@@ -1,0 +1,67 @@
+services:
+  redis:
+    image: redis:7-alpine
+    # appendonly: the event log is the system's audit trail. Losing the last
+    # second of it to an unclean shutdown would lose agent decisions that were
+    # already acted on.
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "6379:6379"
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: sentrymesh
+      POSTGRES_PASSWORD: sentrymesh
+      POSTGRES_DB: sentrymesh
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sentrymesh -d sentrymesh"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgresql://sentrymesh:sentrymesh@postgres:5432/sentrymesh
+      # Under compose both dependencies are guaranteed present, so a silent
+      # downgrade to the in-memory log would be a bug rather than a convenience.
+      SENTRYMESH_REQUIRE_REDIS: "1"
+      SENTRYMESH_REQUIRE_PGVECTOR: "1"
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      SENTRYMESH_MODEL: ${SENTRYMESH_MODEL:-claude-sonnet-5}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "5173:80"
+
+volumes:
+  redis_data:
+  postgres_data:
