@@ -1,0 +1,389 @@
+{
+  "case_id": "SM-010",
+  "category": "synthetic_identity",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "medium",
+  "summary": "Fabricated identity built up with small legitimate-looking spend for a month before a large crypto cash-out.",
+  "planted_signals": [
+    "bust-out amount spike",
+    "unverified KYC",
+    "email-pattern ring",
+    "crypto category"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-13542",
+    "account_age_days": 34,
+    "transaction": {
+      "txn_id": "T-2314388",
+      "amount": 3200.0,
+      "currency": "USD",
+      "merchant": "Vertex Digital",
+      "merchant_category": "crypto_exchange",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-2405590",
+        "amount": 31.09,
+        "currency": "USD",
+        "merchant": "StreamNine",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-18T13:16:06.793601Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2156069",
+        "amount": 27.87,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2025-12-20T14:14:05.422428Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3661591",
+        "amount": 27.12,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-21T12:56:59.627186Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5931794",
+        "amount": 28.63,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-23T14:21:26.513738Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1494114",
+        "amount": 54.06,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-24T13:32:33.760996Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3819703",
+        "amount": 29.88,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2025-12-26T14:09:13.812838Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7708918",
+        "amount": 21.55,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-27T15:15:03.843980Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5283775",
+        "amount": 27.32,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-29T13:08:34.580259Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5111588",
+        "amount": 43.97,
+        "currency": "USD",
+        "merchant": "Tanner & Co",
+        "merchant_category": "restaurants",
+        "timestamp": "2025-12-30T13:31:18.926811Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5523589",
+        "amount": 48.12,
+        "currency": "USD",
+        "merchant": "ReadDaily",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-31T15:13:24.726648Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1258133",
+        "amount": 37.21,
+        "currency": "USD",
+        "merchant": "StreamNine",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-02T14:59:22.503454Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1145787",
+        "amount": 24.77,
+        "currency": "USD",
+        "merchant": "Tanner & Co",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-03T15:13:34.850929Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1030698",
+        "amount": 26.71,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-05T14:50:33.760854Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1414694",
+        "amount": 29.17,
+        "currency": "USD",
+        "merchant": "Tanner & Co",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-06T14:16:52.824183Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9400198",
+        "amount": 18.07,
+        "currency": "USD",
+        "merchant": "StreamNine",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-08T13:49:20.263497Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9619601",
+        "amount": 43.82,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-09T12:44:13.294445Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5681592",
+        "amount": 29.49,
+        "currency": "USD",
+        "merchant": "Blue Fig Cafe",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-11T13:37:25.536851Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7656864",
+        "amount": 23.9,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-12T14:04:10.599640Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1737778",
+        "amount": 35.55,
+        "currency": "USD",
+        "merchant": "Tanner & Co",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-14T13:01:42.506683Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1377599",
+        "amount": 35.65,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-15T15:10:13.509245Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-4566",
+    "device_first_seen": "2025-12-16T12:00:00Z",
+    "device_known_accounts": 4,
+    "browser_fingerprint_hash": "fp_20fa0fb10d2e",
+    "fingerprint_changes_30d": 2,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-4566",
+        "account_id": "ACC-13542",
+        "last_seen": "2026-01-14T03:48:54.477842Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-4566",
+        "account_id": "ACC-27129",
+        "last_seen": "2026-01-13T06:50:40.303865Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-4566",
+        "account_id": "ACC-67778",
+        "last_seen": "2026-01-13T09:55:48.690483Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-4566",
+        "account_id": "ACC-44923",
+        "last_seen": "2026-01-13T11:21:26.917433Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      }
+    ],
+    "ip": "201.152.13.51",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS7184-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 60,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "unverified",
+    "kyc_flags": [
+      "ssn_not_verified"
+    ],
+    "kyc_last_reviewed": "2024-12-27T03:42:57.407126Z",
+    "identity_document_type": "national_id"
+  },
+  "network_data": {
+    "focus_account": "ACC-13542",
+    "edges": [
+      {
+        "account_a": "ACC-13542",
+        "account_b": "ACC-22980",
+        "shared": "email_pattern",
+        "identifier": "EMA-4125",
+        "first_seen_together": "2026-01-02T18:54:12.864313Z"
+      },
+      {
+        "account_a": "ACC-13542",
+        "account_b": "ACC-64931",
+        "shared": "email_pattern",
+        "identifier": "EMA-5649",
+        "first_seen_together": "2026-01-11T13:17:26.332215Z"
+      },
+      {
+        "account_a": "ACC-13542",
+        "account_b": "ACC-64931",
+        "shared": "payment_method",
+        "identifier": "PAY-9067",
+        "first_seen_together": "2026-01-05T10:51:00.101869Z"
+      },
+      {
+        "account_a": "ACC-13542",
+        "account_b": "ACC-84556",
+        "shared": "email_pattern",
+        "identifier": "EMA-5649",
+        "first_seen_together": "2026-01-10T22:36:03.460575Z"
+      },
+      {
+        "account_a": "ACC-13542",
+        "account_b": "ACC-84556",
+        "shared": "payment_method",
+        "identifier": "PAY-7331",
+        "first_seen_together": "2026-01-11T18:37:59.779994Z"
+      },
+      {
+        "account_a": "ACC-13542",
+        "account_b": "ACC-69056",
+        "shared": "email_pattern",
+        "identifier": "EMA-4125",
+        "first_seen_together": "2026-01-12T03:11:52.905727Z"
+      },
+      {
+        "account_a": "ACC-13542",
+        "account_b": "ACC-69056",
+        "shared": "payment_method",
+        "identifier": "PAY-9067",
+        "first_seen_together": "2026-01-10T21:44:30.614939Z"
+      },
+      {
+        "account_a": "ACC-13542",
+        "account_b": "ACC-50319",
+        "shared": "email_pattern",
+        "identifier": "EMA-5649",
+        "first_seen_together": "2026-01-02T15:13:32.406165Z"
+      },
+      {
+        "account_a": "ACC-22980",
+        "account_b": "ACC-69056",
+        "shared": "email_pattern",
+        "identifier": "EMA-5649",
+        "first_seen_together": "2026-01-02T07:20:05.066103Z"
+      },
+      {
+        "account_a": "ACC-22980",
+        "account_b": "ACC-50319",
+        "shared": "payment_method",
+        "identifier": "PAY-7331",
+        "first_seen_together": "2026-01-13T00:20:38.468700Z"
+      },
+      {
+        "account_a": "ACC-64931",
+        "account_b": "ACC-69056",
+        "shared": "email_pattern",
+        "identifier": "EMA-4125",
+        "first_seen_together": "2026-01-08T13:18:45.300883Z"
+      },
+      {
+        "account_a": "ACC-64931",
+        "account_b": "ACC-50319",
+        "shared": "email_pattern",
+        "identifier": "EMA-5649",
+        "first_seen_together": "2026-01-11T23:09:47.170471Z"
+      },
+      {
+        "account_a": "ACC-84556",
+        "account_b": "ACC-69056",
+        "shared": "email_pattern",
+        "identifier": "EMA-5649",
+        "first_seen_together": "2026-01-04T13:56:03.490056Z"
+      },
+      {
+        "account_a": "ACC-84556",
+        "account_b": "ACC-50319",
+        "shared": "payment_method",
+        "identifier": "PAY-7331",
+        "first_seen_together": "2026-01-06T08:16:14.861039Z"
+      },
+      {
+        "account_a": "ACC-69056",
+        "account_b": "ACC-50319",
+        "shared": "email_pattern",
+        "identifier": "EMA-4125",
+        "first_seen_together": "2026-01-07T22:40:03.922527Z"
+      }
+    ],
+    "shared_identifiers": {
+      "email_pattern": [
+        "EMA-4125",
+        "EMA-5649"
+      ],
+      "payment_method": [
+        "PAY-7331",
+        "PAY-9067"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "case_id": "SM-013",
+  "category": "money_muling",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "medium",
+  "summary": "Mule account with a verified owner: identity signals are entirely clean, the ring structure is not.",
+  "planted_signals": [
+    "6-account ring",
+    "two identifier types",
+    "verified KYC",
+    "normal amounts"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-12709",
+    "account_age_days": 410,
+    "transaction": {
+      "txn_id": "T-2255237",
+      "amount": 720.0,
+      "currency": "USD",
+      "merchant": "PayBridge",
+      "merchant_category": "money_transfer",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-3989719",
+        "amount": 408.77,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-14T14:49:14.683519Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1787996",
+        "amount": 478.05,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-16T12:58:44.109178Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3072309",
+        "amount": 564.06,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-17T12:32:01.070063Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8729890",
+        "amount": 297.77,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-19T12:58:06.665087Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5806965",
+        "amount": 316.92,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-20T12:51:57.276229Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1984050",
+        "amount": 334.94,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-22T12:46:52.374441Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2884376",
+        "amount": 523.96,
+        "currency": "USD",
+        "merchant": "Harbour Ferries",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-23T13:13:27.651857Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5284384",
+        "amount": 384.63,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-25T14:42:12.400586Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8970117",
+        "amount": 498.18,
+        "currency": "USD",
+        "merchant": "Harbour Ferries",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-26T15:18:00.400091Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4417560",
+        "amount": 811.48,
+        "currency": "USD",
+        "merchant": "MetroRail",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-28T13:34:45.934875Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3774808",
+        "amount": 243.4,
+        "currency": "USD",
+        "merchant": "Harbour Ferries",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-29T12:48:47.450821Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8824539",
+        "amount": 580.0,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-31T14:29:20.717548Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8922580",
+        "amount": 379.51,
+        "currency": "USD",
+        "merchant": "MetroRail",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-01T14:26:38.420097Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2076788",
+        "amount": 467.72,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-03T12:54:35.475721Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2137938",
+        "amount": 732.42,
+        "currency": "USD",
+        "merchant": "GreenLeaf Grocer",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-04T13:26:39.704640Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5603448",
+        "amount": 949.96,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-06T12:56:12.609673Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8762954",
+        "amount": 630.64,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-07T12:58:07.475949Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5177846",
+        "amount": 431.71,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-09T13:55:14.802245Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3653714",
+        "amount": 325.18,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-10T13:35:29.308421Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2269329",
+        "amount": 771.18,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-12T15:15:11.905741Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3345173",
+        "amount": 326.37,
+        "currency": "USD",
+        "merchant": "MetroRail",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-13T15:24:47.638362Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3142072",
+        "amount": 614.2,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-15T12:30:15.944905Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-8409",
+    "device_first_seen": "2024-12-11T12:00:00Z",
+    "device_known_accounts": 5,
+    "browser_fingerprint_hash": "fp_e296714e3ae6",
+    "fingerprint_changes_30d": 0,
+    "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-8409",
+        "account_id": "ACC-12709",
+        "last_seen": "2026-01-12T20:39:28.902635Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-8409",
+        "account_id": "ACC-76172",
+        "last_seen": "2026-01-13T06:27:46.240248Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-8409",
+        "account_id": "ACC-26505",
+        "last_seen": "2026-01-14T00:46:18.126603Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      {
+        "device_id": "DEV-8409",
+        "account_id": "ACC-60161",
+        "last_seen": "2026-01-13T08:48:04.374750Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-8409",
+        "account_id": "ACC-91429",
+        "last_seen": "2026-01-14T15:14:01.523648Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      }
+    ],
+    "ip": "110.100.127.21",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS23586-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 12,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified_enhanced",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2025-12-12T13:42:09.812880Z",
+    "identity_document_type": "passport"
+  },
+  "network_data": {
+    "focus_account": "ACC-12709",
+    "edges": [
+      {
+        "account_a": "ACC-12709",
+        "account_b": "ACC-31869",
+        "shared": "device",
+        "identifier": "DEV-6280",
+        "first_seen_together": "2026-01-02T00:17:39.199943Z"
+      },
+      {
+        "account_a": "ACC-12709",
+        "account_b": "ACC-89165",
+        "shared": "device",
+        "identifier": "DEV-3480",
+        "first_seen_together": "2026-01-05T00:40:25.820785Z"
+      },
+      {
+        "account_a": "ACC-12709",
+        "account_b": "ACC-91666",
+        "shared": "device",
+        "identifier": "DEV-6280",
+        "first_seen_together": "2026-01-08T12:59:08.252027Z"
+      },
+      {
+        "account_a": "ACC-12709",
+        "account_b": "ACC-91666",
+        "shared": "payment_method",
+        "identifier": "PAY-9734",
+        "first_seen_together": "2026-01-03T17:35:29.429280Z"
+      },
+      {
+        "account_a": "ACC-12709",
+        "account_b": "ACC-60158",
+        "shared": "device",
+        "identifier": "DEV-6280",
+        "first_seen_together": "2026-01-11T21:23:34.369339Z"
+      },
+      {
+        "account_a": "ACC-12709",
+        "account_b": "ACC-92515",
+        "shared": "device",
+        "identifier": "DEV-3480",
+        "first_seen_together": "2026-01-12T19:45:12.773217Z"
+      },
+      {
+        "account_a": "ACC-12709",
+        "account_b": "ACC-92515",
+        "shared": "payment_method",
+        "identifier": "PAY-2035",
+        "first_seen_together": "2026-01-04T15:50:14.189096Z"
+      },
+      {
+        "account_a": "ACC-31869",
+        "account_b": "ACC-91666",
+        "shared": "payment_method",
+        "identifier": "PAY-9734",
+        "first_seen_together": "2026-01-08T08:52:26.646219Z"
+      },
+      {
+        "account_a": "ACC-89165",
+        "account_b": "ACC-92515",
+        "shared": "payment_method",
+        "identifier": "PAY-2035",
+        "first_seen_together": "2026-01-07T03:49:11.902285Z"
+      },
+      {
+        "account_a": "ACC-91666",
+        "account_b": "ACC-60158",
+        "shared": "payment_method",
+        "identifier": "PAY-2035",
+        "first_seen_together": "2026-01-08T20:37:43.947407Z"
+      }
+    ],
+    "shared_identifiers": {
+      "device": [
+        "DEV-3480",
+        "DEV-6280"
+      ],
+      "payment_method": [
+        "PAY-9734",
+        "PAY-2035"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

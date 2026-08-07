@@ -1,0 +1,173 @@
+{
+  "case_id": "SM-020",
+  "category": "legitimate",
+  "ground_truth": "legitimate",
+  "expected_verdict": "approve",
+  "difficulty": "medium",
+  "summary": "Payday burst: eleven small transactions in one afternoon, all at merchants the account uses regularly.",
+  "planted_signals": [
+    "velocity spike (benign)",
+    "familiar merchants",
+    "no declines",
+    "stable device"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-17796",
+    "account_age_days": 1240,
+    "transaction": {
+      "txn_id": "T-7237919",
+      "amount": 38.5,
+      "currency": "USD",
+      "merchant": "Riverside Diner",
+      "merchant_category": "restaurants",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-7759221",
+        "amount": 51.08,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-15T11:04:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9603948",
+        "amount": 50.47,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-15T11:09:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9523387",
+        "amount": 46.1,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-15T11:14:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3102238",
+        "amount": 31.24,
+        "currency": "USD",
+        "merchant": "Harbour Ferries",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-15T11:19:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8354726",
+        "amount": 43.94,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-15T11:24:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1492276",
+        "amount": 33.35,
+        "currency": "USD",
+        "merchant": "Harbour Ferries",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-15T11:29:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5941361",
+        "amount": 24.78,
+        "currency": "USD",
+        "merchant": "Blue Fig Cafe",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-15T11:34:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2822029",
+        "amount": 22.6,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-15T11:39:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3613034",
+        "amount": 39.92,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-15T11:44:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9539794",
+        "amount": 22.54,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-15T11:49:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5511079",
+        "amount": 41.06,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-15T11:54:00Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-3104",
+    "device_first_seen": "2023-11-07T12:00:00Z",
+    "device_known_accounts": 1,
+    "browser_fingerprint_hash": "fp_b581995f7700",
+    "fingerprint_changes_30d": 0,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-3104",
+        "account_id": "ACC-17796",
+        "last_seen": "2026-01-14T04:58:11.667127Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      }
+    ],
+    "ip": "69.45.27.101",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS57432-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 3,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2025-02-24T16:19:51.759604Z",
+    "identity_document_type": "passport"
+  },
+  "network_data": {
+    "focus_account": "ACC-17796",
+    "edges": [],
+    "shared_identifiers": {},
+    "note": "Synthetic evaluation data."
+  }
+}

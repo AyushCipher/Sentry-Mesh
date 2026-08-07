@@ -1,0 +1,227 @@
+{
+  "corpus": "resolved_case_precedents",
+  "data_disclaimer": "SYNTHETIC. These are invented past cases used to give the historical-case specialist something to retrieve. No real case, customer or reviewer is represented.",
+  "contamination_note": "This corpus and the eval case bank were authored by the same person, so lexical overlap between a precedent summary and a case summary is not evidence that retrieval generalises. The harness report treats a strong historical_case result as suspect for exactly this reason.",
+  "precedents": [
+    {
+      "case_id": "HIST-1001",
+      "category": "card_testing",
+      "summary": "Burst of 30 sub-$5 digital goods authorisations in 18 minutes on a 2-day-old account, 60% declined, session on a commercial VPN.",
+      "signals": ["velocity burst", "high decline rate", "digital_goods", "proxy IP", "new account"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Enumeration against a stolen BIN range. Card range blocked at the issuer; account closed same day.",
+      "resolved_at": "2025-08-14",
+      "reviewer": "risk_ops_2"
+    },
+    {
+      "case_id": "HIST-1002",
+      "category": "card_testing",
+      "summary": "Twelve gift card authorisations under $3 across two merchants inside half an hour, unverified KYC, device seen on four accounts.",
+      "signals": ["velocity burst", "gift_cards", "unverified kyc", "device shared across accounts"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Same device fingerprint as two accounts closed the previous week. Declined.",
+      "resolved_at": "2025-09-02",
+      "reviewer": "risk_ops_1"
+    },
+    {
+      "case_id": "HIST-1003",
+      "category": "card_testing",
+      "summary": "Slow probing: nine low-value digital goods attempts spread over five hours with an elevated decline rate on a 6-week-old account.",
+      "signals": ["moderate velocity", "elevated decline rate", "digital_goods", "fingerprint churn"],
+      "resolution": "declined",
+      "resolution_notes": "Deliberately paced to stay under velocity rules. Caught on the decline clustering, not the rate.",
+      "resolved_at": "2025-10-21",
+      "reviewer": "risk_ops_3"
+    },
+    {
+      "case_id": "HIST-1004",
+      "category": "card_testing",
+      "summary": "Repeated small failed authorisations on a long-tenured account with otherwise normal grocery and fuel spend and verified KYC.",
+      "signals": ["decline clustering", "category first-use", "long tenure", "clean kyc"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Card details compromised offline; testing hidden inside the genuine customer's normal traffic. Only the decline burst separated it.",
+      "resolved_at": "2025-11-08",
+      "reviewer": "risk_ops_2"
+    },
+    {
+      "case_id": "HIST-1005",
+      "category": "account_takeover",
+      "summary": "Four-year-old account, brand new device from a hosting ASN 12000km away, followed immediately by a high-value electronics purchase far above baseline.",
+      "signals": ["impossible travel", "new device on old account", "hosting ASN", "amount z-score spike"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Customer confirmed they had not travelled. Credentials reused from an unrelated breach.",
+      "resolved_at": "2025-07-19",
+      "reviewer": "risk_ops_1"
+    },
+    {
+      "case_id": "HIST-1006",
+      "category": "account_takeover",
+      "summary": "Device change followed by a money transfer to a service the account had never used, transaction amount itself unremarkable.",
+      "signals": ["new device", "country new for account", "money_transfer first-use", "moderate amount"],
+      "resolution": "declined",
+      "resolution_notes": "Cash-out attempt after credential stuffing. Amount was kept low deliberately to stay under review thresholds.",
+      "resolved_at": "2025-09-30",
+      "reviewer": "risk_ops_3"
+    },
+    {
+      "case_id": "HIST-1007",
+      "category": "account_takeover",
+      "summary": "Overnight session from an unfamiliar country then three retail charges well above the account's usual amounts.",
+      "signals": ["off-hours activity", "geo mismatch", "amount z-score spike", "velocity uplift"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Session token replay. Chargebacks filed on all three charges.",
+      "resolved_at": "2025-10-04",
+      "reviewer": "risk_ops_2"
+    },
+    {
+      "case_id": "HIST-1008",
+      "category": "account_takeover",
+      "summary": "Takeover from the victim's own city on a fresh device, spending into a crypto exchange the account had never touched.",
+      "signals": ["new device only", "no geo mismatch", "crypto_exchange first-use", "isolated in graph"],
+      "resolution": "declined",
+      "resolution_notes": "Local attacker, no geographic signal at all. Category first-use plus the new device carried the decision.",
+      "resolved_at": "2025-12-01",
+      "reviewer": "risk_ops_1"
+    },
+    {
+      "case_id": "HIST-1009",
+      "category": "synthetic_identity",
+      "summary": "Three-week-old account with a failed KYC document check loading prepaid cards; device shared with five other new accounts.",
+      "signals": ["failed kyc", "thin history", "prepaid_reload", "device shared across accounts"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Fabricated identity in a cluster of six. All six closed.",
+      "resolved_at": "2025-08-27",
+      "reviewer": "risk_ops_3"
+    },
+    {
+      "case_id": "HIST-1010",
+      "category": "synthetic_identity",
+      "summary": "Account nurtured with small subscription and retail spend for six weeks, then a single large crypto exchange cash-out; unverified SSN.",
+      "signals": ["bust-out amount spike", "unverified kyc", "email pattern ring", "crypto_exchange"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Classic bust-out. The nurture period is what makes these expensive: the baseline looks real by the time it matters.",
+      "resolved_at": "2025-11-19",
+      "reviewer": "risk_ops_2"
+    },
+    {
+      "case_id": "HIST-1011",
+      "category": "synthetic_identity",
+      "summary": "Identity passed KYC on fabricated documents and held eight months of tenure before a large money transfer; no shared identifiers with any other account.",
+      "signals": ["kyc passed", "long tenure", "isolated in graph", "amount spike only"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Only found retrospectively when the document vendor was compromised. Network analysis had nothing to offer here and correctly said so.",
+      "resolved_at": "2025-06-11",
+      "reviewer": "risk_ops_1"
+    },
+    {
+      "case_id": "HIST-1012",
+      "category": "money_muling",
+      "summary": "Eight accounts converging on two device fingerprints and a single payment instrument, all forwarding to the same transfer service.",
+      "signals": ["large dense ring", "identifier convergence", "money_transfer", "clean identity signals"],
+      "resolution": "confirmed_fraud",
+      "resolution_notes": "Mule network. Every member had clean KYC and clean device history individually; only the graph showed it.",
+      "resolved_at": "2025-09-15",
+      "reviewer": "risk_ops_2"
+    },
+    {
+      "case_id": "HIST-1013",
+      "category": "money_muling",
+      "summary": "Verified long-tenured account with spotless identity signals sitting inside a six-account ring over device and payment method.",
+      "signals": ["ring structure", "two identifier types", "verified kyc", "normal amounts"],
+      "resolution": "declined",
+      "resolution_notes": "Recruited mule using their own real identity. Identity checks are useless against this pattern by construction.",
+      "resolved_at": "2025-10-28",
+      "reviewer": "risk_ops_3"
+    },
+    {
+      "case_id": "HIST-1014",
+      "category": "money_muling",
+      "summary": "Three accounts sharing one payment instrument with repeat transfers, deliberately small enough to stay under ring-size heuristics.",
+      "signals": ["small ring", "single identifier type", "clean identity", "repeat transfers"],
+      "resolution": "declined",
+      "resolution_notes": "Cell size tuned to evade a ring-size threshold. Repeat-transfer pattern was the deciding evidence.",
+      "resolved_at": "2025-12-09",
+      "reviewer": "risk_ops_1"
+    },
+    {
+      "case_id": "HIST-1015",
+      "category": "legitimate",
+      "summary": "Customer abroad on holiday: foreign IP, large hotel charge above their usual amounts, but the device was their own and travel was gradual.",
+      "signals": ["geo mismatch benign", "amount above baseline", "known device", "verified kyc", "travel"],
+      "resolution": "approved",
+      "resolution_notes": "False positive from the geo rule. Prior countries on file already included this destination.",
+      "resolved_at": "2025-07-30",
+      "reviewer": "risk_ops_2"
+    },
+    {
+      "case_id": "HIST-1016",
+      "category": "legitimate",
+      "summary": "Three family accounts on one residential IP range with ordinary supermarket and transport spend and no device sharing.",
+      "signals": ["ip_range only links benign", "no device sharing", "stable profile", "groceries"],
+      "resolution": "approved",
+      "resolution_notes": "Household, not a ring. Shared IP range alone should never carry a decline.",
+      "resolved_at": "2025-08-08",
+      "reviewer": "risk_ops_1"
+    },
+    {
+      "case_id": "HIST-1017",
+      "category": "legitimate",
+      "summary": "Long-tenured customer on a commercial VPN making a large one-off electronics purchase; no ring links and enhanced KYC on file.",
+      "signals": ["proxy asn benign", "amount spike", "long tenure", "no ring", "verified kyc", "electronics"],
+      "resolution": "approved",
+      "resolution_notes": "Privacy-conscious customer. VPN use correlates with fraud weakly and with privacy preference strongly; declining on it alone costs good customers.",
+      "resolved_at": "2025-11-02",
+      "reviewer": "risk_ops_3"
+    },
+    {
+      "case_id": "HIST-1018",
+      "category": "legitimate",
+      "summary": "New customer in their first week: thin transaction history and a newly seen device, modest retail purchase, clean KYC and no shared identifiers.",
+      "signals": ["thin baseline", "new device", "clean kyc", "no ring", "modest amount"],
+      "resolution": "approved",
+      "resolution_notes": "Every new customer looks like this. Treating a thin baseline as risk is how onboarding conversion dies.",
+      "resolved_at": "2025-09-21",
+      "reviewer": "risk_ops_2"
+    },
+    {
+      "case_id": "HIST-1019",
+      "category": "legitimate",
+      "summary": "Eleven small transactions in one afternoon at merchants the account uses every month, no declines, same device as always.",
+      "signals": ["velocity spike benign", "familiar merchants", "no declines", "stable device", "restaurants"],
+      "resolution": "approved",
+      "resolution_notes": "Payday behaviour. Velocity without novelty is not a fraud signal.",
+      "resolved_at": "2025-10-16",
+      "reviewer": "risk_ops_1"
+    },
+    {
+      "case_id": "HIST-1020",
+      "category": "legitimate",
+      "summary": "Business account making regular prepaid reload purchases for staff; elevated-risk merchant category used consistently for over a year.",
+      "signals": ["elevated risk category benign", "repeat use of category", "verified business kyc", "no ring", "prepaid_reload"],
+      "resolution": "approved",
+      "resolution_notes": "Category risk weights are population statistics, not statements about this account. Repeat use is the defence.",
+      "resolved_at": "2025-12-14",
+      "reviewer": "risk_ops_3"
+    },
+    {
+      "case_id": "HIST-1021",
+      "category": "account_takeover",
+      "summary": "New device from a new country on a long-lived account but with an entirely ordinary amount at an ordinary merchant.",
+      "signals": ["identity risk vs clean transaction profile", "specialist conflict", "escalated"],
+      "resolution": "approved",
+      "resolution_notes": "Escalated to a human, who reached the customer. Genuine travel with a replacement phone. The signals genuinely did not resolve without contacting the customer.",
+      "resolved_at": "2025-11-25",
+      "reviewer": "risk_ops_2"
+    },
+    {
+      "case_id": "HIST-1022",
+      "category": "money_muling",
+      "summary": "Four accounts sharing a single household device with clean identity and clean transaction profiles across all four.",
+      "signals": ["network risk vs clean identity and transactions", "specialist conflict", "escalated"],
+      "resolution": "declined",
+      "resolution_notes": "Escalated on conflicting signals; the human found three of the four accounts had been opened within an hour of each other. That fact was not visible to any single specialist.",
+      "resolved_at": "2025-12-03",
+      "reviewer": "risk_ops_1"
+    }
+  ]
+}

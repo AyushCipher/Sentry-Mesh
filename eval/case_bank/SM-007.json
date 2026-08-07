@@ -1,0 +1,344 @@
+{
+  "case_id": "SM-007",
+  "category": "account_takeover",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "medium",
+  "summary": "Overnight session from an unfamiliar country followed by three high-value retail charges outside the account's pattern.",
+  "planted_signals": [
+    "off-hours activity",
+    "geo mismatch",
+    "amount z-score spike",
+    "velocity uplift"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-15259",
+    "account_age_days": 1100,
+    "transaction": {
+      "txn_id": "T-7279702",
+      "amount": 1150.0,
+      "currency": "USD",
+      "merchant": "Harlow Home",
+      "merchant_category": "retail",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-7462073",
+        "amount": 38.66,
+        "currency": "USD",
+        "merchant": "Harbour Ferries",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-12T12:33:14.596014Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4016161",
+        "amount": 83.2,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-13T13:39:27.029468Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-9186690",
+        "amount": 69.17,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-14T13:11:02.715165Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2587455",
+        "amount": 102.69,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-16T12:06:43.411689Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3465987",
+        "amount": 35.9,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-17T13:41:10.684767Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1165392",
+        "amount": 43.34,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-18T12:46:07.990108Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4237326",
+        "amount": 46.0,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-19T13:16:49.673668Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7989681",
+        "amount": 77.35,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2025-12-21T12:25:01.374767Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8686928",
+        "amount": 88.1,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-22T13:01:34.324879Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4564625",
+        "amount": 45.69,
+        "currency": "USD",
+        "merchant": "Harbour Ferries",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-23T13:48:05.267311Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7773917",
+        "amount": 6.96,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-24T11:29:18.485697Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1786504",
+        "amount": 58.15,
+        "currency": "USD",
+        "merchant": "Blue Fig Cafe",
+        "merchant_category": "restaurants",
+        "timestamp": "2025-12-26T12:26:25.560250Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8404159",
+        "amount": 94.95,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-27T14:06:07.375306Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9935698",
+        "amount": 95.83,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-28T13:55:07.678717Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2377512",
+        "amount": 63.09,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-30T14:09:35.760869Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4384250",
+        "amount": 59.73,
+        "currency": "USD",
+        "merchant": "ReadDaily",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-31T13:12:35.890369Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2667839",
+        "amount": 107.06,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-01T13:43:43.036148Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3022401",
+        "amount": 83.05,
+        "currency": "USD",
+        "merchant": "MetroRail",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-02T13:02:36.157126Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7012113",
+        "amount": 50.03,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-04T14:23:48.371964Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6763553",
+        "amount": 60.8,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-05T12:14:36.575207Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8945350",
+        "amount": 101.36,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-06T11:55:03.171525Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7365069",
+        "amount": 1.0,
+        "currency": "USD",
+        "merchant": "Tanner & Co",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-07T12:20:31.907203Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9837005",
+        "amount": 28.87,
+        "currency": "USD",
+        "merchant": "ReadDaily",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-09T12:19:25.907625Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2095910",
+        "amount": 39.38,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-10T13:50:31.091576Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4522645",
+        "amount": 84.85,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-11T12:38:59.544281Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7851803",
+        "amount": 72.11,
+        "currency": "USD",
+        "merchant": "ReadDaily",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-12T13:47:17.655115Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3239464",
+        "amount": 65.75,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-14T12:43:19.161521Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6311993",
+        "amount": 119.44,
+        "currency": "USD",
+        "merchant": "MetroRail",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-15T13:09:33.685297Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-9399",
+    "device_first_seen": "2026-01-12T12:00:00Z",
+    "device_known_accounts": 2,
+    "browser_fingerprint_hash": "fp_e868ce62dcc3",
+    "fingerprint_changes_30d": 5,
+    "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-9399",
+        "account_id": "ACC-15259",
+        "last_seen": "2026-01-15T02:01:56.129224Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-9399",
+        "account_id": "ACC-83729",
+        "last_seen": "2026-01-14T21:38:56.940873Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      }
+    ],
+    "ip": "26.32.89.17",
+    "ip_country": "BG",
+    "geo_city": "unspecified",
+    "ip_asn": "AS41647-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 7800,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2025-05-04T12:05:29.804007Z",
+    "identity_document_type": "drivers_licence"
+  },
+  "network_data": {
+    "focus_account": "ACC-15259",
+    "edges": [
+      {
+        "account_a": "ACC-15259",
+        "account_b": "ACC-60660",
+        "shared": "ip_range",
+        "identifier": "IP_-6044",
+        "first_seen_together": "2026-01-12T14:53:46.762619Z"
+      }
+    ],
+    "shared_identifiers": {
+      "ip_range": [
+        "IP_-6044"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

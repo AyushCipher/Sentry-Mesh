@@ -1,0 +1,308 @@
+{
+  "case_id": "SM-004",
+  "category": "card_testing",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "hard",
+  "summary": "Card testing camouflaged inside an otherwise normal spending profile; only the decline pattern gives it away.",
+  "planted_signals": [
+    "decline clustering",
+    "category first-use",
+    "no network links",
+    "clean KYC"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-17302",
+    "account_age_days": 620,
+    "transaction": {
+      "txn_id": "T-7920502",
+      "amount": 4.25,
+      "currency": "USD",
+      "merchant": "PixelKeys Store",
+      "merchant_category": "digital_goods",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-4270512",
+        "amount": 92.12,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-18T15:22:14.328768Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-1706614",
+        "amount": 4.77,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-19T13:16:47.921406Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-8289986",
+        "amount": 30.86,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2025-12-20T12:49:50.760227Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-9797752",
+        "amount": 45.23,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-21T13:27:28.736967Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3050161",
+        "amount": 55.14,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-22T13:08:59.436652Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9546482",
+        "amount": 30.56,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-24T13:57:24.272233Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6776992",
+        "amount": 64.24,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-25T13:46:18.619256Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1369339",
+        "amount": 20.25,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-26T13:25:43.279786Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3598696",
+        "amount": 40.68,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-27T14:35:27.917635Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7722779",
+        "amount": 16.3,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-28T12:39:45.871129Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-9426833",
+        "amount": 51.15,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-29T13:44:48.821215Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3741062",
+        "amount": 62.85,
+        "currency": "USD",
+        "merchant": "GreenLeaf Grocer",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-30T14:59:08.041482Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1871454",
+        "amount": 66.8,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-31T14:44:55.843658Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6570066",
+        "amount": 67.91,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-02T12:45:51.080864Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8870661",
+        "amount": 1.0,
+        "currency": "USD",
+        "merchant": "StreamNine",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-03T15:12:40.998294Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3436923",
+        "amount": 79.1,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-04T12:50:43.319720Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-8138185",
+        "amount": 50.25,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-05T14:00:30.886680Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-2896273",
+        "amount": 43.56,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-06T15:16:48.380489Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-6853785",
+        "amount": 77.78,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-07T12:36:28.320055Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3621169",
+        "amount": 47.65,
+        "currency": "USD",
+        "merchant": "StreamNine",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-08T13:03:17.232047Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-9645182",
+        "amount": 49.35,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-09T14:46:41.456760Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-4709308",
+        "amount": 39.7,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-11T13:22:12.978581Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6670600",
+        "amount": 39.93,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-12T14:55:49.658809Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1076006",
+        "amount": 25.54,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-13T14:09:37.737384Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-6434371",
+        "amount": 34.56,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-14T14:24:19.351010Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-7606383",
+        "amount": 39.26,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-15T12:48:17.441743Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-1513",
+    "device_first_seen": "2025-06-19T12:00:00Z",
+    "device_known_accounts": 1,
+    "browser_fingerprint_hash": "fp_fa1a771e549b",
+    "fingerprint_changes_30d": 4,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-1513",
+        "account_id": "ACC-17302",
+        "last_seen": "2026-01-13T06:23:38.170618Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      }
+    ],
+    "ip": "132.75.79.70",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS21360-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 40,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2024-12-24T03:20:45.640101Z",
+    "identity_document_type": "drivers_licence"
+  },
+  "network_data": {
+    "focus_account": "ACC-17302",
+    "edges": [],
+    "shared_identifiers": {},
+    "note": "Synthetic evaluation data."
+  }
+}

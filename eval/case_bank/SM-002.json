@@ -1,0 +1,283 @@
+{
+  "case_id": "SM-002",
+  "category": "card_testing",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "easy",
+  "summary": "Eighteen $0.50-$3 gift-card authorisations in 20 minutes across three merchants, half declined.",
+  "planted_signals": [
+    "velocity burst",
+    "high decline rate",
+    "gift cards",
+    "new device",
+    "unverified KYC"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-14611",
+    "account_age_days": 6,
+    "transaction": {
+      "txn_id": "T-2496426",
+      "amount": 0.99,
+      "currency": "USD",
+      "merchant": "CardMint",
+      "merchant_category": "gift_cards",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-2387139",
+        "amount": 1.18,
+        "currency": "USD",
+        "merchant": "GiftLane",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:39:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4350660",
+        "amount": 2.22,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:40:06.666667Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-1036085",
+        "amount": 1.75,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:41:13.333333Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4405127",
+        "amount": 1.84,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:42:20Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-6603339",
+        "amount": 1.24,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:43:26.666667Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9473031",
+        "amount": 1.31,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:44:33.333333Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9038023",
+        "amount": 2.05,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:45:40Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6662045",
+        "amount": 2.14,
+        "currency": "USD",
+        "merchant": "GiftLane",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:46:46.666667Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2005799",
+        "amount": 1.21,
+        "currency": "USD",
+        "merchant": "GiftLane",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:47:53.333333Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1101197",
+        "amount": 1.16,
+        "currency": "USD",
+        "merchant": "GameCred Direct",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:49:00Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-5394976",
+        "amount": 2.93,
+        "currency": "USD",
+        "merchant": "GiftLane",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:50:06.666667Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3696693",
+        "amount": 1.0,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:51:13.333333Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-3559055",
+        "amount": 1.99,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:52:20Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-9917346",
+        "amount": 1.26,
+        "currency": "USD",
+        "merchant": "CardMint",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:53:26.666667Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-8554815",
+        "amount": 1.46,
+        "currency": "USD",
+        "merchant": "GiftLane",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:54:33.333333Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-7033774",
+        "amount": 2.68,
+        "currency": "USD",
+        "merchant": "CardMint",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:55:40Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-8618096",
+        "amount": 1.23,
+        "currency": "USD",
+        "merchant": "GiftLane",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:56:46.666667Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6159680",
+        "amount": 2.54,
+        "currency": "USD",
+        "merchant": "GiftLane",
+        "merchant_category": "gift_cards",
+        "timestamp": "2026-01-15T11:57:53.333333Z",
+        "status": "declined"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-4066",
+    "device_first_seen": "2026-01-15T12:00:00Z",
+    "device_known_accounts": 4,
+    "browser_fingerprint_hash": "fp_082a3daa52c3",
+    "fingerprint_changes_30d": 6,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-4066",
+        "account_id": "ACC-14611",
+        "last_seen": "2026-01-14T14:59:16.824238Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      {
+        "device_id": "DEV-4066",
+        "account_id": "ACC-70549",
+        "last_seen": "2026-01-14T18:26:19.579581Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-4066",
+        "account_id": "ACC-76859",
+        "last_seen": "2026-01-15T07:08:02.514938Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-4066",
+        "account_id": "ACC-74496",
+        "last_seen": "2026-01-14T13:12:20.740838Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      }
+    ],
+    "ip": "197.191.102.76",
+    "ip_country": "NL",
+    "geo_city": "unspecified",
+    "ip_asn": "AS-COMMERCIAL-VPN",
+    "is_proxy": true,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 6200,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "unverified",
+    "kyc_flags": [
+      "document_not_provided"
+    ],
+    "kyc_last_reviewed": "2025-03-26T17:34:09.880483Z",
+    "identity_document_type": "national_id"
+  },
+  "network_data": {
+    "focus_account": "ACC-14611",
+    "edges": [
+      {
+        "account_a": "ACC-14611",
+        "account_b": "ACC-69442",
+        "shared": "payment_method",
+        "identifier": "PAY-7708",
+        "first_seen_together": "2026-01-04T08:20:57.895519Z"
+      },
+      {
+        "account_a": "ACC-14611",
+        "account_b": "ACC-64817",
+        "shared": "payment_method",
+        "identifier": "PAY-7708",
+        "first_seen_together": "2026-01-07T00:00:27.671106Z"
+      },
+      {
+        "account_a": "ACC-14611",
+        "account_b": "ACC-57380",
+        "shared": "payment_method",
+        "identifier": "PAY-7708",
+        "first_seen_together": "2026-01-02T13:18:20.199582Z"
+      }
+    ],
+    "shared_identifiers": {
+      "payment_method": [
+        "PAY-7708"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

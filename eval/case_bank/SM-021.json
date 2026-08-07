@@ -1,0 +1,308 @@
+{
+  "case_id": "SM-021",
+  "category": "legitimate",
+  "ground_truth": "legitimate",
+  "expected_verdict": "approve",
+  "difficulty": "medium",
+  "summary": "Small business owner topping up prepaid cards for staff - an elevated-risk category used entirely legitimately.",
+  "planted_signals": [
+    "elevated-risk category (benign)",
+    "repeat use of category",
+    "verified business KYC",
+    "no ring"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-11104",
+    "account_age_days": 1450,
+    "transaction": {
+      "txn_id": "T-6921089",
+      "amount": 300.0,
+      "currency": "USD",
+      "merchant": "TopUpNow",
+      "merchant_category": "prepaid_reload",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-8374030",
+        "amount": 299.18,
+        "currency": "USD",
+        "merchant": "ReloadHub",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2025-12-11T15:23:33.904627Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8876948",
+        "amount": 208.39,
+        "currency": "USD",
+        "merchant": "TopUpNow",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2025-12-12T14:37:49.132594Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7627388",
+        "amount": 298.6,
+        "currency": "USD",
+        "merchant": "ReloadHub",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2025-12-14T12:48:30.739698Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7404166",
+        "amount": 290.07,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-15T12:41:57.867562Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3237921",
+        "amount": 151.6,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-17T13:40:15.438453Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2718817",
+        "amount": 248.79,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-19T13:38:47.106566Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4463677",
+        "amount": 401.0,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-20T15:19:39.992395Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1066621",
+        "amount": 387.4,
+        "currency": "USD",
+        "merchant": "TopUpNow",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2025-12-22T15:11:07.040120Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4664155",
+        "amount": 308.43,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-23T13:20:39.258765Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6410572",
+        "amount": 305.23,
+        "currency": "USD",
+        "merchant": "ReloadHub",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2025-12-25T13:07:58.394441Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5214971",
+        "amount": 263.33,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-26T13:10:50.148865Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8927701",
+        "amount": 216.18,
+        "currency": "USD",
+        "merchant": "TopUpNow",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2025-12-28T15:20:28.074502Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3932387",
+        "amount": 355.4,
+        "currency": "USD",
+        "merchant": "ReloadHub",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2025-12-29T14:42:13.236663Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2289754",
+        "amount": 294.54,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-31T15:16:09.710128Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6641314",
+        "amount": 358.74,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-01T12:56:25.243453Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9460236",
+        "amount": 218.14,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-03T13:19:50.103656Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3882280",
+        "amount": 327.8,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-04T12:49:56.258512Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2789043",
+        "amount": 265.37,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-06T12:36:54.541442Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8279355",
+        "amount": 276.14,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-07T12:48:39.722484Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8556621",
+        "amount": 276.18,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-09T14:36:39.001629Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3887234",
+        "amount": 325.36,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-10T14:03:54.567649Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1778575",
+        "amount": 333.7,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-12T13:09:03.913253Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2678748",
+        "amount": 172.07,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-13T14:30:07.497843Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8225081",
+        "amount": 305.34,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-15T14:18:13.832573Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-6019",
+    "device_first_seen": "2023-04-21T12:00:00Z",
+    "device_known_accounts": 2,
+    "browser_fingerprint_hash": "fp_fe3828403559",
+    "fingerprint_changes_30d": 0,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-6019",
+        "account_id": "ACC-11104",
+        "last_seen": "2026-01-15T04:52:05.135105Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-6019",
+        "account_id": "ACC-83263",
+        "last_seen": "2026-01-13T21:50:33.554409Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      }
+    ],
+    "ip": "209.152.133.53",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS8463-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 6,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified_enhanced",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2025-08-26T15:30:18.860774Z",
+    "identity_document_type": "national_id"
+  },
+  "network_data": {
+    "focus_account": "ACC-11104",
+    "edges": [
+      {
+        "account_a": "ACC-11104",
+        "account_b": "ACC-37421",
+        "shared": "ip_range",
+        "identifier": "IP_-1346",
+        "first_seen_together": "2026-01-04T22:22:03.458606Z"
+      }
+    ],
+    "shared_identifiers": {
+      "ip_range": [
+        "IP_-1346"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

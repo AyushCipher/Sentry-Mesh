@@ -1,0 +1,551 @@
+{
+  "case_id": "SM-012",
+  "category": "money_muling",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "medium",
+  "summary": "Nine accounts converging on two devices and one payment instrument, all forwarding funds to the same transfer service.",
+  "planted_signals": [
+    "large dense ring",
+    "identifier convergence",
+    "money transfer",
+    "clean identity signals"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-17671",
+    "account_age_days": 190,
+    "transaction": {
+      "txn_id": "T-5973645",
+      "amount": 940.0,
+      "currency": "USD",
+      "merchant": "SwiftRemit",
+      "merchant_category": "money_transfer",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-3311256",
+        "amount": 410.19,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-18T13:00:24.719798Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1722076",
+        "amount": 557.27,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-20T13:16:03.830556Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4833170",
+        "amount": 516.16,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-22T14:19:59.820562Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8443338",
+        "amount": 771.38,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-23T13:15:24.085172Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8769479",
+        "amount": 474.02,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-25T15:13:40.840575Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2359051",
+        "amount": 1097.63,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-27T15:07:12.036734Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5288415",
+        "amount": 655.09,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-28T14:18:21.528103Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7562151",
+        "amount": 803.81,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-30T15:11:57.363237Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4132151",
+        "amount": 310.09,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-31T13:39:16.352221Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2286284",
+        "amount": 258.41,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-02T12:59:58.680950Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1246928",
+        "amount": 674.75,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-04T14:05:10.327821Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7308416",
+        "amount": 583.61,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-05T12:47:51.148398Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2508337",
+        "amount": 602.89,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-07T14:43:04.518076Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4229044",
+        "amount": 740.09,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-09T15:14:10.693455Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1993733",
+        "amount": 327.29,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-10T14:23:09.350048Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9762717",
+        "amount": 898.4,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-12T13:21:44.504831Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1354554",
+        "amount": 519.13,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-13T13:09:27.441095Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7710838",
+        "amount": 549.09,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-15T14:05:18.611410Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-1097",
+    "device_first_seen": "2025-07-19T12:00:00Z",
+    "device_known_accounts": 9,
+    "browser_fingerprint_hash": "fp_60985e261f8a",
+    "fingerprint_changes_30d": 1,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-1097",
+        "account_id": "ACC-17671",
+        "last_seen": "2026-01-14T11:16:23.357730Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-1097",
+        "account_id": "ACC-97595",
+        "last_seen": "2026-01-12T22:30:25.354645Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-1097",
+        "account_id": "ACC-63081",
+        "last_seen": "2026-01-14T20:14:26.296091Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      {
+        "device_id": "DEV-1097",
+        "account_id": "ACC-84656",
+        "last_seen": "2026-01-15T03:22:25.825933Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-1097",
+        "account_id": "ACC-50160",
+        "last_seen": "2026-01-13T06:41:15.679730Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-1097",
+        "account_id": "ACC-87447",
+        "last_seen": "2026-01-15T01:45:08.517283Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      {
+        "device_id": "DEV-1097",
+        "account_id": "ACC-35370",
+        "last_seen": "2026-01-13T16:29:47.355871Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      {
+        "device_id": "DEV-1097",
+        "account_id": "ACC-23239",
+        "last_seen": "2026-01-13T13:17:55.796812Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      }
+    ],
+    "ip": "104.236.75.188",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS59660-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 30,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2025-02-16T21:24:29.112442Z",
+    "identity_document_type": "national_id"
+  },
+  "network_data": {
+    "focus_account": "ACC-17671",
+    "edges": [
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-77131",
+        "shared": "device",
+        "identifier": "DEV-4541",
+        "first_seen_together": "2026-01-05T05:34:16.283428Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-77131",
+        "shared": "payment_method",
+        "identifier": "PAY-7208",
+        "first_seen_together": "2026-01-03T18:56:03.595003Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-77131",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-14T00:34:03.346006Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-93613",
+        "shared": "device",
+        "identifier": "DEV-1640",
+        "first_seen_together": "2026-01-03T03:38:39.801633Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-93613",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-06T20:59:05.135439Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-45884",
+        "shared": "device",
+        "identifier": "DEV-4541",
+        "first_seen_together": "2026-01-06T11:15:40.321588Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-45884",
+        "shared": "phone",
+        "identifier": "PHO-7507",
+        "first_seen_together": "2026-01-12T10:57:43.267033Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-33131",
+        "shared": "device",
+        "identifier": "DEV-4541",
+        "first_seen_together": "2026-01-03T18:45:01.413468Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-33131",
+        "shared": "payment_method",
+        "identifier": "PAY-4655",
+        "first_seen_together": "2026-01-13T14:40:48.995329Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-33131",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-05T04:44:27.961174Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-52131",
+        "shared": "device",
+        "identifier": "DEV-1640",
+        "first_seen_together": "2026-01-04T04:06:44.442907Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-52131",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-08T05:35:23.247384Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-26093",
+        "shared": "device",
+        "identifier": "DEV-4541",
+        "first_seen_together": "2026-01-10T16:11:01.201206Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-26093",
+        "shared": "payment_method",
+        "identifier": "PAY-7208",
+        "first_seen_together": "2026-01-13T06:55:10.772252Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-26093",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-07T18:54:18.384335Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-33787",
+        "shared": "device",
+        "identifier": "DEV-1640",
+        "first_seen_together": "2026-01-11T13:43:41.473999Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-33787",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-12T20:09:49.545544Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-79903",
+        "shared": "device",
+        "identifier": "DEV-1640",
+        "first_seen_together": "2026-01-08T22:42:26.606733Z"
+      },
+      {
+        "account_a": "ACC-17671",
+        "account_b": "ACC-79903",
+        "shared": "phone",
+        "identifier": "PHO-7507",
+        "first_seen_together": "2026-01-04T23:50:29.821452Z"
+      },
+      {
+        "account_a": "ACC-77131",
+        "account_b": "ACC-93613",
+        "shared": "phone",
+        "identifier": "PHO-7507",
+        "first_seen_together": "2026-01-04T17:22:48.732176Z"
+      },
+      {
+        "account_a": "ACC-77131",
+        "account_b": "ACC-33131",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-05T06:17:49.166301Z"
+      },
+      {
+        "account_a": "ACC-77131",
+        "account_b": "ACC-52131",
+        "shared": "payment_method",
+        "identifier": "PAY-7208",
+        "first_seen_together": "2026-01-06T18:53:47.410602Z"
+      },
+      {
+        "account_a": "ACC-77131",
+        "account_b": "ACC-33787",
+        "shared": "payment_method",
+        "identifier": "PAY-7208",
+        "first_seen_together": "2026-01-04T02:56:22.047226Z"
+      },
+      {
+        "account_a": "ACC-77131",
+        "account_b": "ACC-79903",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-12T23:51:30.591143Z"
+      },
+      {
+        "account_a": "ACC-93613",
+        "account_b": "ACC-45884",
+        "shared": "payment_method",
+        "identifier": "PAY-4655",
+        "first_seen_together": "2026-01-08T12:43:37.018489Z"
+      },
+      {
+        "account_a": "ACC-93613",
+        "account_b": "ACC-33131",
+        "shared": "payment_method",
+        "identifier": "PAY-7208",
+        "first_seen_together": "2026-01-13T16:24:25.562627Z"
+      },
+      {
+        "account_a": "ACC-93613",
+        "account_b": "ACC-52131",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-05T20:56:59.234951Z"
+      },
+      {
+        "account_a": "ACC-93613",
+        "account_b": "ACC-33787",
+        "shared": "phone",
+        "identifier": "PHO-7507",
+        "first_seen_together": "2026-01-07T09:18:25.329634Z"
+      },
+      {
+        "account_a": "ACC-45884",
+        "account_b": "ACC-52131",
+        "shared": "device",
+        "identifier": "DEV-4541",
+        "first_seen_together": "2026-01-05T16:51:19.441937Z"
+      },
+      {
+        "account_a": "ACC-45884",
+        "account_b": "ACC-79903",
+        "shared": "payment_method",
+        "identifier": "PAY-4655",
+        "first_seen_together": "2026-01-13T02:34:58.444702Z"
+      },
+      {
+        "account_a": "ACC-33131",
+        "account_b": "ACC-52131",
+        "shared": "phone",
+        "identifier": "PHO-7507",
+        "first_seen_together": "2026-01-11T15:11:01.677244Z"
+      },
+      {
+        "account_a": "ACC-33131",
+        "account_b": "ACC-26093",
+        "shared": "device",
+        "identifier": "DEV-1640",
+        "first_seen_together": "2026-01-04T12:53:55.540917Z"
+      },
+      {
+        "account_a": "ACC-33131",
+        "account_b": "ACC-33787",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-14T06:49:11.313673Z"
+      },
+      {
+        "account_a": "ACC-33131",
+        "account_b": "ACC-79903",
+        "shared": "phone",
+        "identifier": "PHO-1808",
+        "first_seen_together": "2026-01-13T19:36:11.890706Z"
+      },
+      {
+        "account_a": "ACC-52131",
+        "account_b": "ACC-79903",
+        "shared": "phone",
+        "identifier": "PHO-7507",
+        "first_seen_together": "2026-01-11T08:25:52.104362Z"
+      },
+      {
+        "account_a": "ACC-26093",
+        "account_b": "ACC-33787",
+        "shared": "device",
+        "identifier": "DEV-1640",
+        "first_seen_together": "2026-01-11T13:38:05.623167Z"
+      },
+      {
+        "account_a": "ACC-33787",
+        "account_b": "ACC-79903",
+        "shared": "payment_method",
+        "identifier": "PAY-7208",
+        "first_seen_together": "2026-01-03T01:37:45.305111Z"
+      }
+    ],
+    "shared_identifiers": {
+      "device": [
+        "DEV-1640",
+        "DEV-4541"
+      ],
+      "payment_method": [
+        "PAY-7208",
+        "PAY-4655"
+      ],
+      "phone": [
+        "PHO-1808",
+        "PHO-7507"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

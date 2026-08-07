@@ -1,0 +1,315 @@
+{
+  "case_id": "SM-009",
+  "category": "synthetic_identity",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "medium",
+  "summary": "Two-week-old account, failed KYC on a mismatched document, immediately maxing out on prepaid reloads.",
+  "planted_signals": [
+    "failed KYC",
+    "thin history",
+    "prepaid reload",
+    "device shared across accounts"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-17930",
+    "account_age_days": 14,
+    "transaction": {
+      "txn_id": "T-6964027",
+      "amount": 480.0,
+      "currency": "USD",
+      "merchant": "TopUpNow",
+      "merchant_category": "prepaid_reload",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-4638802",
+        "amount": 54.09,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-05T13:52:19.894167Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5204995",
+        "amount": 86.56,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-07T13:26:27.053522Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-2775096",
+        "amount": 50.3,
+        "currency": "USD",
+        "merchant": "ReloadHub",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2026-01-09T12:32:30.790127Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9162356",
+        "amount": 262.53,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-11T14:44:23.303954Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5417354",
+        "amount": 247.19,
+        "currency": "USD",
+        "merchant": "ReloadHub",
+        "merchant_category": "prepaid_reload",
+        "timestamp": "2026-01-13T14:54:02.311820Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9805864",
+        "amount": 237.5,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-15T13:58:01.711795Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-6189",
+    "device_first_seen": "2026-01-03T12:00:00Z",
+    "device_known_accounts": 6,
+    "browser_fingerprint_hash": "fp_96a99851df1c",
+    "fingerprint_changes_30d": 3,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-6189",
+        "account_id": "ACC-17930",
+        "last_seen": "2026-01-14T13:47:39.988782Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-6189",
+        "account_id": "ACC-60951",
+        "last_seen": "2026-01-15T10:20:08.696149Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-6189",
+        "account_id": "ACC-98205",
+        "last_seen": "2026-01-13T08:17:06.904286Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-6189",
+        "account_id": "ACC-43569",
+        "last_seen": "2026-01-14T19:58:41.278153Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-6189",
+        "account_id": "ACC-76284",
+        "last_seen": "2026-01-15T11:15:09.061291Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-6189",
+        "account_id": "ACC-92877",
+        "last_seen": "2026-01-13T22:12:48.937110Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      }
+    ],
+    "ip": "109.116.213.179",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS28043-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 900,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "failed",
+    "kyc_flags": [
+      "document_mismatch",
+      "ssn_not_verified"
+    ],
+    "kyc_last_reviewed": "2025-08-06T22:18:32.062085Z",
+    "identity_document_type": "drivers_licence"
+  },
+  "network_data": {
+    "focus_account": "ACC-17930",
+    "edges": [
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-61868",
+        "shared": "device",
+        "identifier": "DEV-1730",
+        "first_seen_together": "2026-01-07T02:52:40.392064Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-61868",
+        "shared": "phone",
+        "identifier": "PHO-3741",
+        "first_seen_together": "2026-01-02T16:55:24.646126Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-40361",
+        "shared": "device",
+        "identifier": "DEV-1730",
+        "first_seen_together": "2026-01-01T20:54:04.379067Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-40361",
+        "shared": "email_pattern",
+        "identifier": "EMA-6956",
+        "first_seen_together": "2026-01-09T22:58:08.612407Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-33176",
+        "shared": "device",
+        "identifier": "DEV-2796",
+        "first_seen_together": "2026-01-14T05:02:48.432020Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-33176",
+        "shared": "phone",
+        "identifier": "PHO-3741",
+        "first_seen_together": "2026-01-05T12:47:35.464272Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-33176",
+        "shared": "email_pattern",
+        "identifier": "EMA-6956",
+        "first_seen_together": "2026-01-14T07:58:47.436185Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-43017",
+        "shared": "device",
+        "identifier": "DEV-1730",
+        "first_seen_together": "2026-01-09T13:39:35.988723Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-65872",
+        "shared": "device",
+        "identifier": "DEV-1730",
+        "first_seen_together": "2026-01-04T15:34:54.887774Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-65872",
+        "shared": "email_pattern",
+        "identifier": "EMA-6956",
+        "first_seen_together": "2026-01-06T19:36:14.197034Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-50898",
+        "shared": "device",
+        "identifier": "DEV-2796",
+        "first_seen_together": "2026-01-05T22:02:29.703274Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-50898",
+        "shared": "phone",
+        "identifier": "PHO-2753",
+        "first_seen_together": "2026-01-09T20:33:26.756496Z"
+      },
+      {
+        "account_a": "ACC-17930",
+        "account_b": "ACC-50898",
+        "shared": "email_pattern",
+        "identifier": "EMA-9452",
+        "first_seen_together": "2026-01-13T17:59:02.949324Z"
+      },
+      {
+        "account_a": "ACC-61868",
+        "account_b": "ACC-33176",
+        "shared": "phone",
+        "identifier": "PHO-3741",
+        "first_seen_together": "2026-01-11T12:41:11.878400Z"
+      },
+      {
+        "account_a": "ACC-61868",
+        "account_b": "ACC-43017",
+        "shared": "device",
+        "identifier": "DEV-2796",
+        "first_seen_together": "2026-01-08T23:32:52.967401Z"
+      },
+      {
+        "account_a": "ACC-61868",
+        "account_b": "ACC-50898",
+        "shared": "phone",
+        "identifier": "PHO-3741",
+        "first_seen_together": "2026-01-05T16:54:01.395338Z"
+      },
+      {
+        "account_a": "ACC-40361",
+        "account_b": "ACC-65872",
+        "shared": "phone",
+        "identifier": "PHO-2753",
+        "first_seen_together": "2026-01-05T00:00:17.158613Z"
+      },
+      {
+        "account_a": "ACC-33176",
+        "account_b": "ACC-43017",
+        "shared": "email_pattern",
+        "identifier": "EMA-9452",
+        "first_seen_together": "2026-01-03T20:33:35.757311Z"
+      },
+      {
+        "account_a": "ACC-43017",
+        "account_b": "ACC-50898",
+        "shared": "email_pattern",
+        "identifier": "EMA-6956",
+        "first_seen_together": "2026-01-10T22:45:07.214919Z"
+      },
+      {
+        "account_a": "ACC-65872",
+        "account_b": "ACC-50898",
+        "shared": "email_pattern",
+        "identifier": "EMA-9452",
+        "first_seen_together": "2026-01-05T14:40:41.708338Z"
+      }
+    ],
+    "shared_identifiers": {
+      "device": [
+        "DEV-1730",
+        "DEV-2796"
+      ],
+      "phone": [
+        "PHO-3741",
+        "PHO-2753"
+      ],
+      "email_pattern": [
+        "EMA-9452",
+        "EMA-6956"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

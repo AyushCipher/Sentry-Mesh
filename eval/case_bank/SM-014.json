@@ -1,0 +1,285 @@
+{
+  "case_id": "SM-014",
+  "category": "money_muling",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "hard",
+  "summary": "Small three-account mule cell using only a shared payment instrument; deliberately below the obvious ring threshold.",
+  "planted_signals": [
+    "small ring",
+    "single identifier type",
+    "clean identity",
+    "repeat transfers"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-11257",
+    "account_age_days": 300,
+    "transaction": {
+      "txn_id": "T-7950827",
+      "amount": 610.0,
+      "currency": "USD",
+      "merchant": "SwiftRemit",
+      "merchant_category": "money_transfer",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-6920848",
+        "amount": 430.27,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-16T14:29:54.568755Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8350421",
+        "amount": 666.52,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-18T15:03:01.289198Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1401681",
+        "amount": 457.61,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-19T15:00:04.441707Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7765657",
+        "amount": 316.77,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-21T14:10:03.167976Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8313611",
+        "amount": 532.52,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-23T15:27:22.885309Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1787642",
+        "amount": 189.44,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-24T13:30:25.973773Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1123292",
+        "amount": 578.03,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-26T12:32:09.057407Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5345585",
+        "amount": 511.19,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2025-12-27T13:08:50.056166Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8801994",
+        "amount": 444.31,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-29T14:17:26.456600Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3340241",
+        "amount": 625.48,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-30T15:26:27.229298Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1967056",
+        "amount": 600.7,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-01T13:13:54.927993Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3781970",
+        "amount": 609.28,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-03T15:19:25.324593Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4137377",
+        "amount": 301.84,
+        "currency": "USD",
+        "merchant": "PayBridge",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-04T12:48:25.868395Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3835301",
+        "amount": 645.58,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-06T14:10:37.635747Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6272415",
+        "amount": 242.62,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-07T14:08:34.009576Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4026938",
+        "amount": 767.19,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-09T13:42:28.042102Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5841706",
+        "amount": 410.5,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-10T13:30:31.014379Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9655787",
+        "amount": 516.95,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-12T13:09:28.250498Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2708755",
+        "amount": 310.57,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-13T12:37:57.635168Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1824788",
+        "amount": 182.88,
+        "currency": "USD",
+        "merchant": "SwiftRemit",
+        "merchant_category": "money_transfer",
+        "timestamp": "2026-01-15T14:42:56.242051Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-6879",
+    "device_first_seen": "2025-03-31T12:00:00Z",
+    "device_known_accounts": 3,
+    "browser_fingerprint_hash": "fp_9513a5f44118",
+    "fingerprint_changes_30d": 1,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-6879",
+        "account_id": "ACC-11257",
+        "last_seen": "2026-01-15T07:03:54.540936Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      {
+        "device_id": "DEV-6879",
+        "account_id": "ACC-73620",
+        "last_seen": "2026-01-14T13:57:43.290815Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-6879",
+        "account_id": "ACC-92938",
+        "last_seen": "2026-01-13T09:06:08.567420Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      }
+    ],
+    "ip": "191.109.111.154",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS38629-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 20,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2024-12-22T14:21:45.717815Z",
+    "identity_document_type": "drivers_licence"
+  },
+  "network_data": {
+    "focus_account": "ACC-11257",
+    "edges": [
+      {
+        "account_a": "ACC-11257",
+        "account_b": "ACC-22843",
+        "shared": "payment_method",
+        "identifier": "PAY-2899",
+        "first_seen_together": "2026-01-09T22:02:20.174202Z"
+      },
+      {
+        "account_a": "ACC-11257",
+        "account_b": "ACC-84715",
+        "shared": "payment_method",
+        "identifier": "PAY-2899",
+        "first_seen_together": "2026-01-07T10:58:40.127029Z"
+      }
+    ],
+    "shared_identifiers": {
+      "payment_method": [
+        "PAY-2899"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

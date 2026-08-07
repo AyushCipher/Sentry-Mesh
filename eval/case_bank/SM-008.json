@@ -1,0 +1,344 @@
+{
+  "case_id": "SM-008",
+  "category": "account_takeover",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "hard",
+  "summary": "Takeover from inside the victim's own country and city; the only anomalies are a fresh device and a category the account never used.",
+  "planted_signals": [
+    "new device only",
+    "no geo mismatch",
+    "category first-use",
+    "clean network"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-12769",
+    "account_age_days": 1680,
+    "transaction": {
+      "txn_id": "T-5002257",
+      "amount": 890.0,
+      "currency": "USD",
+      "merchant": "Vertex Digital",
+      "merchant_category": "crypto_exchange",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-1120765",
+        "amount": 81.58,
+        "currency": "USD",
+        "merchant": "Blue Fig Cafe",
+        "merchant_category": "restaurants",
+        "timestamp": "2025-12-10T13:54:38.594443Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8623723",
+        "amount": 143.29,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-11T13:03:33.822772Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2173416",
+        "amount": 121.34,
+        "currency": "USD",
+        "merchant": "StreamNine",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-12T14:04:16.405844Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4600152",
+        "amount": 80.72,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-14T14:47:15.180209Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9452530",
+        "amount": 90.51,
+        "currency": "USD",
+        "merchant": "ReadDaily",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-15T15:15:53.488033Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9145731",
+        "amount": 145.55,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-16T14:44:56.204507Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7087413",
+        "amount": 80.63,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-17T14:50:19.711893Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8167365",
+        "amount": 86.11,
+        "currency": "USD",
+        "merchant": "ReadDaily",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-19T15:02:17.891443Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3770047",
+        "amount": 27.98,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-20T14:24:18.477089Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2790063",
+        "amount": 180.08,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-21T12:54:33.410701Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7157644",
+        "amount": 136.29,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-22T13:39:30.700375Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6914281",
+        "amount": 132.11,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-24T14:55:11.863380Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9461309",
+        "amount": 117.01,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-25T12:50:41.609876Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3245492",
+        "amount": 139.37,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-26T14:48:43.636809Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3420266",
+        "amount": 134.76,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-27T13:37:22.340297Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5978341",
+        "amount": 113.35,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-29T14:22:24.118162Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7276974",
+        "amount": 107.63,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-30T14:16:21.970710Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2665287",
+        "amount": 90.89,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-31T13:29:31.453762Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7364966",
+        "amount": 149.77,
+        "currency": "USD",
+        "merchant": "Vantage Power",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-01T13:03:07.153363Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1907762",
+        "amount": 97.19,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-03T13:12:41.862756Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1475900",
+        "amount": 91.45,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-04T13:55:56.224199Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1189774",
+        "amount": 127.22,
+        "currency": "USD",
+        "merchant": "MetroRail",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-05T13:42:50.352361Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9319854",
+        "amount": 22.62,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-06T13:51:06.577889Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7244090",
+        "amount": 132.91,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-08T14:00:00.524058Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3071957",
+        "amount": 77.89,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-09T13:04:51.050466Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9056466",
+        "amount": 98.23,
+        "currency": "USD",
+        "merchant": "Blue Fig Cafe",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-10T14:50:20.672474Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6143121",
+        "amount": 135.48,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-11T14:23:58.801320Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2974998",
+        "amount": 53.07,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-13T13:59:09.423236Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3677219",
+        "amount": 63.73,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-14T13:00:42.721495Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4619568",
+        "amount": 105.04,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-15T14:31:58.279696Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-2854",
+    "device_first_seen": "2026-01-15T12:00:00Z",
+    "device_known_accounts": 1,
+    "browser_fingerprint_hash": "fp_d2906b99284a",
+    "fingerprint_changes_30d": 6,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-2854",
+        "account_id": "ACC-12769",
+        "last_seen": "2026-01-13T00:18:49.628085Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      }
+    ],
+    "ip": "107.52.6.231",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS49032-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 25,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2025-02-28T06:35:22.369994Z",
+    "identity_document_type": "passport"
+  },
+  "network_data": {
+    "focus_account": "ACC-12769",
+    "edges": [],
+    "shared_identifiers": {},
+    "note": "Synthetic evaluation data."
+  }
+}

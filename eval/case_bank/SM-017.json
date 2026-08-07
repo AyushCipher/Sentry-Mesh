@@ -1,0 +1,354 @@
+{
+  "case_id": "SM-017",
+  "category": "legitimate",
+  "ground_truth": "legitimate",
+  "expected_verdict": "approve",
+  "difficulty": "medium",
+  "summary": "Shared household: three family accounts on one residential IP range, ordinary supermarket spend.",
+  "planted_signals": [
+    "ip_range-only links (benign)",
+    "no device sharing",
+    "stable profile"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-15916",
+    "account_age_days": 990,
+    "transaction": {
+      "txn_id": "T-6416979",
+      "amount": 122.4,
+      "currency": "USD",
+      "merchant": "Northfield Market",
+      "merchant_category": "groceries",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-9866990",
+        "amount": 71.71,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-12T14:54:05.571801Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2304198",
+        "amount": 112.77,
+        "currency": "USD",
+        "merchant": "ReadDaily",
+        "merchant_category": "subscriptions",
+        "timestamp": "2025-12-13T13:37:51.861750Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2855951",
+        "amount": 105.25,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-14T14:11:07.527575Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1886336",
+        "amount": 125.38,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-16T15:27:05.009216Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4886354",
+        "amount": 107.23,
+        "currency": "USD",
+        "merchant": "Blue Fig Cafe",
+        "merchant_category": "restaurants",
+        "timestamp": "2025-12-17T14:16:36.631272Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9432274",
+        "amount": 83.12,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-18T14:20:12.146870Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5869159",
+        "amount": 102.62,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-20T13:54:42.447562Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3714266",
+        "amount": 57.31,
+        "currency": "USD",
+        "merchant": "Harlow Home",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-21T14:52:54.627179Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-8979185",
+        "amount": 55.09,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-23T14:51:17.240574Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-4279836",
+        "amount": 137.65,
+        "currency": "USD",
+        "merchant": "Kestrel Apparel",
+        "merchant_category": "retail",
+        "timestamp": "2025-12-24T15:03:30.963484Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6821982",
+        "amount": 138.32,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2025-12-25T14:41:19.218692Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1229083",
+        "amount": 99.15,
+        "currency": "USD",
+        "merchant": "GreenLeaf Grocer",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-27T13:37:37.789660Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1355118",
+        "amount": 67.75,
+        "currency": "USD",
+        "merchant": "GreenLeaf Grocer",
+        "merchant_category": "groceries",
+        "timestamp": "2025-12-28T14:02:07.360649Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9694341",
+        "amount": 38.1,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2025-12-29T15:23:38.599947Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6651895",
+        "amount": 112.84,
+        "currency": "USD",
+        "merchant": "Beacon Petrol",
+        "merchant_category": "fuel",
+        "timestamp": "2025-12-31T13:32:36.352106Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2890153",
+        "amount": 107.09,
+        "currency": "USD",
+        "merchant": "Clearwater Utilities",
+        "merchant_category": "utilities",
+        "timestamp": "2026-01-01T14:25:58.287811Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2947561",
+        "amount": 84.79,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-03T13:03:23.268913Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7412444",
+        "amount": 81.91,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-04T13:53:10.959190Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6728048",
+        "amount": 139.72,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-05T12:36:23.087476Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-3731721",
+        "amount": 89.83,
+        "currency": "USD",
+        "merchant": "CityCab",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-07T15:05:51.542727Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2541944",
+        "amount": 83.53,
+        "currency": "USD",
+        "merchant": "Ridgeway Fuel",
+        "merchant_category": "fuel",
+        "timestamp": "2026-01-08T14:21:02.294472Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5860034",
+        "amount": 65.58,
+        "currency": "USD",
+        "merchant": "Harbour Ferries",
+        "merchant_category": "transport",
+        "timestamp": "2026-01-09T13:14:03.230779Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7808271",
+        "amount": 78.97,
+        "currency": "USD",
+        "merchant": "Blue Fig Cafe",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-11T14:55:56.994344Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-7326065",
+        "amount": 61.36,
+        "currency": "USD",
+        "merchant": "Riverside Diner",
+        "merchant_category": "restaurants",
+        "timestamp": "2026-01-12T15:20:30.505833Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-1364850",
+        "amount": 131.42,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-14T14:53:28.985127Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9747396",
+        "amount": 120.95,
+        "currency": "USD",
+        "merchant": "CloudVault",
+        "merchant_category": "subscriptions",
+        "timestamp": "2026-01-15T12:38:35.617561Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-8951",
+    "device_first_seen": "2024-09-02T12:00:00Z",
+    "device_known_accounts": 1,
+    "browser_fingerprint_hash": "fp_8db4405e5260",
+    "fingerprint_changes_30d": 0,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-8951",
+        "account_id": "ACC-15916",
+        "last_seen": "2026-01-14T18:17:34.589842Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      }
+    ],
+    "ip": "94.200.82.190",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS50809-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 2,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2025-05-28T17:08:01.674919Z",
+    "identity_document_type": "national_id"
+  },
+  "network_data": {
+    "focus_account": "ACC-15916",
+    "edges": [
+      {
+        "account_a": "ACC-15916",
+        "account_b": "ACC-91217",
+        "shared": "ip_range",
+        "identifier": "IP_-3734",
+        "first_seen_together": "2026-01-14T07:43:15.784066Z"
+      },
+      {
+        "account_a": "ACC-15916",
+        "account_b": "ACC-70191",
+        "shared": "ip_range",
+        "identifier": "IP_-3734",
+        "first_seen_together": "2026-01-14T01:50:57.744422Z"
+      },
+      {
+        "account_a": "ACC-15916",
+        "account_b": "ACC-34775",
+        "shared": "ip_range",
+        "identifier": "IP_-3734",
+        "first_seen_together": "2026-01-02T12:58:15.741112Z"
+      },
+      {
+        "account_a": "ACC-91217",
+        "account_b": "ACC-70191",
+        "shared": "ip_range",
+        "identifier": "IP_-3734",
+        "first_seen_together": "2026-01-11T09:32:50.611584Z"
+      },
+      {
+        "account_a": "ACC-91217",
+        "account_b": "ACC-34775",
+        "shared": "ip_range",
+        "identifier": "IP_-3734",
+        "first_seen_together": "2026-01-08T16:15:48.469209Z"
+      },
+      {
+        "account_a": "ACC-70191",
+        "account_b": "ACC-34775",
+        "shared": "ip_range",
+        "identifier": "IP_-3734",
+        "first_seen_together": "2026-01-10T03:06:05.528770Z"
+      }
+    ],
+    "shared_identifiers": {
+      "ip_range": [
+        "IP_-3734"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

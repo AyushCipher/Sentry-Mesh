@@ -1,0 +1,390 @@
+{
+  "case_id": "SM-001",
+  "category": "card_testing",
+  "ground_truth": "fraud",
+  "expected_verdict": "decline",
+  "difficulty": "easy",
+  "summary": "Rapid sequence of sub-$5 digital-goods authorisations on a 3-day-old account, most declined.",
+  "planted_signals": [
+    "velocity burst",
+    "high decline rate",
+    "elevated-risk category",
+    "proxy IP",
+    "device shared across accounts"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-16686",
+    "account_age_days": 3,
+    "transaction": {
+      "txn_id": "T-1301658",
+      "amount": 1.99,
+      "currency": "USD",
+      "merchant": "AppVault",
+      "merchant_category": "digital_goods",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-1317966",
+        "amount": 1.0,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:25:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4732437",
+        "amount": 3.19,
+        "currency": "USD",
+        "merchant": "GameCred Direct",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:26:32.727273Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-4400125",
+        "amount": 3.92,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:28:05.454545Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-4664751",
+        "amount": 2.11,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:29:38.181818Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-5442063",
+        "amount": 2.59,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:31:10.909091Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-4096577",
+        "amount": 2.82,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:32:43.636364Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5021996",
+        "amount": 4.15,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:34:16.363636Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-3885441",
+        "amount": 3.57,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:35:49.090909Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-2872494",
+        "amount": 2.18,
+        "currency": "USD",
+        "merchant": "GameCred Direct",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:37:21.818182Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6917333",
+        "amount": 2.86,
+        "currency": "USD",
+        "merchant": "GameCred Direct",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:38:54.545455Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-3532626",
+        "amount": 2.1,
+        "currency": "USD",
+        "merchant": "GameCred Direct",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:40:27.272727Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6745780",
+        "amount": 2.36,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:42:00Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4060639",
+        "amount": 2.9,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:43:32.727273Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-3560711",
+        "amount": 3.11,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:45:05.454545Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-5962032",
+        "amount": 1.0,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:46:38.181818Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5926635",
+        "amount": 1.97,
+        "currency": "USD",
+        "merchant": "GameCred Direct",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:48:10.909091Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-6102256",
+        "amount": 3.03,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:49:43.636364Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-7666818",
+        "amount": 3.1,
+        "currency": "USD",
+        "merchant": "PixelKeys Store",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:51:16.363636Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-5404641",
+        "amount": 2.29,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:52:49.090909Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4294966",
+        "amount": 1.59,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:54:21.818182Z",
+        "status": "declined"
+      },
+      {
+        "txn_id": "T-7335654",
+        "amount": 1.94,
+        "currency": "USD",
+        "merchant": "AppVault",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:55:54.545455Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-2294632",
+        "amount": 1.0,
+        "currency": "USD",
+        "merchant": "GameCred Direct",
+        "merchant_category": "digital_goods",
+        "timestamp": "2026-01-15T11:57:27.272727Z",
+        "status": "declined"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-7708",
+    "device_first_seen": "2026-01-13T12:00:00Z",
+    "device_known_accounts": 8,
+    "browser_fingerprint_hash": "fp_cd3de26d4513",
+    "fingerprint_changes_30d": 9,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": true,
+    "device_history": [
+      {
+        "device_id": "DEV-7708",
+        "account_id": "ACC-16686",
+        "last_seen": "2026-01-13T01:12:36.350473Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-7708",
+        "account_id": "ACC-51794",
+        "last_seen": "2026-01-14T23:03:04.111235Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-7708",
+        "account_id": "ACC-82962",
+        "last_seen": "2026-01-15T03:53:30.209281Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      {
+        "device_id": "DEV-7708",
+        "account_id": "ACC-38826",
+        "last_seen": "2026-01-13T00:34:18.189517Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-7708",
+        "account_id": "ACC-48422",
+        "last_seen": "2026-01-13T16:58:07.822046Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      },
+      {
+        "device_id": "DEV-7708",
+        "account_id": "ACC-93445",
+        "last_seen": "2026-01-14T06:00:05.239883Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      },
+      {
+        "device_id": "DEV-7708",
+        "account_id": "ACC-37648",
+        "last_seen": "2026-01-13T17:19:30.569371Z",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+      },
+      {
+        "device_id": "DEV-7708",
+        "account_id": "ACC-42531",
+        "last_seen": "2026-01-13T23:57:12.112335Z",
+        "user_agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2)"
+      }
+    ],
+    "ip": "30.208.69.110",
+    "ip_country": "RO",
+    "geo_city": "unspecified",
+    "ip_asn": "AS-COMMERCIAL-VPN",
+    "is_proxy": true,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 8100,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "unverified",
+    "kyc_flags": [
+      "document_not_provided"
+    ],
+    "kyc_last_reviewed": "2025-04-19T22:24:50.825882Z",
+    "identity_document_type": "passport"
+  },
+  "network_data": {
+    "focus_account": "ACC-16686",
+    "edges": [
+      {
+        "account_a": "ACC-16686",
+        "account_b": "ACC-44803",
+        "shared": "device",
+        "identifier": "DEV-5314",
+        "first_seen_together": "2026-01-05T09:12:05.311226Z"
+      },
+      {
+        "account_a": "ACC-16686",
+        "account_b": "ACC-39586",
+        "shared": "device",
+        "identifier": "DEV-5314",
+        "first_seen_together": "2026-01-06T19:56:18.962842Z"
+      },
+      {
+        "account_a": "ACC-16686",
+        "account_b": "ACC-40032",
+        "shared": "device",
+        "identifier": "DEV-5314",
+        "first_seen_together": "2026-01-07T04:58:23.738225Z"
+      },
+      {
+        "account_a": "ACC-16686",
+        "account_b": "ACC-29744",
+        "shared": "device",
+        "identifier": "DEV-3669",
+        "first_seen_together": "2026-01-04T15:54:16.036373Z"
+      },
+      {
+        "account_a": "ACC-16686",
+        "account_b": "ACC-29744",
+        "shared": "payment_method",
+        "identifier": "PAY-9616",
+        "first_seen_together": "2026-01-10T01:34:22.260812Z"
+      },
+      {
+        "account_a": "ACC-44803",
+        "account_b": "ACC-39586",
+        "shared": "device",
+        "identifier": "DEV-5314",
+        "first_seen_together": "2026-01-07T04:26:18.350340Z"
+      },
+      {
+        "account_a": "ACC-44803",
+        "account_b": "ACC-40032",
+        "shared": "payment_method",
+        "identifier": "PAY-9616",
+        "first_seen_together": "2026-01-04T07:38:23.325502Z"
+      },
+      {
+        "account_a": "ACC-44803",
+        "account_b": "ACC-29744",
+        "shared": "payment_method",
+        "identifier": "PAY-3132",
+        "first_seen_together": "2026-01-03T11:57:34.373889Z"
+      },
+      {
+        "account_a": "ACC-39586",
+        "account_b": "ACC-40032",
+        "shared": "device",
+        "identifier": "DEV-5314",
+        "first_seen_together": "2026-01-09T01:32:40.019082Z"
+      }
+    ],
+    "shared_identifiers": {
+      "device": [
+        "DEV-3669",
+        "DEV-5314"
+      ],
+      "payment_method": [
+        "PAY-9616",
+        "PAY-3132"
+      ]
+    },
+    "note": "Synthetic evaluation data."
+  }
+}

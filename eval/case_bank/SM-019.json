@@ -1,0 +1,111 @@
+{
+  "case_id": "SM-019",
+  "category": "legitimate",
+  "ground_truth": "legitimate",
+  "expected_verdict": "approve",
+  "difficulty": "hard",
+  "summary": "New customer's first week: thin history and a new device, but every signal that would indicate fraud is absent.",
+  "planted_signals": [
+    "thin baseline",
+    "new device",
+    "clean KYC",
+    "no ring",
+    "modest amount"
+  ],
+  "synthetic": true,
+  "data_disclaimer": "SYNTHETIC evaluation data. Not derived from any real account, card, device or person.",
+  "generator": {
+    "script": "eval/case_bank/build_cases.py",
+    "seed": 20260115
+  },
+  "transaction_data": {
+    "account_id": "ACC-17316",
+    "account_age_days": 5,
+    "transaction": {
+      "txn_id": "T-6466032",
+      "amount": 64.0,
+      "currency": "USD",
+      "merchant": "Harlow Home",
+      "merchant_category": "retail",
+      "timestamp": "2026-01-15T12:00:00Z",
+      "channel": "card_not_present"
+    },
+    "history": [
+      {
+        "txn_id": "T-7891389",
+        "amount": 49.68,
+        "currency": "USD",
+        "merchant": "Northfield Market",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-12T13:52:05.249759Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-4532259",
+        "amount": 27.86,
+        "currency": "USD",
+        "merchant": "CityFresh",
+        "merchant_category": "groceries",
+        "timestamp": "2026-01-13T15:16:52.641470Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-6888777",
+        "amount": 55.34,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-14T13:14:23.432743Z",
+        "status": "approved"
+      },
+      {
+        "txn_id": "T-9853065",
+        "amount": 59.53,
+        "currency": "USD",
+        "merchant": "Orchard Supply",
+        "merchant_category": "retail",
+        "timestamp": "2026-01-15T14:52:26.878105Z",
+        "status": "approved"
+      }
+    ]
+  },
+  "device_data": {
+    "device_id": "DEV-7821",
+    "device_first_seen": "2026-01-10T12:00:00Z",
+    "device_known_accounts": 1,
+    "browser_fingerprint_hash": "fp_a49b4bd911c5",
+    "fingerprint_changes_30d": 0,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64)",
+    "emulator_signals": false,
+    "device_history": [
+      {
+        "device_id": "DEV-7821",
+        "account_id": "ACC-17316",
+        "last_seen": "2026-01-12T22:02:17.290350Z",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64)"
+      }
+    ],
+    "ip": "218.186.88.84",
+    "ip_country": "US",
+    "geo_city": "unspecified",
+    "ip_asn": "AS18436-RETAIL-ISP",
+    "is_proxy": false,
+    "billing_country": "US",
+    "billing_city": "unspecified",
+    "distance_km": 8,
+    "impossible_travel": false,
+    "account_prior_countries": [
+      "US"
+    ],
+    "kyc_status": "verified",
+    "kyc_flags": [],
+    "kyc_last_reviewed": "2025-01-18T16:46:12.918505Z",
+    "identity_document_type": "drivers_licence"
+  },
+  "network_data": {
+    "focus_account": "ACC-17316",
+    "edges": [],
+    "shared_identifiers": {},
+    "note": "Synthetic evaluation data."
+  }
+}
