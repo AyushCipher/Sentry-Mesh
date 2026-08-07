@@ -1,0 +1,3037 @@
+{
+  "report_version": 1,
+  "run_id": "b606fd",
+  "generated_at": "2026-08-07T21:30:54+00:00",
+  "wall_clock_ms": 898,
+  "data_disclaimer": "All cases are SYNTHETIC. No real financial data is represented anywhere in this system or this report.",
+  "runtime": {
+    "event_log_backend": "redis",
+    "review_queue_backend": "redis",
+    "retrieval_backend": "local_cosine",
+    "llm_backend": "offline",
+    "run_mode": "offline_deterministic",
+    "model": null,
+    "thresholds": {
+      "auto_decline_risk": 70.0,
+      "auto_approve_risk": 35.0,
+      "min_confidence": 0.7
+    },
+    "data": "synthetic"
+  },
+  "environment": {
+    "python": "3.10.11",
+    "platform": "Windows-10-10.0.26200-SP0"
+  },
+  "case_bank": {
+    "cases_run": 23,
+    "ground_truth_distribution": {
+      "ambiguous": 2,
+      "fraud": 14,
+      "legitimate": 7
+    },
+    "category_distribution": {
+      "account_takeover": 5,
+      "card_testing": 4,
+      "legitimate": 7,
+      "money_muling": 4,
+      "synthetic_identity": 3
+    },
+    "difficulty_distribution": {
+      "easy": 4,
+      "hard": 8,
+      "medium": 11
+    }
+  },
+  "overall": {
+    "auto_only": {
+      "true_positive": 5,
+      "false_positive": 0,
+      "true_negative": 4,
+      "false_negative": 0,
+      "abstained": 12,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0,
+      "scored_cases": 9
+    },
+    "escalation_as_flag": {
+      "true_positive": 14,
+      "false_positive": 3,
+      "true_negative": 4,
+      "false_negative": 0,
+      "abstained": 0,
+      "precision": 0.8235,
+      "recall": 1.0,
+      "f1": 0.9032,
+      "false_positive_rate": 0.4286,
+      "accuracy": 0.8571,
+      "scored_cases": 21
+    }
+  },
+  "by_category": {
+    "account_takeover": {
+      "cases": 5,
+      "auto_only": {
+        "true_positive": 2,
+        "false_positive": 0,
+        "true_negative": 0,
+        "false_negative": 0,
+        "abstained": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "accuracy": 1.0,
+        "scored_cases": 2
+      },
+      "escalation_as_flag": {
+        "true_positive": 4,
+        "false_positive": 0,
+        "true_negative": 0,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "accuracy": 1.0,
+        "scored_cases": 4
+      },
+      "decisions": {
+        "auto_decline": 2,
+        "escalate": 3
+      },
+      "exact_verdict_matches": 3
+    },
+    "card_testing": {
+      "cases": 4,
+      "auto_only": {
+        "true_positive": 2,
+        "false_positive": 0,
+        "true_negative": 0,
+        "false_negative": 0,
+        "abstained": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "accuracy": 1.0,
+        "scored_cases": 2
+      },
+      "escalation_as_flag": {
+        "true_positive": 4,
+        "false_positive": 0,
+        "true_negative": 0,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "accuracy": 1.0,
+        "scored_cases": 4
+      },
+      "decisions": {
+        "auto_decline": 2,
+        "escalate": 2
+      },
+      "exact_verdict_matches": 2
+    },
+    "legitimate": {
+      "cases": 7,
+      "auto_only": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "true_negative": 4,
+        "false_negative": 0,
+        "abstained": 3,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "false_positive_rate": 0.0,
+        "accuracy": 1.0,
+        "scored_cases": 4
+      },
+      "escalation_as_flag": {
+        "true_positive": 0,
+        "false_positive": 3,
+        "true_negative": 4,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 0.0,
+        "recall": null,
+        "f1": null,
+        "false_positive_rate": 0.4286,
+        "accuracy": 0.5714,
+        "scored_cases": 7
+      },
+      "decisions": {
+        "auto_approve": 4,
+        "escalate": 3
+      },
+      "exact_verdict_matches": 4
+    },
+    "money_muling": {
+      "cases": 4,
+      "auto_only": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "true_negative": 0,
+        "false_negative": 0,
+        "abstained": 2,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "accuracy": 1.0,
+        "scored_cases": 1
+      },
+      "escalation_as_flag": {
+        "true_positive": 3,
+        "false_positive": 0,
+        "true_negative": 0,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "accuracy": 1.0,
+        "scored_cases": 3
+      },
+      "decisions": {
+        "auto_decline": 1,
+        "escalate": 3
+      },
+      "exact_verdict_matches": 2
+    },
+    "synthetic_identity": {
+      "cases": 3,
+      "auto_only": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "true_negative": 0,
+        "false_negative": 0,
+        "abstained": 3,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "false_positive_rate": null,
+        "accuracy": null,
+        "scored_cases": 0
+      },
+      "escalation_as_flag": {
+        "true_positive": 3,
+        "false_positive": 0,
+        "true_negative": 0,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": null,
+        "accuracy": 1.0,
+        "scored_cases": 3
+      },
+      "decisions": {
+        "escalate": 3
+      },
+      "exact_verdict_matches": 0
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "cases": 4,
+      "auto_only": {
+        "true_positive": 3,
+        "false_positive": 0,
+        "true_negative": 1,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "accuracy": 1.0,
+        "scored_cases": 4
+      },
+      "escalation_as_flag": {
+        "true_positive": 3,
+        "false_positive": 0,
+        "true_negative": 1,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "accuracy": 1.0,
+        "scored_cases": 4
+      },
+      "decisions": {
+        "auto_approve": 1,
+        "auto_decline": 3
+      },
+      "exact_verdict_matches": 4
+    },
+    "hard": {
+      "cases": 8,
+      "auto_only": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "true_negative": 1,
+        "false_negative": 0,
+        "abstained": 5,
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "false_positive_rate": 0.0,
+        "accuracy": 1.0,
+        "scored_cases": 1
+      },
+      "escalation_as_flag": {
+        "true_positive": 4,
+        "false_positive": 1,
+        "true_negative": 1,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1": 0.8889,
+        "false_positive_rate": 0.5,
+        "accuracy": 0.8333,
+        "scored_cases": 6
+      },
+      "decisions": {
+        "auto_approve": 1,
+        "escalate": 7
+      },
+      "exact_verdict_matches": 3
+    },
+    "medium": {
+      "cases": 11,
+      "auto_only": {
+        "true_positive": 2,
+        "false_positive": 0,
+        "true_negative": 2,
+        "false_negative": 0,
+        "abstained": 7,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "accuracy": 1.0,
+        "scored_cases": 4
+      },
+      "escalation_as_flag": {
+        "true_positive": 7,
+        "false_positive": 2,
+        "true_negative": 2,
+        "false_negative": 0,
+        "abstained": 0,
+        "precision": 0.7778,
+        "recall": 1.0,
+        "f1": 0.875,
+        "false_positive_rate": 0.5,
+        "accuracy": 0.8182,
+        "scored_cases": 11
+      },
+      "decisions": {
+        "auto_approve": 2,
+        "auto_decline": 2,
+        "escalate": 7
+      },
+      "exact_verdict_matches": 4
+    }
+  },
+  "escalation_analysis": {
+    "total_cases": 23,
+    "escalated": 14,
+    "auto_resolved": 9,
+    "ambiguous_total": 2,
+    "ambiguous_escalated": 2,
+    "decisive_total": 21,
+    "decisive_escalated": 12,
+    "escalation_rate": 0.6087,
+    "ambiguous_escalation_rate": 1.0,
+    "decisive_escalation_rate": 0.5714,
+    "lift": 1.75,
+    "findings": [
+      "All 2/2 deliberately-ambiguous cases were escalated.",
+      "Ambiguous cases escalate 1.75x as often as decisive ones (100% vs 57%).",
+      "Overall escalation rate is 61%. In production that is roughly 14 human reviews per 23 flagged payments, which is a staffing cost, not a free safety margin. Auto-decision quality below should be read against it."
+    ]
+  },
+  "error_classification": {
+    "infrastructure_failures": {
+      "total": 0,
+      "by_class": {},
+      "affected_cases": {},
+      "meaning": "Transport or provider failures. These say nothing about agent reasoning quality and any metric computed over a run containing them is measured on degraded evidence."
+    },
+    "agent_protocol_failures": {
+      "total": 0,
+      "by_class": {},
+      "affected_cases": {},
+      "meaning": "The agent ran but did not produce a usable structured result (bad tool call, turn limit, tool execution error). A reasoning-adjacent failure, distinct from both infrastructure and from being wrong."
+    },
+    "wrong_auto_decisions": {
+      "total": 0,
+      "cases": [],
+      "meaning": "The system ran correctly and committed to the wrong answer. This is the only bucket that measures reasoning quality, and it is the one that matters."
+    },
+    "escalated_decisive_cases": {
+      "total": 12,
+      "cases": [
+        "SM-003",
+        "SM-004",
+        "SM-007",
+        "SM-008",
+        "SM-009",
+        "SM-010",
+        "SM-011",
+        "SM-013",
+        "SM-014",
+        "SM-017",
+        "SM-019",
+        "SM-021"
+      ],
+      "meaning": "Cases with a clear ground truth that the system would not commit to. Not wrong, but not autonomous either - each one is a human review the system failed to save."
+    }
+  },
+  "honesty_and_self_scrutiny": {
+    "headline": "7 slice(s) came back at or above 95% accuracy (category=account_takeover, category=card_testing, category=legitimate, category=money_muling, difficulty=easy, difficulty=hard, difficulty=medium). Each is investigated below rather than reported as a win.",
+    "suspicious_results": [
+      {
+        "slice": "category=account_takeover",
+        "accuracy": 1.0,
+        "scored_cases": 2,
+        "escalated_out_of_metric": 2,
+        "avg_planted_signals": 4.0,
+        "avg_contributing_specialists": 4.0,
+        "checks": [
+          "Only 2 case(s) were scored in this slice. At that size a single case moves the number by 20 points or more; this is not a measurement, it is an anecdote.",
+          "2 of 4 decisive cases in this slice were escalated and are therefore excluded from the auto_only accuracy. The perfect score describes only the 2 case(s) the system was willing to commit to.",
+          "Cases in this slice carry 4.0 planted signals on average. They were built to be detectable, and a system that missed them would be broken rather than merely imperfect. Getting them right is a floor, not an achievement.",
+          "2 of 2 auto-decisions here collapse when the loudest specialist is removed (SM-005, SM-006), so they rest on one signal rather than on corroboration across the panel."
+        ],
+        "verdict": "SUSPECT - sample too small to mean anything; survivorship: the hard cases were escalated out of the metric; cases were seeded to be easy; decisions rest on a single specialist"
+      },
+      {
+        "slice": "category=card_testing",
+        "accuracy": 1.0,
+        "scored_cases": 2,
+        "escalated_out_of_metric": 2,
+        "avg_planted_signals": 5.0,
+        "avg_contributing_specialists": 3.5,
+        "checks": [
+          "Only 2 case(s) were scored in this slice. At that size a single case moves the number by 20 points or more; this is not a measurement, it is an anecdote.",
+          "2 of 4 decisive cases in this slice were escalated and are therefore excluded from the auto_only accuracy. The perfect score describes only the 2 case(s) the system was willing to commit to.",
+          "Cases in this slice carry 5.0 planted signals on average. They were built to be detectable, and a system that missed them would be broken rather than merely imperfect. Getting them right is a floor, not an achievement.",
+          "2 of 2 auto-decisions here collapse when the loudest specialist is removed (SM-001, SM-002), so they rest on one signal rather than on corroboration across the panel."
+        ],
+        "verdict": "SUSPECT - sample too small to mean anything; survivorship: the hard cases were escalated out of the metric; cases were seeded to be easy; decisions rest on a single specialist"
+      },
+      {
+        "slice": "category=legitimate",
+        "accuracy": 1.0,
+        "scored_cases": 4,
+        "escalated_out_of_metric": 3,
+        "avg_planted_signals": 3.5,
+        "avg_contributing_specialists": 3.75,
+        "checks": [
+          "Only 4 case(s) were scored in this slice. At that size a single case moves the number by 20 points or more; this is not a measurement, it is an anecdote.",
+          "3 of 7 decisive cases in this slice were escalated and are therefore excluded from the auto_only accuracy. The perfect score describes only the 4 case(s) the system was willing to commit to.",
+          "1 of 4 auto-decisions here collapse when the loudest specialist is removed (SM-016), so they rest on one signal rather than on corroboration across the panel."
+        ],
+        "verdict": "SUSPECT - sample too small to mean anything; survivorship: the hard cases were escalated out of the metric; decisions rest on a single specialist"
+      },
+      {
+        "slice": "category=money_muling",
+        "accuracy": 1.0,
+        "scored_cases": 1,
+        "escalated_out_of_metric": 2,
+        "avg_planted_signals": 4.0,
+        "avg_contributing_specialists": 4.0,
+        "checks": [
+          "Only 1 case(s) were scored in this slice. At that size a single case moves the number by 20 points or more; this is not a measurement, it is an anecdote.",
+          "2 of 3 decisive cases in this slice were escalated and are therefore excluded from the auto_only accuracy. The perfect score describes only the 1 case(s) the system was willing to commit to.",
+          "Cases in this slice carry 4.0 planted signals on average. They were built to be detectable, and a system that missed them would be broken rather than merely imperfect. Getting them right is a floor, not an achievement.",
+          "1 of 1 auto-decisions here collapse when the loudest specialist is removed (SM-012), so they rest on one signal rather than on corroboration across the panel."
+        ],
+        "verdict": "SUSPECT - sample too small to mean anything; survivorship: the hard cases were escalated out of the metric; cases were seeded to be easy; decisions rest on a single specialist"
+      },
+      {
+        "slice": "difficulty=easy",
+        "accuracy": 1.0,
+        "scored_cases": 4,
+        "escalated_out_of_metric": 0,
+        "avg_planted_signals": 3.75,
+        "avg_contributing_specialists": 3.5,
+        "checks": [
+          "Only 4 case(s) were scored in this slice. At that size a single case moves the number by 20 points or more; this is not a measurement, it is an anecdote.",
+          "3 of 4 auto-decisions here collapse when the loudest specialist is removed (SM-001, SM-002, SM-005), so they rest on one signal rather than on corroboration across the panel."
+        ],
+        "verdict": "SUSPECT - sample too small to mean anything; decisions rest on a single specialist"
+      },
+      {
+        "slice": "difficulty=hard",
+        "accuracy": 1.0,
+        "scored_cases": 1,
+        "escalated_out_of_metric": 5,
+        "avg_planted_signals": 5.0,
+        "avg_contributing_specialists": 4.0,
+        "checks": [
+          "Only 1 case(s) were scored in this slice. At that size a single case moves the number by 20 points or more; this is not a measurement, it is an anecdote.",
+          "5 of 6 decisive cases in this slice were escalated and are therefore excluded from the auto_only accuracy. The perfect score describes only the 1 case(s) the system was willing to commit to.",
+          "Cases in this slice carry 5.0 planted signals on average. They were built to be detectable, and a system that missed them would be broken rather than merely imperfect. Getting them right is a floor, not an achievement.",
+          "All 1 auto-decisions survive removal of the loudest specialist, and 4.0 specialists contributed a confident finding on average. The multi-signal reasoning is real for this slice."
+        ],
+        "verdict": "SUSPECT - sample too small to mean anything; survivorship: the hard cases were escalated out of the metric; cases were seeded to be easy"
+      },
+      {
+        "slice": "difficulty=medium",
+        "accuracy": 1.0,
+        "scored_cases": 4,
+        "escalated_out_of_metric": 7,
+        "avg_planted_signals": 4.0,
+        "avg_contributing_specialists": 4.0,
+        "checks": [
+          "Only 4 case(s) were scored in this slice. At that size a single case moves the number by 20 points or more; this is not a measurement, it is an anecdote.",
+          "7 of 11 decisive cases in this slice were escalated and are therefore excluded from the auto_only accuracy. The perfect score describes only the 4 case(s) the system was willing to commit to.",
+          "Cases in this slice carry 4.0 planted signals on average. They were built to be detectable, and a system that missed them would be broken rather than merely imperfect. Getting them right is a floor, not an achievement.",
+          "3 of 4 auto-decisions here collapse when the loudest specialist is removed (SM-006, SM-012, SM-016), so they rest on one signal rather than on corroboration across the panel."
+        ],
+        "verdict": "SUSPECT - sample too small to mean anything; survivorship: the hard cases were escalated out of the metric; cases were seeded to be easy; decisions rest on a single specialist"
+      }
+    ],
+    "ablation_study": {
+      "method": "Re-runs the supervisor's aggregation and decision functions over a reduced panel using the findings already recorded in the event log. No additional model calls, so this measures the decision logic exactly as it ran.",
+      "auto_decisions_examined": 9,
+      "survives_removal_of_loudest_specialist": 3,
+      "collapses_without_loudest_specialist": 6,
+      "multi_signal_share": 0.3333,
+      "single_signal_cases": [
+        {
+          "case_id": "SM-001",
+          "decision": "auto_decline",
+          "removed_specialist": "identity_signal",
+          "removed_risk_score": 100.0,
+          "decision_without_it": "escalate",
+          "risk_without_it": 69.81
+        },
+        {
+          "case_id": "SM-002",
+          "decision": "auto_decline",
+          "removed_specialist": "identity_signal",
+          "removed_risk_score": 75.5,
+          "decision_without_it": "escalate",
+          "risk_without_it": 71.04
+        },
+        {
+          "case_id": "SM-005",
+          "decision": "auto_decline",
+          "removed_specialist": "identity_signal",
+          "removed_risk_score": 80.0,
+          "decision_without_it": "escalate",
+          "risk_without_it": 47.2
+        },
+        {
+          "case_id": "SM-006",
+          "decision": "auto_decline",
+          "removed_specialist": "identity_signal",
+          "removed_risk_score": 70.0,
+          "decision_without_it": "escalate",
+          "risk_without_it": 64.01
+        },
+        {
+          "case_id": "SM-012",
+          "decision": "auto_decline",
+          "removed_specialist": "network_analysis",
+          "removed_risk_score": 90.0,
+          "decision_without_it": "escalate",
+          "risk_without_it": 32.29
+        },
+        {
+          "case_id": "SM-016",
+          "decision": "auto_approve",
+          "removed_specialist": "transaction_pattern",
+          "removed_risk_score": 26.0,
+          "decision_without_it": "escalate",
+          "risk_without_it": 0.0
+        }
+      ],
+      "precedent_dependence": {
+        "decisions_that_change_without_historical_case": 3,
+        "cases": [
+          {
+            "case_id": "SM-005",
+            "decision": "auto_decline",
+            "decision_without_precedent": "escalate",
+            "risk_delta": -6.57
+          },
+          {
+            "case_id": "SM-006",
+            "decision": "auto_decline",
+            "decision_without_precedent": "escalate",
+            "risk_delta": -6.41
+          },
+          {
+            "case_id": "SM-012",
+            "decision": "auto_decline",
+            "decision_without_precedent": "escalate",
+            "risk_delta": -9.77
+          }
+        ],
+        "why_this_matters": "The precedent corpus and the case bank were authored by the same person, so the historical-case specialist has a contamination advantage that would not survive contact with a real case archive. Decisions that depend on it should be discounted accordingly."
+      }
+    },
+    "concerns": [
+      "RUN MODE: this run used the offline deterministic reasoner, not an LLM, because no ANTHROPIC_API_KEY was configured. Every accuracy number in this report therefore measures the explicit scoring functions inside each specialist, NOT agent reasoning. The tool calls, the event log, the supervisor's aggregation and the decision thresholds are all exercised exactly as they would be in an LLM run - but nothing here is evidence about model quality, and it must not be presented as such. Re-run with a key set to get numbers that mean what a reader will assume they mean.",
+      "SAMPLE SIZE: 23 cases, 21 with a decisive ground truth. Every per-category figure below rests on 2-7 cases. Confidence intervals at that size are wide enough to swallow most of the differences between categories, and none of these numbers would survive being quoted as a production benchmark.",
+      "SCORING VIEW: the false-positive rate is 0.0% counting only auto-declines, and 42.9% once escalations are counted as flags. The second number is the one a customer feels: an escalated payment is still held. Quoting only the first would be the single most misleading thing this report could do.",
+      "AUTONOMY: 61% of cases were escalated to a human. High precision on the remaining auto-decisions is partly a selection effect - the system chose which cases to be judged on. A fraud team would not deploy this without pushing the escalation rate down, and doing so is exactly what would expose the error rate this report cannot currently see.",
+      "MULTI-SIGNAL REASONING: only 33% of auto-decisions survive removal of their loudest specialist. The rest collapse to a different verdict, which means the four-specialist architecture is not earning its cost on those cases - a single specialist plus the threshold logic would have produced the same answers.",
+      "RETRIEVAL CONTAMINATION: 3 auto-decision(s) change when the historical-case specialist is removed. The precedent corpus was written alongside the case bank by the same author, and retrieval is lexical TF-IDF, so precedent summaries share vocabulary with the cases they 'predict'. Retrieval hits at this rate would not transfer to a real case archive, and any per-category strength that traces back to this specialist should be discounted.",
+      "FAILURE ACCOUNTING: no infrastructure or agent-protocol failures in this run. All 0 incorrect outcome(s) are genuine wrong decisions rather than plumbing, so the metrics above are measured on complete evidence.",
+      "NOT MEASURED: the case bank was written by the same person who wrote the detectors, so it encodes the same assumptions about what fraud looks like. Nothing here tests the patterns neither the author nor the agents thought of, and that blind spot is where a real fraud system's losses actually come from. Adversarial cases authored by someone else would be the first thing to add."
+    ],
+    "how_to_read_this": "Read the escalation rate first, then the escalation_as_flag false-positive rate, then the ablation study. The auto_only precision figure is the least informative number in this report and is printed first only because that is the convention."
+  },
+  "case_results": [
+    {
+      "case_id": "SM-001",
+      "run_case_id": "SM-001-b606fd",
+      "category": "card_testing",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "easy",
+      "summary": "Rapid sequence of sub-$5 digital-goods authorisations on a 3-day-old account, most declined.",
+      "planted_signals": [
+        "velocity burst",
+        "high decline rate",
+        "elevated-risk category",
+        "proxy IP",
+        "device shared across accounts"
+      ],
+      "decision": "auto_decline",
+      "combined_risk": 95.47,
+      "confidence": 0.767,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 95.5. Panel: transaction_pattern 63@0.82, identity_signal 100@0.85, network_analysis 65@0.83, historical_case 45@0.25. Confidence 0.77 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 37.0,
+        "risk_stdev": 17.03,
+        "lowest_specialist_confidence": 0.82,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [
+          "historical_case"
+        ],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 3,
+      "abstaining_specialists": 1,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 63.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 63. Baseline sample size 22 (reliable).",
+          "key_evidence": [
+            "23 transactions in a 60-minute window",
+            "13 declines in 24h (rate 0.591)"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 27,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 100.0,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 100 from 4 concurrent identity signal(s).",
+          "key_evidence": [
+            "9 fingerprint changes in 30 days",
+            "device seen on 8 distinct accounts",
+            "emulator/automation signals present on the session",
+            "IP country RO differs from billing US and is new for this account",
+            "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN",
+            "KYC status 'unverified' with flags ['document_not_provided']"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 30,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 64.8,
+          "confidence": 0.83,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 64.8 from a 5-account component spanning identifier types ['device', 'payment_method'], density 0.8, convergence 1.25.",
+          "key_evidence": [
+            "5-account component, density 0.8, types ['device', 'payment_method']",
+            "focus account directly linked to 4 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 30,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 45.0,
+          "confidence": 0.25,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): no past case cleared the 0.25 relevance floor, so there is no usable precedent. Reporting a neutral score with low confidence rather than guessing.",
+          "key_evidence": [
+            "no precedent above the relevance floor"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 32,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 82
+    },
+    {
+      "case_id": "SM-002",
+      "run_case_id": "SM-002-b606fd",
+      "category": "card_testing",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "easy",
+      "summary": "Eighteen $0.50-$3 gift-card authorisations in 20 minutes across three merchants, half declined.",
+      "planted_signals": [
+        "velocity burst",
+        "high decline rate",
+        "gift cards",
+        "new device",
+        "unverified KYC"
+      ],
+      "decision": "auto_decline",
+      "combined_risk": 88.56,
+      "confidence": 0.705,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 88.6. Panel: transaction_pattern 63@0.82, identity_signal 76@0.85, network_analysis 49@0.60, historical_case 84@0.55. Confidence 0.70 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 35.34,
+        "risk_stdev": 13.33,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 63.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 63. Baseline sample size 18 (reliable).",
+          "key_evidence": [
+            "19 transactions in a 60-minute window",
+            "9 declines in 24h (rate 0.5)"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 14,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 75.5,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 76 from 4 concurrent identity signal(s).",
+          "key_evidence": [
+            "6 fingerprint changes in 30 days",
+            "IP country NL differs from billing US and is new for this account",
+            "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN",
+            "KYC status 'unverified' with flags ['document_not_provided']"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 15,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 48.8,
+          "confidence": 0.6,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 48.8 from a 4-account component spanning identifier types ['payment_method'], density 0.5, convergence 4.0.",
+          "key_evidence": [
+            "4-account component, density 0.5, types ['payment_method']",
+            "4 accounts converging on 1 identifiers (convergence 4.0)",
+            "focus account directly linked to 3 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 84.14166666666668,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1002 (card_testing) similarity 0.4097 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 5,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 40
+    },
+    {
+      "case_id": "SM-003",
+      "run_case_id": "SM-003-b606fd",
+      "category": "card_testing",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "medium",
+      "summary": "Low-value probing spread over 6 hours rather than a tight burst, on an account with a short but clean history.",
+      "planted_signals": [
+        "moderate velocity",
+        "elevated decline rate",
+        "digital goods",
+        "fingerprint churn"
+      ],
+      "decision": "escalate",
+      "combined_risk": 44.85,
+      "confidence": 0.696,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 44.9. Panel: transaction_pattern 37@0.82, identity_signal 41@0.85, network_analysis 24@0.60, historical_case 45@0.25. Confidence 0.70 after disagreement penalty.",
+      "escalation_reason": "aggregate confidence 0.70 below the 0.70 auto-resolution floor",
+      "disagreement": {
+        "pairwise_spread": 16.75,
+        "risk_stdev": 7.18,
+        "lowest_specialist_confidence": 0.6,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [
+          "historical_case"
+        ],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 3,
+      "abstaining_specialists": 1,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 37.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 37. Baseline sample size 14 (reliable).",
+          "key_evidence": [
+            "6 declines in 24h (rate 0.429)"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 40.75,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 41 from 3 concurrent identity signal(s).",
+          "key_evidence": [
+            "5 fingerprint changes in 30 days"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 24.0,
+          "confidence": 0.6,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 24.0 from a 3-account component spanning identifier types ['device'], density 0.667, convergence 3.0.",
+          "key_evidence": [
+            "3-account component, density 0.667, types ['device']"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 45.0,
+          "confidence": 0.25,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): no past case cleared the 0.25 relevance floor, so there is no usable precedent. Reporting a neutral score with low confidence rather than guessing.",
+          "key_evidence": [
+            "no precedent above the relevance floor"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 29
+    },
+    {
+      "case_id": "SM-004",
+      "run_case_id": "SM-004-b606fd",
+      "category": "card_testing",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "hard",
+      "summary": "Card testing camouflaged inside an otherwise normal spending profile; only the decline pattern gives it away.",
+      "planted_signals": [
+        "decline clustering",
+        "category first-use",
+        "no network links",
+        "clean KYC"
+      ],
+      "decision": "escalate",
+      "combined_risk": 44.55,
+      "confidence": 0.456,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 44.5. Panel: transaction_pattern 40@0.82, identity_signal 11@0.62, network_analysis 0@0.86, historical_case 74@0.55. Confidence 0.46 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: uncorroborated signal: historical_case alone reports elevated risk (74) while every other contributing specialist stays below 55 (transaction_pattern=40, identity_signal=11, network_analysis=0); precedent contradicts live evidence: historical_case reports 74, 57 points higher than the live-signal mean (17)",
+      "disagreement": {
+        "pairwise_spread": 74.45,
+        "risk_stdev": 28.85,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": true,
+        "dissenting_specialists": [
+          "historical_case"
+        ],
+        "reasons": [
+          "uncorroborated signal: historical_case alone reports elevated risk (74) while every other contributing specialist stays below 55 (transaction_pattern=40, identity_signal=11, network_analysis=0)",
+          "precedent contradicts live evidence: historical_case reports 74, 57 points higher than the live-signal mean (17)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 40.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 40. Baseline sample size 26 (reliable).",
+          "key_evidence": [
+            "1 declines in 24h (rate 0.5)",
+            "first-ever spend in elevated-risk category digital_goods"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 11.0,
+          "confidence": 0.62,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 11 from 1 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 0.0,
+          "confidence": 0.86,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 0.0 from a 1-account component spanning identifier types [], density 0.0, convergence 1.0.",
+          "key_evidence": [
+            "no shared identifiers with any other account"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 74.45,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1004 (card_testing) similarity 0.2934 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 5,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 28
+    },
+    {
+      "case_id": "SM-005",
+      "run_case_id": "SM-005-b606fd",
+      "category": "account_takeover",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "easy",
+      "summary": "Long-tenured account: new device, impossible travel from a hosting ASN, then a 12x-baseline electronics purchase.",
+      "planted_signals": [
+        "impossible travel",
+        "new device on old account",
+        "hosting ASN",
+        "amount z-score spike"
+      ],
+      "decision": "auto_decline",
+      "combined_risk": 81.52,
+      "confidence": 0.705,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 81.5. Panel: transaction_pattern 44@0.82, identity_signal 80@0.85, network_analysis 16@0.60, historical_case 73@0.55. Confidence 0.70 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 64.0,
+        "risk_stdev": 25.37,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": true,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 44.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 44. Baseline sample size 30 (reliable).",
+          "key_evidence": [
+            "amount z-score 79.9 against the account's own baseline",
+            "first-ever spend in elevated-risk category electronics"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 15,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 80.0,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 80 from 2 concurrent identity signal(s).",
+          "key_evidence": [
+            "7 fingerprint changes in 30 days",
+            "brand-new device (age 0d) on a 1450-day-old account",
+            "impossible-travel between consecutive sessions",
+            "IP country VN differs from billing US and is new for this account",
+            "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 16.0,
+          "confidence": 0.6,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 16.0 from a 2-account component spanning identifier types ['device'], density 1.0, convergence 2.0.",
+          "key_evidence": [
+            "2-account component, density 1.0, types ['device']"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 72.89166666666667,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1005 (account_takeover) similarity 0.2747 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 9,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 30
+    },
+    {
+      "case_id": "SM-006",
+      "run_case_id": "SM-006-b606fd",
+      "category": "account_takeover",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "medium",
+      "summary": "Credential-stuffed account draining to money transfer after a device change; transaction size itself is unremarkable.",
+      "planted_signals": [
+        "new device",
+        "country new for account",
+        "money transfer first-use",
+        "moderate amount"
+      ],
+      "decision": "auto_decline",
+      "combined_risk": 83.8,
+      "confidence": 0.762,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 83.8. Panel: transaction_pattern 44@0.82, identity_signal 70@0.85, network_analysis 49@0.83, historical_case 78@0.55. Confidence 0.76 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 33.64,
+        "risk_stdev": 13.96,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 44.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 44. Baseline sample size 24 (reliable).",
+          "key_evidence": [
+            "amount z-score 3.64 against the account's own baseline",
+            "first-ever spend in elevated-risk category money_transfer"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 70.0,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 70 from 3 concurrent identity signal(s).",
+          "key_evidence": [
+            "6 fingerprint changes in 30 days",
+            "brand-new device (age 1d) on a 880-day-old account",
+            "IP country GH differs from billing GB and is new for this account",
+            "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 49.4,
+          "confidence": 0.83,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 49.4 from a 4-account component spanning identifier types ['device', 'ip_range'], density 0.5, convergence 1.33.",
+          "key_evidence": [
+            "4-account component, density 0.5, types ['device', 'ip_range']",
+            "focus account directly linked to 3 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 77.64166666666667,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1006 (account_takeover) similarity 0.3317 -> declined"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 28
+    },
+    {
+      "case_id": "SM-007",
+      "run_case_id": "SM-007-b606fd",
+      "category": "account_takeover",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "medium",
+      "summary": "Overnight session from an unfamiliar country followed by three high-value retail charges outside the account's pattern.",
+      "planted_signals": [
+        "off-hours activity",
+        "geo mismatch",
+        "amount z-score spike",
+        "velocity uplift"
+      ],
+      "decision": "escalate",
+      "combined_risk": 48.82,
+      "confidence": 0.451,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 48.8. Panel: transaction_pattern 26@0.82, identity_signal 36@0.85, network_analysis 9@0.60, historical_case 76@0.55. Confidence 0.45 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: uncorroborated signal: historical_case alone reports elevated risk (76) while every other contributing specialist stays below 55 (transaction_pattern=26, identity_signal=36, network_analysis=9); precedent contradicts live evidence: historical_case reports 76, 52 points higher than the live-signal mean (24)",
+      "disagreement": {
+        "pairwise_spread": 66.38,
+        "risk_stdev": 24.43,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": true,
+        "dissenting_specialists": [
+          "historical_case"
+        ],
+        "reasons": [
+          "uncorroborated signal: historical_case alone reports elevated risk (76) while every other contributing specialist stays below 55 (transaction_pattern=26, identity_signal=36, network_analysis=9)",
+          "precedent contradicts live evidence: historical_case reports 76, 52 points higher than the live-signal mean (24)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 26.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 26. Baseline sample size 28 (reliable).",
+          "key_evidence": [
+            "amount z-score 37.35 against the account's own baseline"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 14,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 36.0,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 36 from 2 concurrent identity signal(s).",
+          "key_evidence": [
+            "5 fingerprint changes in 30 days",
+            "IP country BG differs from billing US and is new for this account"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 9.4,
+          "confidence": 0.6,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 9.4 from a 2-account component spanning identifier types ['ip_range'], density 1.0, convergence 2.0.",
+          "key_evidence": [
+            "2-account component, density 1.0, types ['ip_range']"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 75.775,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1007 (account_takeover) similarity 0.3093 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 3,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 29
+    },
+    {
+      "case_id": "SM-008",
+      "run_case_id": "SM-008-b606fd",
+      "category": "account_takeover",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "hard",
+      "summary": "Takeover from inside the victim's own country and city; the only anomalies are a fresh device and a category the account never used.",
+      "planted_signals": [
+        "new device only",
+        "no geo mismatch",
+        "category first-use",
+        "clean network"
+      ],
+      "decision": "escalate",
+      "combined_risk": 54.71,
+      "confidence": 0.456,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 54.7. Panel: transaction_pattern 44@0.82, identity_signal 34@0.62, network_analysis 0@0.86, historical_case 75@0.55. Confidence 0.46 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: uncorroborated signal: historical_case alone reports elevated risk (75) while every other contributing specialist stays below 55 (transaction_pattern=44, identity_signal=34, network_analysis=0); precedent contradicts live evidence: historical_case reports 75, 49 points higher than the live-signal mean (26)",
+      "disagreement": {
+        "pairwise_spread": 74.61,
+        "risk_stdev": 26.63,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": true,
+        "dissenting_specialists": [
+          "historical_case"
+        ],
+        "reasons": [
+          "uncorroborated signal: historical_case alone reports elevated risk (75) while every other contributing specialist stays below 55 (transaction_pattern=44, identity_signal=34, network_analysis=0)",
+          "precedent contradicts live evidence: historical_case reports 75, 49 points higher than the live-signal mean (26)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 44.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 44. Baseline sample size 30 (reliable).",
+          "key_evidence": [
+            "amount z-score 22.09 against the account's own baseline",
+            "first-ever spend in elevated-risk category crypto_exchange"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 11,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 34.0,
+          "confidence": 0.62,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 34 from 1 concurrent identity signal(s).",
+          "key_evidence": [
+            "6 fingerprint changes in 30 days",
+            "brand-new device (age 0d) on a 1680-day-old account"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 11,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 0.0,
+          "confidence": 0.86,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 0.0 from a 1-account component spanning identifier types [], density 0.0, convergence 1.0.",
+          "key_evidence": [
+            "no shared identifiers with any other account"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 74.60833333333333,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1008 (account_takeover) similarity 0.2953 -> declined"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 6,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 27
+    },
+    {
+      "case_id": "SM-009",
+      "run_case_id": "SM-009-b606fd",
+      "category": "synthetic_identity",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "medium",
+      "summary": "Two-week-old account, failed KYC on a mismatched document, immediately maxing out on prepaid reloads.",
+      "planted_signals": [
+        "failed KYC",
+        "thin history",
+        "prepaid reload",
+        "device shared across accounts"
+      ],
+      "decision": "escalate",
+      "combined_risk": 83.75,
+      "confidence": 0.67,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 83.8. Panel: transaction_pattern 33@0.45, identity_signal 55@0.85, network_analysis 80@0.83, historical_case 82@0.55. Confidence 0.67 after disagreement penalty.",
+      "escalation_reason": "aggregate confidence 0.67 below the 0.70 auto-resolution floor",
+      "disagreement": {
+        "pairwise_spread": 49.27,
+        "risk_stdev": 20.17,
+        "lowest_specialist_confidence": 0.45,
+        "split_verdict": true,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 33.0,
+          "confidence": 0.45,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 33. Baseline sample size 6 (too thin for a strong baseline).",
+          "key_evidence": [
+            "amount z-score 3.45 against the account's own baseline"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 54.75,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 55 from 3 concurrent identity signal(s).",
+          "key_evidence": [
+            "device seen on 6 distinct accounts",
+            "KYC status 'failed' with flags ['document_mismatch', 'ssn_not_verified']"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 9,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 80.0,
+          "confidence": 0.83,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 80.0 from a 7-account component spanning identifier types ['device', 'email_pattern', 'phone'], density 0.619, convergence 1.17.",
+          "key_evidence": [
+            "7-account component, density 0.619, types ['device', 'email_pattern', 'phone']",
+            "focus account directly linked to 6 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 82.26666666666667,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1009 (synthetic_identity) similarity 0.3872 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 4,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 27
+    },
+    {
+      "case_id": "SM-010",
+      "run_case_id": "SM-010-b606fd",
+      "category": "synthetic_identity",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "medium",
+      "summary": "Fabricated identity built up with small legitimate-looking spend for a month before a large crypto cash-out.",
+      "planted_signals": [
+        "bust-out amount spike",
+        "unverified KYC",
+        "email-pattern ring",
+        "crypto category"
+      ],
+      "decision": "escalate",
+      "combined_risk": 67.0,
+      "confidence": 0.629,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 67.0. Panel: transaction_pattern 44@0.82, identity_signal 28@0.85, network_analysis 69@0.83, historical_case 45@0.25. Confidence 0.63 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: uncorroborated signal: network_analysis alone reports elevated risk (69) while every other contributing specialist stays below 55 (transaction_pattern=44, identity_signal=28)",
+      "disagreement": {
+        "pairwise_spread": 41.7,
+        "risk_stdev": 17.15,
+        "lowest_specialist_confidence": 0.82,
+        "split_verdict": true,
+        "dissenting_specialists": [
+          "network_analysis"
+        ],
+        "reasons": [
+          "uncorroborated signal: network_analysis alone reports elevated risk (69) while every other contributing specialist stays below 55 (transaction_pattern=44, identity_signal=28)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [
+          "historical_case"
+        ],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 3,
+      "abstaining_specialists": 1,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 44.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 44. Baseline sample size 20 (reliable).",
+          "key_evidence": [
+            "amount z-score 351.47 against the account's own baseline",
+            "first-ever spend in elevated-risk category crypto_exchange"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 27.5,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 28 from 2 concurrent identity signal(s).",
+          "key_evidence": [
+            "KYC status 'unverified' with flags ['ssn_not_verified']"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 69.2,
+          "confidence": 0.83,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 69.2 from a 6-account component spanning identifier types ['email_pattern', 'payment_method'], density 0.8, convergence 1.5.",
+          "key_evidence": [
+            "6-account component, density 0.8, types ['email_pattern', 'payment_method']",
+            "focus account directly linked to 5 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 45.0,
+          "confidence": 0.25,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): no past case cleared the 0.25 relevance floor, so there is no usable precedent. Reporting a neutral score with low confidence rather than guessing.",
+          "key_evidence": [
+            "no precedent above the relevance floor"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 21
+    },
+    {
+      "case_id": "SM-011",
+      "run_case_id": "SM-011-b606fd",
+      "category": "synthetic_identity",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "hard",
+      "summary": "Patient synthetic identity: KYC passed on fabricated documents, 8 months of tenure, no ring links yet.",
+      "planted_signals": [
+        "KYC passed",
+        "long tenure",
+        "isolated in graph",
+        "amount spike only"
+      ],
+      "decision": "escalate",
+      "combined_risk": 27.98,
+      "confidence": 0.65,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 28.0. Panel: transaction_pattern 44@0.82, identity_signal 0@0.70, network_analysis 9@0.60, historical_case 45@0.25. Confidence 0.65 after disagreement penalty.",
+      "escalation_reason": "aggregate confidence 0.65 below the 0.70 auto-resolution floor",
+      "disagreement": {
+        "pairwise_spread": 44.0,
+        "risk_stdev": 18.92,
+        "lowest_specialist_confidence": 0.6,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [
+          "historical_case"
+        ],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 3,
+      "abstaining_specialists": 1,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 44.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 44. Baseline sample size 24 (reliable).",
+          "key_evidence": [
+            "amount z-score 164.34 against the account's own baseline",
+            "first-ever spend in elevated-risk category money_transfer"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 14,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 0.0,
+          "confidence": 0.7,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 0 from 0 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 14,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 9.4,
+          "confidence": 0.6,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 9.4 from a 2-account component spanning identifier types ['ip_range'], density 1.0, convergence 2.0.",
+          "key_evidence": [
+            "2-account component, density 1.0, types ['ip_range']"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 45.0,
+          "confidence": 0.25,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): no past case cleared the 0.25 relevance floor, so there is no usable precedent. Reporting a neutral score with low confidence rather than guessing.",
+          "key_evidence": [
+            "no precedent above the relevance floor"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 31
+    },
+    {
+      "case_id": "SM-012",
+      "run_case_id": "SM-012-b606fd",
+      "category": "money_muling",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "medium",
+      "summary": "Nine accounts converging on two devices and one payment instrument, all forwarding funds to the same transfer service.",
+      "planted_signals": [
+        "large dense ring",
+        "identifier convergence",
+        "money transfer",
+        "clean identity signals"
+      ],
+      "decision": "auto_decline",
+      "combined_risk": 76.92,
+      "confidence": 0.705,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 76.9. Panel: transaction_pattern 7@0.82, identity_signal 20@0.62, network_analysis 90@0.83, historical_case 81@0.55. Confidence 0.70 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 83.0,
+        "risk_stdev": 36.35,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": true,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 7.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 7. Baseline sample size 18 (reliable).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 16,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 20.0,
+          "confidence": 0.62,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 20 from 1 concurrent identity signal(s).",
+          "key_evidence": [
+            "device seen on 9 distinct accounts"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 15,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 90.0,
+          "confidence": 0.83,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 90.0 from a 9-account component spanning identifier types ['device', 'payment_method', 'phone'], density 0.722, convergence 1.5.",
+          "key_evidence": [
+            "9-account component, density 0.722, types ['device', 'payment_method', 'phone']",
+            "focus account directly linked to 8 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 80.63333333333333,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1012 (money_muling) similarity 0.3676 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 33
+    },
+    {
+      "case_id": "SM-013",
+      "run_case_id": "SM-013-b606fd",
+      "category": "money_muling",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "medium",
+      "summary": "Mule account with a verified owner: identity signals are entirely clean, the ring structure is not.",
+      "planted_signals": [
+        "6-account ring",
+        "two identifier types",
+        "verified KYC",
+        "normal amounts"
+      ],
+      "decision": "escalate",
+      "combined_risk": 52.59,
+      "confidence": 0.571,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 52.6. Panel: transaction_pattern 7@0.82, identity_signal 20@0.62, network_analysis 73@0.83, historical_case 45@0.25. Confidence 0.57 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: uncorroborated signal: network_analysis alone reports elevated risk (73) while every other contributing specialist stays below 55 (transaction_pattern=7, identity_signal=20)",
+      "disagreement": {
+        "pairwise_spread": 65.8,
+        "risk_stdev": 28.45,
+        "lowest_specialist_confidence": 0.62,
+        "split_verdict": true,
+        "dissenting_specialists": [
+          "network_analysis"
+        ],
+        "reasons": [
+          "uncorroborated signal: network_analysis alone reports elevated risk (73) while every other contributing specialist stays below 55 (transaction_pattern=7, identity_signal=20)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [
+          "historical_case"
+        ],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 3,
+      "abstaining_specialists": 1,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 7.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 7. Baseline sample size 22 (reliable).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 20.0,
+          "confidence": 0.62,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 20 from 1 concurrent identity signal(s).",
+          "key_evidence": [
+            "device seen on 5 distinct accounts"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 72.8,
+          "confidence": 0.83,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 72.8 from a 6-account component spanning identifier types ['device', 'payment_method'], density 0.533, convergence 1.5.",
+          "key_evidence": [
+            "6-account component, density 0.533, types ['device', 'payment_method']",
+            "focus account directly linked to 5 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 45.0,
+          "confidence": 0.25,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): no past case cleared the 0.25 relevance floor, so there is no usable precedent. Reporting a neutral score with low confidence rather than guessing.",
+          "key_evidence": [
+            "no precedent above the relevance floor"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 30
+    },
+    {
+      "case_id": "SM-014",
+      "run_case_id": "SM-014-b606fd",
+      "category": "money_muling",
+      "ground_truth": "fraud",
+      "expected_verdict": "decline",
+      "difficulty": "hard",
+      "summary": "Small three-account mule cell using only a shared payment instrument; deliberately below the obvious ring threshold.",
+      "planted_signals": [
+        "small ring",
+        "single identifier type",
+        "clean identity",
+        "repeat transfers"
+      ],
+      "decision": "escalate",
+      "combined_risk": 30.77,
+      "confidence": 0.414,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 30.8. Panel: transaction_pattern 7@0.82, identity_signal 10@0.62, network_analysis 23@0.60, historical_case 75@0.55. Confidence 0.41 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: uncorroborated signal: historical_case alone reports elevated risk (75) while every other contributing specialist stays below 55 (transaction_pattern=7, identity_signal=10, network_analysis=23); precedent contradicts live evidence: historical_case reports 75, 62 points higher than the live-signal mean (13)",
+      "disagreement": {
+        "pairwise_spread": 67.97,
+        "risk_stdev": 27.37,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": true,
+        "dissenting_specialists": [
+          "historical_case"
+        ],
+        "reasons": [
+          "uncorroborated signal: historical_case alone reports elevated risk (75) while every other contributing specialist stays below 55 (transaction_pattern=7, identity_signal=10, network_analysis=23)",
+          "precedent contradicts live evidence: historical_case reports 75, 62 points higher than the live-signal mean (13)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 7.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 7. Baseline sample size 20 (reliable).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 14,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 10.0,
+          "confidence": 0.62,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 10 from 1 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 15,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 22.8,
+          "confidence": 0.6,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 22.8 from a 3-account component spanning identifier types ['payment_method'], density 0.667, convergence 3.0.",
+          "key_evidence": [
+            "3-account component, density 0.667, types ['payment_method']"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 74.975,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1012 (money_muling) similarity 0.2997 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 9,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 48
+    },
+    {
+      "case_id": "SM-015",
+      "run_case_id": "SM-015-b606fd",
+      "category": "legitimate",
+      "ground_truth": "legitimate",
+      "expected_verdict": "approve",
+      "difficulty": "easy",
+      "summary": "Routine grocery purchase on a four-year-old account from its usual device and city.",
+      "planted_signals": [
+        "no anomalies"
+      ],
+      "decision": "auto_approve",
+      "combined_risk": 0.0,
+      "confidence": 0.73,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 0.0. Panel: transaction_pattern 0@0.82, identity_signal 0@0.70, network_analysis 0@0.86, historical_case 45@0.25. Confidence 0.73 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 0.0,
+        "risk_stdev": 0.0,
+        "lowest_specialist_confidence": 0.7,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [
+          "historical_case"
+        ],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 3,
+      "abstaining_specialists": 1,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 0.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 0. Baseline sample size 30 (reliable).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 0.0,
+          "confidence": 0.7,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 0 from 0 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 9,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 0.0,
+          "confidence": 0.86,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 0.0 from a 1-account component spanning identifier types [], density 0.0, convergence 1.0.",
+          "key_evidence": [
+            "no shared identifiers with any other account"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 45.0,
+          "confidence": 0.25,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): no past case cleared the 0.25 relevance floor, so there is no usable precedent. Reporting a neutral score with low confidence rather than guessing.",
+          "key_evidence": [
+            "no precedent above the relevance floor"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 5,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 29
+    },
+    {
+      "case_id": "SM-016",
+      "run_case_id": "SM-016-b606fd",
+      "category": "legitimate",
+      "ground_truth": "legitimate",
+      "expected_verdict": "approve",
+      "difficulty": "medium",
+      "summary": "Genuine holiday abroad: foreign IP and a large hotel charge, but travel is gradual and the device is the customer's own.",
+      "planted_signals": [
+        "geo mismatch (benign)",
+        "amount above baseline",
+        "known device",
+        "verified KYC"
+      ],
+      "decision": "auto_approve",
+      "combined_risk": 10.61,
+      "confidence": 0.713,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 10.6. Panel: transaction_pattern 26@0.82, identity_signal 5@0.62, network_analysis 0@0.86, historical_case 14@0.55. Confidence 0.71 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 26.0,
+        "risk_stdev": 9.88,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 26.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 26. Baseline sample size 28 (reliable).",
+          "key_evidence": [
+            "amount z-score 10.87 against the account's own baseline"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 11,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 5.0,
+          "confidence": 0.62,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 5 from 1 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 0.0,
+          "confidence": 0.86,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 0.0 from a 1-account component spanning identifier types [], density 0.0, convergence 1.0.",
+          "key_evidence": [
+            "no shared identifiers with any other account"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 13.958333333333336,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 0% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1015 (legitimate) similarity 0.4325 -> approved"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 6,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 27
+    },
+    {
+      "case_id": "SM-017",
+      "run_case_id": "SM-017-b606fd",
+      "category": "legitimate",
+      "ground_truth": "legitimate",
+      "expected_verdict": "approve",
+      "difficulty": "medium",
+      "summary": "Shared household: three family accounts on one residential IP range, ordinary supermarket spend.",
+      "planted_signals": [
+        "ip_range-only links (benign)",
+        "no device sharing",
+        "stable profile"
+      ],
+      "decision": "escalate",
+      "combined_risk": 7.03,
+      "confidence": 0.667,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 7.0. Panel: transaction_pattern 0@0.82, identity_signal 0@0.70, network_analysis 25@0.60, historical_case 17@0.55. Confidence 0.67 after disagreement penalty.",
+      "escalation_reason": "aggregate confidence 0.67 below the 0.70 auto-resolution floor",
+      "disagreement": {
+        "pairwise_spread": 25.0,
+        "risk_stdev": 10.82,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 0.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 0. Baseline sample size 26 (reliable).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 0.0,
+          "confidence": 0.7,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 0 from 0 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 25.0,
+          "confidence": 0.6,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 25.0 from a 4-account component spanning identifier types ['ip_range'], density 1.0, convergence 4.0.",
+          "key_evidence": [
+            "4-account component, density 1.0, types ['ip_range']",
+            "4 accounts converging on 1 identifiers (convergence 4.0)",
+            "focus account directly linked to 3 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 9,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 16.6,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 0% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1016 (legitimate) similarity 0.4008 -> approved"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 5,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 27
+    },
+    {
+      "case_id": "SM-018",
+      "run_case_id": "SM-018-b606fd",
+      "category": "legitimate",
+      "ground_truth": "legitimate",
+      "expected_verdict": "approve",
+      "difficulty": "hard",
+      "summary": "Privacy-conscious customer on a commercial VPN buying a laptop; VPN plus a big-ticket electronics charge looks bad and is not.",
+      "planted_signals": [
+        "proxy ASN (benign)",
+        "amount spike",
+        "long tenure",
+        "no ring",
+        "verified KYC"
+      ],
+      "decision": "auto_approve",
+      "combined_risk": 32.11,
+      "confidence": 0.732,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 32.1. Panel: transaction_pattern 44@0.82, identity_signal 12@0.70, network_analysis 0@0.86, historical_case 28@0.55. Confidence 0.73 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 44.0,
+        "risk_stdev": 16.55,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 44.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 44. Baseline sample size 30 (reliable).",
+          "key_evidence": [
+            "amount z-score 45.53 against the account's own baseline",
+            "first-ever spend in elevated-risk category electronics"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 11,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 12.0,
+          "confidence": 0.7,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 12 from 0 concurrent identity signal(s).",
+          "key_evidence": [
+            "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 0.0,
+          "confidence": 0.86,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 0.0 from a 1-account component spanning identifier types [], density 0.0, convergence 1.0.",
+          "key_evidence": [
+            "no shared identifiers with any other account"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 27.65833333333333,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 0% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1017 (legitimate) similarity 0.2681 -> approved"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 6,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 24
+    },
+    {
+      "case_id": "SM-019",
+      "run_case_id": "SM-019-b606fd",
+      "category": "legitimate",
+      "ground_truth": "legitimate",
+      "expected_verdict": "approve",
+      "difficulty": "hard",
+      "summary": "New customer's first week: thin history and a new device, but every signal that would indicate fraud is absent.",
+      "planted_signals": [
+        "thin baseline",
+        "new device",
+        "clean KYC",
+        "no ring",
+        "modest amount"
+      ],
+      "decision": "escalate",
+      "combined_risk": 13.13,
+      "confidence": 0.514,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 13.1. Panel: transaction_pattern 0@0.45, identity_signal 0@0.70, network_analysis 0@0.86, historical_case 47@0.50. Confidence 0.51 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: precedent contradicts live evidence: historical_case reports 47, 47 points higher than the live-signal mean (0)",
+      "disagreement": {
+        "pairwise_spread": 46.89,
+        "risk_stdev": 20.3,
+        "lowest_specialist_confidence": 0.45,
+        "split_verdict": false,
+        "dissenting_specialists": [
+          "historical_case"
+        ],
+        "reasons": [
+          "precedent contradicts live evidence: historical_case reports 47, 47 points higher than the live-signal mean (0)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 0.0,
+          "confidence": 0.45,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 0. Baseline sample size 4 (too thin for a strong baseline).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 0.0,
+          "confidence": 0.7,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 0 from 0 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 0.0,
+          "confidence": 0.86,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 0.0 from a 1-account component spanning identifier types [], density 0.0, convergence 1.0.",
+          "key_evidence": [
+            "no shared identifiers with any other account"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 5,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 46.88670898170898,
+          "confidence": 0.5,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 2 precedent(s) above the relevance floor, 44% of similarity weight resolved as fraud. Precedent is mixed, so confidence is capped. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1018 (legitimate) similarity 0.3389 -> approved",
+            "HIST-1009 (synthetic_identity) similarity 0.2716 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 3,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 21
+    },
+    {
+      "case_id": "SM-020",
+      "run_case_id": "SM-020-b606fd",
+      "category": "legitimate",
+      "ground_truth": "legitimate",
+      "expected_verdict": "approve",
+      "difficulty": "medium",
+      "summary": "Payday burst: eleven small transactions in one afternoon, all at merchants the account uses regularly.",
+      "planted_signals": [
+        "velocity spike (benign)",
+        "familiar merchants",
+        "no declines",
+        "stable device"
+      ],
+      "decision": "auto_approve",
+      "combined_risk": 19.2,
+      "confidence": 0.732,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 19.2. Panel: transaction_pattern 34@0.82, identity_signal 0@0.70, network_analysis 0@0.86, historical_case 17@0.55. Confidence 0.73 after disagreement penalty.",
+      "escalation_reason": null,
+      "disagreement": {
+        "pairwise_spread": 34.0,
+        "risk_stdev": 14.12,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 34.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 34. Baseline sample size 11 (reliable).",
+          "key_evidence": [
+            "12 transactions in a 60-minute window"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 0.0,
+          "confidence": 0.7,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 0 from 0 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 0.0,
+          "confidence": 0.86,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 0.0 from a 1-account component spanning identifier types [], density 0.0, convergence 1.0.",
+          "key_evidence": [
+            "no shared identifiers with any other account"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 6,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 17.36666666666666,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 0% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1019 (legitimate) similarity 0.3916 -> approved"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 4,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 27
+    },
+    {
+      "case_id": "SM-021",
+      "run_case_id": "SM-021-b606fd",
+      "category": "legitimate",
+      "ground_truth": "legitimate",
+      "expected_verdict": "approve",
+      "difficulty": "medium",
+      "summary": "Small business owner topping up prepaid cards for staff - an elevated-risk category used entirely legitimately.",
+      "planted_signals": [
+        "elevated-risk category (benign)",
+        "repeat use of category",
+        "verified business KYC",
+        "no ring"
+      ],
+      "decision": "escalate",
+      "combined_risk": 12.25,
+      "confidence": 0.655,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 12.2. Panel: transaction_pattern 7@0.82, identity_signal 0@0.70, network_analysis 9@0.60, historical_case 45@0.50. Confidence 0.66 after disagreement penalty.",
+      "escalation_reason": "aggregate confidence 0.66 below the 0.70 auto-resolution floor",
+      "disagreement": {
+        "pairwise_spread": 44.74,
+        "risk_stdev": 17.35,
+        "lowest_specialist_confidence": 0.5,
+        "split_verdict": false,
+        "dissenting_specialists": [],
+        "reasons": [],
+        "significant": false,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": false,
+      "prediction_correct": false,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 7.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 7. Baseline sample size 24 (reliable).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 0.0,
+          "confidence": 0.7,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 0 from 0 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 8,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 9.4,
+          "confidence": 0.6,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 9.4 from a 2-account component spanning identifier types ['ip_range'], density 1.0, convergence 2.0.",
+          "key_evidence": [
+            "2-account component, density 1.0, types ['ip_range']"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 44.740906415538554,
+          "confidence": 0.5,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 2 precedent(s) above the relevance floor, 42% of similarity weight resolved as fraud. Precedent is mixed, so confidence is capped. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1020 (legitimate) similarity 0.3942 -> approved",
+            "HIST-1009 (synthetic_identity) similarity 0.2854 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 5,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 24
+    },
+    {
+      "case_id": "SM-022",
+      "run_case_id": "SM-022-b606fd",
+      "category": "account_takeover",
+      "ground_truth": "ambiguous",
+      "expected_verdict": "escalate",
+      "difficulty": "hard",
+      "summary": "New device from a new country on a long-lived account, but the amount and merchant fit the customer perfectly. Genuinely undecidable from the available signals.",
+      "planted_signals": [
+        "identity risk vs clean transaction profile",
+        "designed specialist conflict"
+      ],
+      "decision": "escalate",
+      "combined_risk": 57.59,
+      "confidence": 0.631,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 57.6. Panel: transaction_pattern 0@0.82, identity_signal 70@0.85, network_analysis 0@0.86, historical_case 28@0.55. Confidence 0.63 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: uncorroborated signal: identity_signal alone reports elevated risk (70) while every other contributing specialist stays below 55 (transaction_pattern=0, network_analysis=0, historical_case=28)",
+      "disagreement": {
+        "pairwise_spread": 70.0,
+        "risk_stdev": 28.64,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": true,
+        "dissenting_specialists": [
+          "identity_signal"
+        ],
+        "reasons": [
+          "uncorroborated signal: identity_signal alone reports elevated risk (70) while every other contributing specialist stays below 55 (transaction_pattern=0, network_analysis=0, historical_case=28)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 0.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 0. Baseline sample size 26 (reliable).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 11,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 70.0,
+          "confidence": 0.85,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 70 from 3 concurrent identity signal(s).",
+          "key_evidence": [
+            "6 fingerprint changes in 30 days",
+            "brand-new device (age 0d) on a 1300-day-old account",
+            "IP country PL differs from billing US and is new for this account",
+            "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 0.0,
+          "confidence": 0.86,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 0.0 from a 1-account component spanning identifier types [], density 0.0, convergence 1.0.",
+          "key_evidence": [
+            "no shared identifiers with any other account"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 27.725,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 0% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1021 (account_takeover) similarity 0.2673 -> approved"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 7,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 28
+    },
+    {
+      "case_id": "SM-023",
+      "run_case_id": "SM-023-b606fd",
+      "category": "money_muling",
+      "ground_truth": "ambiguous",
+      "expected_verdict": "escalate",
+      "difficulty": "hard",
+      "summary": "Four accounts sharing a device in what could be a mule cell or a shared family tablet; identity and transaction signals are spotless.",
+      "planted_signals": [
+        "network risk vs clean identity and transactions",
+        "designed specialist conflict"
+      ],
+      "decision": "escalate",
+      "combined_risk": 57.39,
+      "confidence": 0.578,
+      "rationale": "Offline deterministic aggregation (no LLM): confidence-weighted mean blended with the strongest confident signal gives 57.4. Panel: transaction_pattern 0@0.82, identity_signal 10@0.62, network_analysis 63@0.83, historical_case 72@0.55. Confidence 0.58 after disagreement penalty.",
+      "escalation_reason": "specialist disagreement: precedent contradicts live evidence: historical_case reports 72, 48 points higher than the live-signal mean (24)",
+      "disagreement": {
+        "pairwise_spread": 72.08,
+        "risk_stdev": 31.72,
+        "lowest_specialist_confidence": 0.55,
+        "split_verdict": true,
+        "dissenting_specialists": [
+          "historical_case"
+        ],
+        "reasons": [
+          "precedent contradicts live evidence: historical_case reports 72, 48 points higher than the live-signal mean (24)"
+        ],
+        "significant": true,
+        "abstaining_specialists": [],
+        "failed_specialists": [],
+        "contributing_specialists": [
+          "transaction_pattern",
+          "identity_signal",
+          "network_analysis",
+          "historical_case"
+        ]
+      },
+      "verdict_matches_expected": true,
+      "prediction_correct": true,
+      "contributing_specialists": 4,
+      "abstaining_specialists": 0,
+      "failed_specialists": 0,
+      "findings": [
+        {
+          "specialist": "transaction_pattern",
+          "risk_score": 0.0,
+          "confidence": 0.82,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): combined velocity, amount z-score, decline rate and merchant-category drift into a risk of 0. Baseline sample size 24 (reliable).",
+          "key_evidence": [
+            "velocity, amount, category and timing all within the account's normal range"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 13,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "identity_signal",
+          "risk_score": 10.0,
+          "confidence": 0.62,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): weighed fingerprint churn, device sharing, geo/billing mismatch and KYC status into a risk of 10 from 1 concurrent identity signal(s).",
+          "key_evidence": [
+            "device, geolocation and KYC all consistent with the account holder"
+          ],
+          "tool_calls": 3,
+          "duration_ms": 12,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "network_analysis",
+          "risk_score": 63.4,
+          "confidence": 0.83,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): structural ring score 63.4 from a 4-account component spanning identifier types ['device', 'ip_range'], density 0.833, convergence 2.0.",
+          "key_evidence": [
+            "4-account component, density 0.833, types ['device', 'ip_range']",
+            "4 accounts converging on 2 identifiers (convergence 2.0)",
+            "focus account directly linked to 3 accounts"
+          ],
+          "tool_calls": 2,
+          "duration_ms": 10,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        },
+        {
+          "specialist": "historical_case",
+          "risk_score": 72.075,
+          "confidence": 0.55,
+          "reasoning_summary": "Offline deterministic scorer (no LLM): 1 precedent(s) above the relevance floor, 100% of similarity weight resolved as fraud. Precedent is consistent. Retrieval backend: local_cosine.",
+          "key_evidence": [
+            "HIST-1009 (synthetic_identity) similarity 0.2649 -> confirmed_fraud"
+          ],
+          "tool_calls": 1,
+          "duration_ms": 6,
+          "backend": "offline_deterministic",
+          "error": null,
+          "error_class": null
+        }
+      ],
+      "run_errors": [],
+      "duration_ms": 27
+    }
+  ]
+}
