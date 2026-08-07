@@ -26,6 +26,12 @@ from sentrymesh.retrieval import build_index
 # retrieval agent ends up confidently citing an irrelevant case.
 RELEVANCE_FLOOR = 0.25
 
+# Similarity at which a precedent is treated as fully grounded. With hashed
+# TF-IDF over a 22-precedent corpus, real matches land around 0.3-0.45, so this
+# scales the offline score honestly instead of letting a weak match speak with
+# the authority of a strong one.
+STRONG_SIMILARITY = 0.6
+
 
 class HistoricalCaseAgent(SpecialistAgent):
     name = "historical_case"
@@ -166,9 +172,15 @@ class HistoricalCaseAgent(SpecialistAgent):
         weight_total = sum(m["similarity"] for m in matches)
         fraud_weight = sum(m["similarity"] for m in matches if m.get("resolution") in {"declined", "confirmed_fraud"})
         fraud_share = fraud_weight / weight_total if weight_total else 0.0
-        risk = fraud_share * 100.0
 
         top = matches[0]
+        # Pull the score toward neutral in proportion to how weak the best match
+        # is. A unanimous fraud precedent at 0.28 similarity is not the same
+        # evidence as a unanimous fraud precedent at 0.8, and reporting both as
+        # risk 100 was making this specialist the loudest voice on the panel
+        # while being the least grounded one.
+        strength = min(1.0, top["similarity"] / STRONG_SIMILARITY)
+        risk = 50.0 + (fraud_share - 0.5) * 100.0 * strength
         outcomes = {m.get("resolution") for m in matches}
         mixed = len(outcomes) > 1
 

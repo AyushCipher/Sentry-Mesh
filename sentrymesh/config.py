@@ -64,12 +64,18 @@ class DecisionThresholds:
     min_confidence: float = 0.70
 
     # --- disagreement detection -------------------------------------------
-    # Largest pairwise gap between any two specialist risk scores.
+    # Largest pairwise gap between any two *contributing* specialist scores.
     max_pairwise_spread: float = 40.0
-    # Population standard deviation across the four risk scores.
+    # Population standard deviation across the contributing risk scores.
     max_risk_stdev: float = 22.0
-    # Any single specialist reporting confidence below this is itself a signal.
-    min_specialist_confidence: float = 0.40
+    # A specialist reporting confidence below this has ABSTAINED: it is telling
+    # the supervisor its category carries no information on this case, which is
+    # a different thing from contradicting the panel. Abstentions are excluded
+    # from the spread/stdev statistics and from the weighted aggregate, and cost
+    # a small amount of panel confidence. Conflating abstention with dissent was
+    # the single biggest source of spurious escalation in early runs - a
+    # retrieval agent that found no precedent would drag every case to a human.
+    abstention_confidence: float = 0.40
     # A "split verdict": specialists on both sides of this line, each by at
     # least `split_margin`, means the panel does not agree on the direction.
     split_midpoint: float = 50.0

@@ -122,6 +122,12 @@ class DisagreementReport:
     dissenting_specialists: List[str] = field(default_factory=list)
     reasons: List[str] = field(default_factory=list)
     significant: bool = False
+    # Specialists that reported but declared their category uninformative.
+    # Tracked separately from dissent: an abstention is a specialist saying
+    # "I have nothing", not "I disagree".
+    abstaining_specialists: List[str] = field(default_factory=list)
+    failed_specialists: List[str] = field(default_factory=list)
+    contributing_specialists: List[str] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)

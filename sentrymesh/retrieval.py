@@ -16,12 +16,20 @@ Two interchangeable backends behind one interface:
 Whichever backend answered is recorded on every tool result and in the harness
 report, so a reader is never left guessing which path produced a number.
 
-EMBEDDINGS ARE A DOCUMENTED MOCK.  ``embed()`` is a deterministic hashed
-bag-of-words projection, not a learned text embedding.  It captures lexical
-overlap between case summaries and nothing deeper - two cases describing the
-same fraud pattern in different words will not match well.  Replacing it with a
-real embedding model is a one-function change; the honest consequence of not
-having done so is stated in the README's Known Limitations.
+EMBEDDINGS ARE A DOCUMENTED MOCK.  ``embed()`` is hashed TF-IDF - a
+deterministic lexical projection, not a learned text embedding.  IDF weights are
+derived from the precedent corpus itself, which is what stops ubiquitous tokens
+("account", "transaction", "usd") from dominating the cosine and reducing
+retrieval to noise.  The first implementation here was unweighted hashed
+bag-of-words and it was measurably useless: it returned high fraud-precedent
+similarity for spotlessly clean cases, which would have shown up in the eval as
+a false-positive problem in the *supervisor* when the fault was in retrieval.
+
+What it still cannot do: match two cases that describe the same fraud pattern in
+different vocabulary.  Lexical overlap is the whole mechanism.  Swapping in a
+real embedding model is a change to this one function; the honest consequence of
+not having done so is stated in the README's Known Limitations and interrogated
+in the harness report.
 """
 
 from __future__ import annotations
@@ -30,6 +38,7 @@ import hashlib
 import json
 import math
 import re
+from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -38,16 +47,47 @@ from sentrymesh.config import PRECEDENT_CORPUS, SETTINGS
 EMBED_DIM = 256
 _TOKEN = re.compile(r"[a-z0-9_]+")
 
+# Tokens carried by every case description regardless of risk. Kept explicit
+# rather than folded into the IDF cutoff so a reader can see what was dropped.
+_STOPWORDS = frozenset(
+    {
+        "a", "an", "and", "the", "of", "on", "in", "to", "for", "with", "at", "by", "from",
+        "is", "was", "were", "be", "been", "it", "its", "that", "this", "as", "but", "or",
+        "not", "no", "than", "then", "over", "under", "into", "out", "up", "usd", "amount",
+        "account", "accounts", "transaction", "transactions", "case", "cases", "days", "day",
+    }
+)
 
-def embed(text: str) -> List[float]:
-    """Deterministic hashed bag-of-words vector (MOCK - see module docstring)."""
+
+def tokenize(text: str) -> List[str]:
+    return [t for t in _TOKEN.findall((text or "").lower()) if t not in _STOPWORDS and len(t) > 1]
+
+
+def build_idf(documents: List[str]) -> Dict[str, float]:
+    """Smoothed inverse document frequency over the precedent corpus."""
+    n = max(len(documents), 1)
+    df: Counter = Counter()
+    for doc in documents:
+        df.update(set(tokenize(doc)))
+    return {token: math.log((n + 1) / (count + 1)) + 1.0 for token, count in df.items()}
+
+
+def embed(text: str, idf: Optional[Dict[str, float]] = None) -> List[float]:
+    """Deterministic hashed TF-IDF vector (MOCK - see module docstring)."""
     vec = [0.0] * EMBED_DIM
-    tokens = _TOKEN.findall((text or "").lower())
-    for token in tokens:
+    counts = Counter(tokenize(text))
+    if not counts:
+        return vec
+    # Unseen tokens get the weight of a token appearing in exactly one document,
+    # so a query term absent from the corpus is treated as maximally specific
+    # rather than silently discarded.
+    default_idf = max(idf.values()) if idf else 1.0
+    for token, tf in counts.items():
+        weight = (1.0 + math.log(tf)) * ((idf or {}).get(token, default_idf))
         digest = hashlib.blake2b(token.encode(), digest_size=8).digest()
         bucket = int.from_bytes(digest[:4], "big") % EMBED_DIM
         sign = 1.0 if digest[4] & 1 else -1.0
-        vec[bucket] += sign
+        vec[bucket] += sign * weight
     norm = math.sqrt(sum(v * v for v in vec))
     if norm == 0:
         return vec
@@ -87,10 +127,11 @@ class LocalCosineIndex:
 
     def __init__(self, corpus: List[Dict[str, Any]]) -> None:
         self.corpus = corpus
-        self._vectors = [embed(precedent_text(row)) for row in corpus]
+        self.idf = build_idf([precedent_text(row) for row in corpus])
+        self._vectors = [embed(precedent_text(row), self.idf) for row in corpus]
 
     async def search(self, query: str, k: int) -> List[Dict[str, Any]]:
-        qv = embed(query)
+        qv = embed(query, self.idf)
         scored = [
             (cosine(qv, vec), row) for vec, row in zip(self._vectors, self.corpus)
         ]
@@ -115,14 +156,16 @@ class PgVectorIndex:
 
     name = "pgvector"
 
-    def __init__(self, pool: Any, corpus: List[Dict[str, Any]]) -> None:
+    def __init__(self, pool: Any, corpus: List[Dict[str, Any]], idf: Dict[str, float]) -> None:
         self._pool = pool
         self.corpus = corpus
+        self.idf = idf
 
     @classmethod
     async def create(cls, dsn: str, corpus: List[Dict[str, Any]]) -> "PgVectorIndex":
         import asyncpg
 
+        idf = build_idf([precedent_text(row) for row in corpus])
         pool = await asyncpg.create_pool(dsn=dsn, min_size=1, max_size=4, timeout=5, command_timeout=10)
         async with pool.acquire() as conn:
             await conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
@@ -159,17 +202,17 @@ class PgVectorIndex:
                     row.get("resolution_notes", ""),
                     str(row.get("resolved_at", "")),
                     row.get("reviewer", ""),
-                    _vector_literal(embed(precedent_text(row))),
+                    _vector_literal(embed(precedent_text(row), idf)),
                 )
             # ivfflat needs rows present before it can be built usefully.
             await conn.execute(
                 "CREATE INDEX IF NOT EXISTS resolved_case_precedents_embedding_idx "
                 "ON resolved_case_precedents USING ivfflat (embedding vector_cosine_ops) WITH (lists = 8)"
             )
-        return cls(pool, corpus)
+        return cls(pool, corpus, idf)
 
     async def search(self, query: str, k: int) -> List[Dict[str, Any]]:
-        literal = _vector_literal(embed(query))
+        literal = _vector_literal(embed(query, self.idf))
         async with self._pool.acquire() as conn:
             rows = await conn.fetch(
                 """

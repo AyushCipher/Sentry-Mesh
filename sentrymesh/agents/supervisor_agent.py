@@ -52,83 +52,148 @@ SPECIALIST_WEIGHTS = {
 # A single high-confidence specialist screaming 95 must not be averaged down to
 # 40 by three quiet colleagues. The aggregate keeps a floor tied to the loudest
 # *confident* voice.
-MAX_SIGNAL_BLEND = 0.35
-MIN_CONFIDENCE_FOR_MAX_SIGNAL = 0.6
+# Below this, a specialist is reporting an ABSENCE of signal in its category
+# rather than positive evidence, and contributes nothing to the combination.
+# Above it, the excess is treated as evidence strength.
+NEUTRAL_EVIDENCE = 15.0
+
+# A specialist at or above this is making a positive claim of elevated risk.
+# Used to ask whether a claim is corroborated - see `detect_disagreement`.
+ELEVATED_RISK_FLOOR = 55.0
+
+# How far the precedent specialist may diverge from the live-evidence panel
+# before it counts as a genuine contradiction rather than a different emphasis.
+PRECEDENT_CONFLICT_GAP = 45.0
+
+# Asymmetric confidence penalties. An abstaining specialist looked and had
+# nothing; a failed one never looked at all, so we do not know what it would
+# have found.
+ABSTENTION_CONFIDENCE_COST = 0.08
+FAILURE_CONFIDENCE_COST = 0.35
 
 
 # ---------------------------------------------------------------------------
 # Pure decision logic - unit-tested in tests/test_supervisor.py
 # ---------------------------------------------------------------------------
+def partition(
+    findings: Sequence[Finding], thresholds: Optional[DecisionThresholds] = None
+) -> Tuple[List[Finding], List[Finding], List[Finding]]:
+    """Split the panel into contributing, abstaining and failed specialists.
+
+    The abstention/dissent distinction matters more than any threshold in this
+    file. A specialist that returns a score with confidence below
+    ``abstention_confidence`` is not disagreeing with its colleagues - it is
+    reporting that its own signal category is uninformative for this case.
+    Treating that as dissent means every case where, say, no precedent exists
+    gets escalated on manufactured "disagreement", which is both wrong and
+    expensive: it floods the human queue with cases nobody disagreed about.
+    """
+    th = thresholds or SETTINGS.thresholds
+    contributing = [f for f in findings if f.ok and f.confidence >= th.abstention_confidence]
+    abstained = [f for f in findings if f.ok and f.confidence < th.abstention_confidence]
+    failed = [f for f in findings if not f.ok]
+    return contributing, abstained, failed
+
+
 def detect_disagreement(
     findings: Sequence[Finding], thresholds: Optional[DecisionThresholds] = None
 ) -> DisagreementReport:
-    """Measure how much the specialist panel disagrees.
+    """Measure how much the *contributing* specialists disagree.
 
-    Four independent checks, any of which makes disagreement 'significant':
+    WHAT COUNTS AS DISAGREEMENT HERE, AND WHY IT IS NOT SPREAD
+    ----------------------------------------------------------
+    The obvious implementation - flag a wide spread between the four risk scores
+    - is wrong for this panel, and measurably so: it escalated 21 of 23 seeded
+    cases. The specialists examine *orthogonal* categories, so a low score does
+    not mean "this case is fine", it means "my category shows nothing". Identity
+    saying 80 and network saying 10 is not a contradiction; it is a device-based
+    takeover with no ring, which is a completely coherent story. Fraud evidence
+    is disjunctive, and treating disjunctive evidence as if the sources were
+    estimating the same quantity manufactures conflict that does not exist.
 
-    * **pairwise spread** - the widest gap between any two specialists
-    * **standard deviation** - whether the whole panel is scattered
-    * **specialist self-doubt** - any specialist reporting confidence below the
-      floor is itself a disagreement signal (it disagrees with its own answer)
-    * **split verdict** - specialists on opposite sides of the midpoint, each by
-      a clear margin, meaning the panel disagrees on *direction* and not merely
-      on magnitude
+    So `pairwise_spread`, `risk_stdev` and `split_verdict` are still computed and
+    reported - they are useful diagnostics on the trace - but significance rests
+    on three checks that mean something for orthogonal signals:
 
-    Failed specialists are excluded from the score statistics but recorded, so a
-    panel that lost half its members cannot look like a panel in agreement.
+    * **uncorroborated elevation** - exactly one specialist claims elevated risk
+      and nothing else supports it. One signal can be a false positive; two
+      independent ones rarely are. This is the single most valuable escalation
+      trigger in the system.
+    * **precedent contradiction** - the historical specialist speaks to the case
+      as a whole rather than to one category, so when it diverges sharply from
+      the live-evidence panel that IS a genuine conflict about the same question.
+    * **missing evidence** - any specialist that failed. A panel that lost a
+      member cannot look like a panel in agreement.
+
+    Abstentions are recorded but never make disagreement significant.
     """
     th = thresholds or SETTINGS.thresholds
-    usable = [f for f in findings if f.ok]
-    failed = [f for f in findings if not f.ok]
+    contributing, abstained, failed = partition(findings, th)
 
     reasons: List[str] = []
     dissenters: List[str] = []
 
-    if len(usable) < 2:
+    base = dict(
+        abstaining_specialists=[f.specialist for f in abstained],
+        failed_specialists=[f.specialist for f in failed],
+        contributing_specialists=[f.specialist for f in contributing],
+    )
+
+    if failed:
+        reasons.append(f"{len(failed)} specialist(s) failed to report: {', '.join(f.specialist for f in failed)}")
+        dissenters.extend(f.specialist for f in failed)
+
+    if len(contributing) < 2:
+        reasons.append(
+            f"only {len(contributing)} of {len(findings)} specialists contributed a confident finding "
+            f"({len(abstained)} abstained, {len(failed)} failed) - too little agreement to measure"
+        )
         return DisagreementReport(
             pairwise_spread=0.0,
             risk_stdev=0.0,
-            lowest_specialist_confidence=min((f.confidence for f in usable), default=0.0),
+            lowest_specialist_confidence=round(min((f.confidence for f in contributing), default=0.0), 3),
             split_verdict=False,
-            dissenting_specialists=[f.specialist for f in failed],
-            reasons=[f"only {len(usable)} of {len(findings)} specialists returned a usable finding"],
+            dissenting_specialists=sorted(set(dissenters)),
+            reasons=reasons,
             significant=True,
+            **base,
         )
 
-    scores = [f.risk_score for f in usable]
+    scores = [f.risk_score for f in contributing]
     spread = max(scores) - min(scores)
     stdev = statistics.pstdev(scores)
-    lowest_conf = min(f.confidence for f in usable)
+    lowest_conf = min(f.confidence for f in contributing)
 
-    high = [f for f in usable if f.risk_score >= th.split_midpoint + th.split_margin]
-    low = [f for f in usable if f.risk_score <= th.split_midpoint - th.split_margin]
+    high = [f for f in contributing if f.risk_score >= th.split_midpoint + th.split_margin]
+    low = [f for f in contributing if f.risk_score <= th.split_midpoint - th.split_margin]
     split = bool(high and low)
 
-    if spread >= th.max_pairwise_spread:
-        top = max(usable, key=lambda f: f.risk_score)
-        bottom = min(usable, key=lambda f: f.risk_score)
+    # 1. Uncorroborated elevation.
+    elevated = [f for f in contributing if f.risk_score >= ELEVATED_RISK_FLOOR]
+    if len(elevated) == 1:
+        lone = elevated[0]
+        others = ", ".join(f"{f.specialist}={f.risk_score:.0f}" for f in contributing if f is not lone)
         reasons.append(
-            f"{spread:.0f}-point spread between {top.specialist} ({top.risk_score:.0f}) "
-            f"and {bottom.specialist} ({bottom.risk_score:.0f})"
+            f"uncorroborated signal: {lone.specialist} alone reports elevated risk "
+            f"({lone.risk_score:.0f}) while every other contributing specialist stays below "
+            f"{ELEVATED_RISK_FLOOR:.0f} ({others or 'none'})"
         )
-        dissenters.extend([top.specialist, bottom.specialist])
-    if stdev >= th.max_risk_stdev:
-        reasons.append(f"risk scores scattered (stdev {stdev:.1f} >= {th.max_risk_stdev})")
-    if lowest_conf < th.min_specialist_confidence:
-        weak = [f.specialist for f in usable if f.confidence < th.min_specialist_confidence]
-        reasons.append(f"specialist self-reported low confidence: {', '.join(weak)} (< {th.min_specialist_confidence})")
-        dissenters.extend(weak)
-    if split:
-        reasons.append(
-            "split verdict: "
-            + ", ".join(f"{f.specialist}={f.risk_score:.0f}" for f in high)
-            + " vs "
-            + ", ".join(f"{f.specialist}={f.risk_score:.0f}" for f in low)
-        )
-        dissenters.extend([f.specialist for f in high + low])
-    if failed:
-        reasons.append(f"{len(failed)} specialist(s) failed to report: {', '.join(f.specialist for f in failed)}")
-        dissenters.extend([f.specialist for f in failed])
+        dissenters.append(lone.specialist)
+
+    # 2. Precedent contradiction.
+    precedent = next((f for f in contributing if f.specialist == "historical_case"), None)
+    live = [f for f in contributing if f.specialist != "historical_case"]
+    if precedent is not None and live:
+        live_mean = statistics.fmean([f.risk_score for f in live])
+        gap = abs(precedent.risk_score - live_mean)
+        if gap >= PRECEDENT_CONFLICT_GAP:
+            direction = "higher" if precedent.risk_score > live_mean else "lower"
+            reasons.append(
+                f"precedent contradicts live evidence: historical_case reports "
+                f"{precedent.risk_score:.0f}, {gap:.0f} points {direction} than the live-signal mean "
+                f"({live_mean:.0f})"
+            )
+            dissenters.append("historical_case")
 
     return DisagreementReport(
         pairwise_spread=round(spread, 2),
@@ -138,35 +203,53 @@ def detect_disagreement(
         dissenting_specialists=sorted(set(dissenters)),
         reasons=reasons,
         significant=bool(reasons),
+        **base,
     )
 
 
-def aggregate_scores(findings: Sequence[Finding]) -> Tuple[float, float]:
-    """Confidence-weighted risk and a baseline panel confidence.
+def aggregate_scores(
+    findings: Sequence[Finding], thresholds: Optional[DecisionThresholds] = None
+) -> Tuple[float, float]:
+    """Combine independent evidence into one risk, and report panel confidence.
 
-    Two pieces, blended:
+    NOISY-OR, NOT A MEAN
+    --------------------
+    Averaging four orthogonal signal categories is the wrong operator and the
+    reason is concrete: it lets three categories that found nothing drag a
+    conclusive red flag down below any actionable threshold. Nothing about
+    "network analysis found no ring" is evidence that the transaction is fine,
+    so it should not be able to cancel "identity found impossible travel".
 
-    * a confidence-and-category weighted mean, so a specialist that admits it is
-      unsure contributes less than one that is certain;
-    * the highest risk reported by any *confident* specialist, blended in at
-      :data:`MAX_SIGNAL_BLEND`, because fraud signals are disjunctive - one
-      conclusive red flag is not cancelled by three clean categories.
+    Each contributing specialist supplies independent evidence strength::
+
+        p_i = ((risk_i - NEUTRAL_EVIDENCE) / (100 - NEUTRAL_EVIDENCE))
+              * confidence_i * category_weight_i
+
+    clamped at zero, so a specialist reporting an absence of signal contributes
+    nothing rather than contributing negatively. These combine as
+    ``1 - prod(1 - p_i)``: evidence accumulates, a single strong confident
+    signal is sufficient on its own, and a pile of weak ones adds up to less
+    than any one of them would if it were strong.
+
+    Confidence starts from the contributing specialists' mean and is docked
+    asymmetrically: an abstention costs a little (a category was looked at and
+    had nothing to say), a failure costs a lot (a category was never looked at
+    and we cannot tell what it would have said).
     """
-    usable = [f for f in findings if f.ok]
-    if not usable:
+    contributing, abstained, failed = partition(findings, thresholds)
+    if not contributing:
         return 0.0, 0.0
 
-    weights = [SPECIALIST_WEIGHTS.get(f.specialist, 1.0) * max(f.confidence, 0.05) for f in usable]
-    weighted_mean = sum(f.risk_score * w for f, w in zip(usable, weights)) / sum(weights)
+    survival = 1.0
+    for f in contributing:
+        excess = max(0.0, f.risk_score - NEUTRAL_EVIDENCE) / (100.0 - NEUTRAL_EVIDENCE)
+        strength = excess * f.confidence * SPECIALIST_WEIGHTS.get(f.specialist, 1.0)
+        survival *= 1.0 - max(0.0, min(1.0, strength))
+    combined = (1.0 - survival) * 100.0
 
-    confident = [f.risk_score for f in usable if f.confidence >= MIN_CONFIDENCE_FOR_MAX_SIGNAL]
-    max_signal = max(confident) if confident else weighted_mean
-    combined = (1 - MAX_SIGNAL_BLEND) * weighted_mean + MAX_SIGNAL_BLEND * max_signal
-
-    # Panel confidence starts as the mean specialist confidence and is docked
-    # for every specialist that never reported.
-    coverage = len(usable) / max(len(findings), 1)
-    panel_confidence = statistics.fmean([f.confidence for f in usable]) * coverage
+    panel_confidence = statistics.fmean([f.confidence for f in contributing])
+    panel_confidence *= max(0.5, 1.0 - ABSTENTION_CONFIDENCE_COST * len(abstained))
+    panel_confidence *= max(0.25, 1.0 - FAILURE_CONFIDENCE_COST * len(failed))
 
     return round(max(0.0, min(100.0, combined)), 2), round(max(0.0, min(1.0, panel_confidence)), 3)
 
@@ -185,12 +268,17 @@ def decide(
     A case can only be auto-resolved if it survives all three gates.
     """
     th = thresholds or SETTINGS.thresholds
-    usable = [f for f in findings if f.ok]
+    contributing, abstained, failed = partition(findings, th)
 
-    if len(usable) < 3:
+    if len(failed) >= 2:
         return "escalate", (
-            f"insufficient specialist coverage: only {len(usable)} of {len(findings)} specialists "
-            "returned a usable finding"
+            f"{len(failed)} of {len(findings)} specialists failed to run "
+            f"({', '.join(f.specialist for f in failed)}); the evidence base is incomplete"
+        )
+    if len(contributing) < 2:
+        return "escalate", (
+            f"insufficient specialist coverage: {len(contributing)} of {len(findings)} specialists "
+            f"contributed a confident finding ({len(abstained)} abstained, {len(failed)} failed)"
         )
     if disagreement.significant:
         return "escalate", "specialist disagreement: " + "; ".join(disagreement.reasons)
