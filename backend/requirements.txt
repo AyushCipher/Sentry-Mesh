@@ -1,0 +1,2 @@
+# Backend image installs the same pinned set as the root requirements.
+-r ../requirements.txt
