@@ -256,6 +256,18 @@ async def review_case(case_id: str) -> Dict[str, Any]:
     return row
 
 
+@app.post("/api/review-queue/_rebuild")
+async def rebuild_queue() -> Dict[str, Any]:
+    """Rebuild the queue from the event log. Proves the queue is derived state.
+
+    Declared BEFORE the ``/{case_id}`` route: FastAPI matches in declaration
+    order, so a literal path registered after a path parameter is unreachable -
+    it would be swallowed as a review submission for a case called "_rebuild".
+    """
+    restored = await mesh().queue.rebuild_from_log()
+    return {"restored": restored, "depth": await mesh().queue.depth()}
+
+
 @app.post("/api/review-queue/{case_id}")
 async def submit_review(case_id: str, submission: ReviewSubmission) -> Dict[str, Any]:
     decision = HumanDecision(
@@ -271,13 +283,6 @@ async def submit_review(case_id: str, submission: ReviewSubmission) -> Dict[str,
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
-
-
-@app.post("/api/review-queue/_rebuild")
-async def rebuild_queue() -> Dict[str, Any]:
-    """Rebuild the queue from the event log. Proves the queue is derived state."""
-    restored = await mesh().queue.rebuild_from_log()
-    return {"restored": restored, "depth": await mesh().queue.depth()}
 
 
 # ---------------------------------------------------------------------------
