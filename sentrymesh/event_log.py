@@ -249,8 +249,12 @@ def _id_gt(a: str, b: str) -> bool:
 class EventLog:
     """Append-only shared state for every agent, the API and the dashboard."""
 
-    def __init__(self, backend: Any) -> None:
+    def __init__(self, backend: Any, downgrade_reason: Optional[str] = None) -> None:
         self._backend = backend
+        # Why we are not on Redis, when we are not on Redis. Surfaced through
+        # /health and the harness report so the downgrade is never silent - a
+        # run whose audit trail evaporates at process exit must say so.
+        self.downgrade_reason = downgrade_reason
 
     @property
     def backend(self) -> str:
@@ -270,13 +274,20 @@ class EventLog:
         try:
             import redis.asyncio as aioredis
 
-            client = aioredis.from_url(url, socket_connect_timeout=2, socket_timeout=5)
+            # 10s, not 2s: a dual-stack host that tries ::1 before 127.0.0.1
+            # spends the whole budget on the dead IPv6 attempt, and a too-tight
+            # timeout turns "resolution is slow" into "Redis is down".
+            client = aioredis.from_url(url, socket_connect_timeout=10, socket_timeout=10)
             await client.ping()
             return cls(_RedisStreamBackend(client))
         except Exception as exc:  # noqa: BLE001 - any connection failure downgrades
             if strict:
                 raise RuntimeError(f"SENTRYMESH_REQUIRE_REDIS=1 but Redis at {url} is unreachable: {exc}") from exc
-            return cls(_InMemoryStreamBackend())
+            return cls(
+                _InMemoryStreamBackend(),
+                downgrade_reason=f"Redis at {url} unreachable ({type(exc).__name__}: {exc}); "
+                "the event log is in-memory and will not survive this process",
+            )
 
     @classmethod
     def in_memory(cls) -> "EventLog":

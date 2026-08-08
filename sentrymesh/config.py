@@ -92,7 +92,12 @@ class DecisionThresholds:
 
 @dataclass(frozen=True)
 class Settings:
-    redis_url: str = field(default_factory=lambda: os.getenv("REDIS_URL", "redis://localhost:6379/0"))
+    # 127.0.0.1, not "localhost", and deliberately so: on Windows and on many
+    # dual-stack Linux boxes "localhost" resolves to ::1 first, and a Redis
+    # listening only on IPv4 makes the asyncio client burn its entire connect
+    # timeout on the IPv6 attempt before falling back. That reads as "Redis is
+    # down" and silently downgrades the event log to in-memory.
+    redis_url: str = field(default_factory=lambda: os.getenv("REDIS_URL", "redis://127.0.0.1:6379/0"))
     require_redis: bool = field(default_factory=lambda: _env_bool("SENTRYMESH_REQUIRE_REDIS"))
 
     database_url: str = field(default_factory=lambda: os.getenv("DATABASE_URL", ""))

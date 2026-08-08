@@ -1,11 +1,12 @@
 {
   "report_version": 1,
-  "run_id": "4980a4",
-  "generated_at": "2026-08-07T21:50:36+00:00",
-  "wall_clock_ms": 926,
+  "run_id": "dd7076",
+  "generated_at": "2026-08-08T06:01:44+00:00",
+  "wall_clock_ms": 259,
   "data_disclaimer": "All cases are SYNTHETIC. No real financial data is represented anywhere in this system or this report.",
   "runtime": {
     "event_log_backend": "redis",
+    "event_log_downgrade_reason": null,
     "review_queue_backend": "redis",
     "retrieval_backend": "local_cosine",
     "llm_backend": "offline",
@@ -603,7 +604,7 @@
   "case_results": [
     {
       "case_id": "SM-001",
-      "run_case_id": "SM-001-4980a4",
+      "run_case_id": "SM-001-dd7076",
       "category": "card_testing",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -655,7 +656,7 @@
             "13 declines in 24h (rate 0.591)"
           ],
           "tool_calls": 3,
-          "duration_ms": 20,
+          "duration_ms": 10,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -674,7 +675,7 @@
             "KYC status 'unverified' with flags ['document_not_provided']"
           ],
           "tool_calls": 3,
-          "duration_ms": 38,
+          "duration_ms": 11,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -689,7 +690,7 @@
             "focus account directly linked to 4 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 38,
+          "duration_ms": 8,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -703,18 +704,18 @@
             "no precedent above the relevance floor"
           ],
           "tool_calls": 1,
-          "duration_ms": 32,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 74
+      "duration_ms": 16
     },
     {
       "case_id": "SM-002",
-      "run_case_id": "SM-002-4980a4",
+      "run_case_id": "SM-002-dd7076",
       "category": "card_testing",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -765,7 +766,7 @@
             "9 declines in 24h (rate 0.5)"
           ],
           "tool_calls": 3,
-          "duration_ms": 17,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -782,7 +783,7 @@
             "KYC status 'unverified' with flags ['document_not_provided']"
           ],
           "tool_calls": 3,
-          "duration_ms": 16,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -798,7 +799,7 @@
             "focus account directly linked to 3 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 10,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -812,18 +813,18 @@
             "HIST-1002 (card_testing) similarity 0.4097 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 6,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 45
+      "duration_ms": 11
     },
     {
       "case_id": "SM-003",
-      "run_case_id": "SM-003-4980a4",
+      "run_case_id": "SM-003-dd7076",
       "category": "card_testing",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -873,7 +874,7 @@
             "6 declines in 24h (rate 0.429)"
           ],
           "tool_calls": 3,
-          "duration_ms": 18,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -887,7 +888,7 @@
             "5 fingerprint changes in 30 days"
           ],
           "tool_calls": 3,
-          "duration_ms": 18,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -901,7 +902,7 @@
             "3-account component, density 0.667, types ['device']"
           ],
           "tool_calls": 2,
-          "duration_ms": 11,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -915,18 +916,18 @@
             "no precedent above the relevance floor"
           ],
           "tool_calls": 1,
-          "duration_ms": 7,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 41
+      "duration_ms": 8
     },
     {
       "case_id": "SM-004",
-      "run_case_id": "SM-004-4980a4",
+      "run_case_id": "SM-004-dd7076",
       "category": "card_testing",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -981,7 +982,7 @@
             "first-ever spend in elevated-risk category digital_goods"
           ],
           "tool_calls": 3,
-          "duration_ms": 14,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -995,7 +996,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 15,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1009,7 +1010,7 @@
             "no shared identifiers with any other account"
           ],
           "tool_calls": 2,
-          "duration_ms": 12,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1023,18 +1024,18 @@
             "HIST-1004 (card_testing) similarity 0.2934 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 8,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 40
+      "duration_ms": 11
     },
     {
       "case_id": "SM-005",
-      "run_case_id": "SM-005-4980a4",
+      "run_case_id": "SM-005-dd7076",
       "category": "account_takeover",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1084,7 +1085,7 @@
             "first-ever spend in elevated-risk category electronics"
           ],
           "tool_calls": 3,
-          "duration_ms": 16,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1102,7 +1103,7 @@
             "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN"
           ],
           "tool_calls": 3,
-          "duration_ms": 13,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1116,7 +1117,7 @@
             "2-account component, density 1.0, types ['device']"
           ],
           "tool_calls": 2,
-          "duration_ms": 10,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1130,18 +1131,18 @@
             "HIST-1005 (account_takeover) similarity 0.2747 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 6,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 41
+      "duration_ms": 12
     },
     {
       "case_id": "SM-006",
-      "run_case_id": "SM-006-4980a4",
+      "run_case_id": "SM-006-dd7076",
       "category": "account_takeover",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1191,7 +1192,7 @@
             "first-ever spend in elevated-risk category money_transfer"
           ],
           "tool_calls": 3,
-          "duration_ms": 16,
+          "duration_ms": 8,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1208,7 +1209,7 @@
             "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN"
           ],
           "tool_calls": 3,
-          "duration_ms": 15,
+          "duration_ms": 8,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1223,7 +1224,7 @@
             "focus account directly linked to 3 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 12,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1237,18 +1238,18 @@
             "HIST-1006 (account_takeover) similarity 0.3317 -> declined"
           ],
           "tool_calls": 1,
-          "duration_ms": 8,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 37
+      "duration_ms": 12
     },
     {
       "case_id": "SM-007",
-      "run_case_id": "SM-007-4980a4",
+      "run_case_id": "SM-007-dd7076",
       "category": "account_takeover",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1302,7 +1303,7 @@
             "amount z-score 37.35 against the account's own baseline"
           ],
           "tool_calls": 3,
-          "duration_ms": 14,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1317,7 +1318,7 @@
             "IP country BG differs from billing US and is new for this account"
           ],
           "tool_calls": 3,
-          "duration_ms": 14,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1331,7 +1332,7 @@
             "2-account component, density 1.0, types ['ip_range']"
           ],
           "tool_calls": 2,
-          "duration_ms": 9,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1345,18 +1346,18 @@
             "HIST-1007 (account_takeover) similarity 0.3093 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 6,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 36
+      "duration_ms": 12
     },
     {
       "case_id": "SM-008",
-      "run_case_id": "SM-008-4980a4",
+      "run_case_id": "SM-008-dd7076",
       "category": "account_takeover",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1411,7 +1412,7 @@
             "first-ever spend in elevated-risk category crypto_exchange"
           ],
           "tool_calls": 3,
-          "duration_ms": 7,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1426,7 +1427,7 @@
             "brand-new device (age 0d) on a 1680-day-old account"
           ],
           "tool_calls": 3,
-          "duration_ms": 8,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1440,7 +1441,7 @@
             "no shared identifiers with any other account"
           ],
           "tool_calls": 2,
-          "duration_ms": 6,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1454,18 +1455,18 @@
             "HIST-1008 (account_takeover) similarity 0.2953 -> declined"
           ],
           "tool_calls": 1,
-          "duration_ms": 4,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 25
+      "duration_ms": 8
     },
     {
       "case_id": "SM-009",
-      "run_case_id": "SM-009-4980a4",
+      "run_case_id": "SM-009-dd7076",
       "category": "synthetic_identity",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1514,7 +1515,7 @@
             "amount z-score 3.45 against the account's own baseline"
           ],
           "tool_calls": 3,
-          "duration_ms": 12,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1529,7 +1530,7 @@
             "KYC status 'failed' with flags ['document_mismatch', 'ssn_not_verified']"
           ],
           "tool_calls": 3,
-          "duration_ms": 9,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1544,7 +1545,7 @@
             "focus account directly linked to 6 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 8,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1558,18 +1559,18 @@
             "HIST-1009 (synthetic_identity) similarity 0.3872 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 5,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 26
+      "duration_ms": 7
     },
     {
       "case_id": "SM-010",
-      "run_case_id": "SM-010-4980a4",
+      "run_case_id": "SM-010-dd7076",
       "category": "synthetic_identity",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1624,7 +1625,7 @@
             "first-ever spend in elevated-risk category crypto_exchange"
           ],
           "tool_calls": 3,
-          "duration_ms": 10,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1638,7 +1639,7 @@
             "KYC status 'unverified' with flags ['ssn_not_verified']"
           ],
           "tool_calls": 3,
-          "duration_ms": 10,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1653,7 +1654,7 @@
             "focus account directly linked to 5 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 8,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1667,18 +1668,18 @@
             "no precedent above the relevance floor"
           ],
           "tool_calls": 1,
-          "duration_ms": 6,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 20
+      "duration_ms": 8
     },
     {
       "case_id": "SM-011",
-      "run_case_id": "SM-011-4980a4",
+      "run_case_id": "SM-011-dd7076",
       "category": "synthetic_identity",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1729,7 +1730,7 @@
             "first-ever spend in elevated-risk category money_transfer"
           ],
           "tool_calls": 3,
-          "duration_ms": 11,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1743,7 +1744,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 9,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1757,7 +1758,7 @@
             "2-account component, density 1.0, types ['ip_range']"
           ],
           "tool_calls": 2,
-          "duration_ms": 8,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1771,18 +1772,18 @@
             "no precedent above the relevance floor"
           ],
           "tool_calls": 1,
-          "duration_ms": 6,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 20
+      "duration_ms": 6
     },
     {
       "case_id": "SM-012",
-      "run_case_id": "SM-012-4980a4",
+      "run_case_id": "SM-012-dd7076",
       "category": "money_muling",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1831,7 +1832,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 14,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1845,7 +1846,7 @@
             "device seen on 9 distinct accounts"
           ],
           "tool_calls": 3,
-          "duration_ms": 14,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1860,7 +1861,7 @@
             "focus account directly linked to 8 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 10,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1874,18 +1875,18 @@
             "HIST-1012 (money_muling) similarity 0.3676 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 4,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 31
+      "duration_ms": 9
     },
     {
       "case_id": "SM-013",
-      "run_case_id": "SM-013-4980a4",
+      "run_case_id": "SM-013-dd7076",
       "category": "money_muling",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -1939,7 +1940,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 15,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1953,7 +1954,7 @@
             "device seen on 5 distinct accounts"
           ],
           "tool_calls": 3,
-          "duration_ms": 16,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1968,7 +1969,7 @@
             "focus account directly linked to 5 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 14,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -1982,18 +1983,18 @@
             "no precedent above the relevance floor"
           ],
           "tool_calls": 1,
-          "duration_ms": 11,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 32
+      "duration_ms": 9
     },
     {
       "case_id": "SM-014",
-      "run_case_id": "SM-014-4980a4",
+      "run_case_id": "SM-014-dd7076",
       "category": "money_muling",
       "ground_truth": "fraud",
       "expected_verdict": "decline",
@@ -2047,7 +2048,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 18,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2061,7 +2062,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 17,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2075,7 +2076,7 @@
             "3-account component, density 0.667, types ['payment_method']"
           ],
           "tool_calls": 2,
-          "duration_ms": 14,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2089,18 +2090,18 @@
             "HIST-1012 (money_muling) similarity 0.2997 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 4,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 33
+      "duration_ms": 6
     },
     {
       "case_id": "SM-015",
-      "run_case_id": "SM-015-4980a4",
+      "run_case_id": "SM-015-dd7076",
       "category": "legitimate",
       "ground_truth": "legitimate",
       "expected_verdict": "approve",
@@ -2147,7 +2148,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 27,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2161,7 +2162,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 26,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2175,7 +2176,7 @@
             "no shared identifiers with any other account"
           ],
           "tool_calls": 2,
-          "duration_ms": 26,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2189,18 +2190,18 @@
             "no precedent above the relevance floor"
           ],
           "tool_calls": 1,
-          "duration_ms": 18,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 50
+      "duration_ms": 7
     },
     {
       "case_id": "SM-016",
-      "run_case_id": "SM-016-4980a4",
+      "run_case_id": "SM-016-dd7076",
       "category": "legitimate",
       "ground_truth": "legitimate",
       "expected_verdict": "approve",
@@ -2249,7 +2250,7 @@
             "amount z-score 10.87 against the account's own baseline"
           ],
           "tool_calls": 3,
-          "duration_ms": 13,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2263,7 +2264,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 10,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2277,7 +2278,7 @@
             "no shared identifiers with any other account"
           ],
           "tool_calls": 2,
-          "duration_ms": 6,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2291,18 +2292,18 @@
             "HIST-1015 (legitimate) similarity 0.4325 -> approved"
           ],
           "tool_calls": 1,
-          "duration_ms": 4,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 24
+      "duration_ms": 5
     },
     {
       "case_id": "SM-017",
-      "run_case_id": "SM-017-4980a4",
+      "run_case_id": "SM-017-dd7076",
       "category": "legitimate",
       "ground_truth": "legitimate",
       "expected_verdict": "approve",
@@ -2350,7 +2351,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 10,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2364,7 +2365,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 10,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2380,7 +2381,7 @@
             "focus account directly linked to 3 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 5,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2394,18 +2395,18 @@
             "HIST-1016 (legitimate) similarity 0.4008 -> approved"
           ],
           "tool_calls": 1,
-          "duration_ms": 3,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 26
+      "duration_ms": 7
     },
     {
       "case_id": "SM-018",
-      "run_case_id": "SM-018-4980a4",
+      "run_case_id": "SM-018-dd7076",
       "category": "legitimate",
       "ground_truth": "legitimate",
       "expected_verdict": "approve",
@@ -2456,7 +2457,7 @@
             "first-ever spend in elevated-risk category electronics"
           ],
           "tool_calls": 3,
-          "duration_ms": 12,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2470,7 +2471,7 @@
             "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN"
           ],
           "tool_calls": 3,
-          "duration_ms": 11,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2484,7 +2485,7 @@
             "no shared identifiers with any other account"
           ],
           "tool_calls": 2,
-          "duration_ms": 9,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2498,18 +2499,18 @@
             "HIST-1017 (legitimate) similarity 0.2681 -> approved"
           ],
           "tool_calls": 1,
-          "duration_ms": 5,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 23
+      "duration_ms": 6
     },
     {
       "case_id": "SM-019",
-      "run_case_id": "SM-019-4980a4",
+      "run_case_id": "SM-019-dd7076",
       "category": "legitimate",
       "ground_truth": "legitimate",
       "expected_verdict": "approve",
@@ -2563,7 +2564,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 7,
+          "duration_ms": 5,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2577,7 +2578,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 6,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2591,7 +2592,7 @@
             "no shared identifiers with any other account"
           ],
           "tool_calls": 2,
-          "duration_ms": 3,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2606,18 +2607,18 @@
             "HIST-1009 (synthetic_identity) similarity 0.2716 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 3,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 22
+      "duration_ms": 9
     },
     {
       "case_id": "SM-020",
-      "run_case_id": "SM-020-4980a4",
+      "run_case_id": "SM-020-dd7076",
       "category": "legitimate",
       "ground_truth": "legitimate",
       "expected_verdict": "approve",
@@ -2666,7 +2667,7 @@
             "12 transactions in a 60-minute window"
           ],
           "tool_calls": 3,
-          "duration_ms": 11,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2680,7 +2681,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 10,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2694,7 +2695,7 @@
             "no shared identifiers with any other account"
           ],
           "tool_calls": 2,
-          "duration_ms": 9,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2708,18 +2709,18 @@
             "HIST-1019 (legitimate) similarity 0.3916 -> approved"
           ],
           "tool_calls": 1,
-          "duration_ms": 7,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 23
+      "duration_ms": 7
     },
     {
       "case_id": "SM-021",
-      "run_case_id": "SM-021-4980a4",
+      "run_case_id": "SM-021-dd7076",
       "category": "legitimate",
       "ground_truth": "legitimate",
       "expected_verdict": "approve",
@@ -2768,7 +2769,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 9,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2782,7 +2783,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 10,
+          "duration_ms": 3,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2796,7 +2797,7 @@
             "2-account component, density 1.0, types ['ip_range']"
           ],
           "tool_calls": 2,
-          "duration_ms": 6,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2811,18 +2812,18 @@
             "HIST-1009 (synthetic_identity) similarity 0.2854 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 3,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 21
+      "duration_ms": 8
     },
     {
       "case_id": "SM-022",
-      "run_case_id": "SM-022-4980a4",
+      "run_case_id": "SM-022-dd7076",
       "category": "account_takeover",
       "ground_truth": "ambiguous",
       "expected_verdict": "escalate",
@@ -2873,7 +2874,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 9,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2890,7 +2891,7 @@
             "session IP on proxy/hosting ASN AS-COMMERCIAL-VPN"
           ],
           "tool_calls": 3,
-          "duration_ms": 8,
+          "duration_ms": 6,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2918,18 +2919,18 @@
             "HIST-1021 (account_takeover) similarity 0.2673 -> approved"
           ],
           "tool_calls": 1,
-          "duration_ms": 3,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 24
+      "duration_ms": 10
     },
     {
       "case_id": "SM-023",
-      "run_case_id": "SM-023-4980a4",
+      "run_case_id": "SM-023-dd7076",
       "category": "money_muling",
       "ground_truth": "ambiguous",
       "expected_verdict": "escalate",
@@ -2980,7 +2981,7 @@
             "velocity, amount, category and timing all within the account's normal range"
           ],
           "tool_calls": 3,
-          "duration_ms": 9,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -2994,7 +2995,7 @@
             "device, geolocation and KYC all consistent with the account holder"
           ],
           "tool_calls": 3,
-          "duration_ms": 8,
+          "duration_ms": 4,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -3010,7 +3011,7 @@
             "focus account directly linked to 3 accounts"
           ],
           "tool_calls": 2,
-          "duration_ms": 5,
+          "duration_ms": 2,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
@@ -3024,14 +3025,14 @@
             "HIST-1009 (synthetic_identity) similarity 0.2649 -> confirmed_fraud"
           ],
           "tool_calls": 1,
-          "duration_ms": 3,
+          "duration_ms": 1,
           "backend": "offline_deterministic",
           "error": null,
           "error_class": null
         }
       ],
       "run_errors": [],
-      "duration_ms": 24
+      "duration_ms": 7
     }
   ]
 }

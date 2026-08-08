@@ -117,7 +117,8 @@ class ReviewQueue:
         try:
             import redis.asyncio as aioredis
 
-            client = aioredis.from_url(url, socket_connect_timeout=2, socket_timeout=5)
+            # Same timeout reasoning as EventLog.connect - see the comment there.
+            client = aioredis.from_url(url, socket_connect_timeout=10, socket_timeout=10)
             await client.ping()
             return cls(log, _RedisQueueBackend(client))
         except Exception as exc:  # noqa: BLE001

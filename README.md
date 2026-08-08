@@ -151,8 +151,9 @@ reader will assume they mean.
 
 ## Eval results
 
-Run `4980a4`, 2026-08-07, 23 synthetic cases (14 fraud / 7 legitimate / 2 ambiguous), 926 ms wall
-clock, `run_mode: offline_deterministic`, event log on real Redis, retrieval on the local cosine index.
+Run `dd7076`, 2026-08-08, 23 synthetic cases (14 fraud / 7 legitimate / 2 ambiguous), 259 ms wall
+clock, `run_mode: offline_deterministic`, event log and review queue on real Redis, retrieval on the
+local cosine index.
 
 Reproduce with `python eval/run_harness.py`. Full output: `eval/results/harness_report.md`.
 
@@ -218,7 +219,7 @@ findings about different parts of the system.
 Modelled on the treatment PatchPilot's README gave its own 100% hard-tier result. **Seven slices came
 back at ≥95% accuracy, and the harness flags every one of them as suspect rather than reporting them
 as wins.** This section is generated from the run, not written by hand; `eval/scrutiny.py` produces it
-and the dashboard renders it. Everything below is quoted from the report for run `4980a4`.
+and the dashboard renders it. Everything below is quoted from the report for run `dd7076`.
 
 **1. `auto_only` P/R/F1 = 1.000 is a selection effect, not a result.** The system escalated 61% of
 cases. Perfect precision on the 9 it chose to answer is partly the system grading its own homework:
@@ -304,6 +305,16 @@ fixed the worst of it. Replacing it with a real embedding model is a change to o
 back to an in-process NumPy cosine index over the same corpus. Numerically equivalent at 22
 precedents; not equivalent at 22 million. `SENTRYMESH_REQUIRE_PGVECTOR=1` makes the downgrade a hard
 error, and `docker-compose.yml` sets it.
+
+**The Redis downgrade is a footgun, now defused rather than removed.** `REDIS_URL` defaults to
+`redis://127.0.0.1:6379/0`, not `localhost`, because on a dual-stack host `localhost` resolves to
+`::1` first — and a Redis listening only on IPv4 makes the asyncio client spend its entire connect
+timeout on the dead IPv6 attempt. With the original 2-second timeout that read as "Redis is down" and
+the event log silently fell back to in-memory *while the sync client connected fine*, which is how a
+harness run ended up reporting `event_log: in_memory` on a machine with a healthy Redis. The timeout
+is now 10s, and `EventLog.downgrade_reason` is surfaced through `/health` and the harness report so
+the fallback can never again be silent. It is still a fallback: `SENTRYMESH_REQUIRE_REDIS=1` is the
+only setting that makes it an error, and compose sets it.
 
 **The review queue is Redis-resident, not in Postgres.** A Redis loss drops the work list. This is
 survivable only because `ReviewQueue.rebuild_from_log()` reconstructs it from the event log, and that

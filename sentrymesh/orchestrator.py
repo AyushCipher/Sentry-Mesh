@@ -52,6 +52,7 @@ class SentryMesh:
         stamped into every harness report so no result is ambiguous about it."""
         return {
             "event_log_backend": self.log.backend,
+            "event_log_downgrade_reason": self.log.downgrade_reason,
             "review_queue_backend": self.queue.backend,
             "retrieval_backend": getattr(self.precedent_index, "name", "unknown"),
             "llm_backend": self.llm.backend,
