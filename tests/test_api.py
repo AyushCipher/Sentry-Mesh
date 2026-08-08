@@ -53,7 +53,7 @@ def test_health_reports_runtime(client):
     data = body.json()
     assert data["status"] == "ok"
     assert data["runtime"]["data"] == "synthetic"
-    assert data["runtime"]["run_mode"] in {"anthropic", "offline_deterministic"}
+    assert data["runtime"]["run_mode"] in {"anthropic", "openai_compat", "offline_deterministic"}
 
 
 def test_case_bank_is_served_and_labelled_synthetic(client):

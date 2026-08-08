@@ -229,21 +229,24 @@ def build_honesty_section(
     concerns: List[str] = []
 
     # 1. What the run mode means for every number above it.
-    if runtime.get("run_mode") != "anthropic":
+    run_mode = runtime.get("run_mode")
+    if run_mode == "offline_deterministic":
         concerns.append(
             "RUN MODE: this run used the offline deterministic reasoner, not an LLM, because no "
-            "ANTHROPIC_API_KEY was configured. Every accuracy number in this report therefore measures "
+            "model provider was configured. Every accuracy number in this report therefore measures "
             "the explicit scoring functions inside each specialist, NOT agent reasoning. The tool "
             "calls, the event log, the supervisor's aggregation and the decision thresholds are all "
             "exercised exactly as they would be in an LLM run - but nothing here is evidence about "
-            "model quality, and it must not be presented as such. Re-run with a key set to get numbers "
-            "that mean what a reader will assume they mean."
+            "model quality, and it must not be presented as such. Re-run with a provider configured "
+            "to get numbers that mean what a reader will assume they mean."
         )
     else:
         concerns.append(
-            f"RUN MODE: live Anthropic tool-use loops on {runtime.get('model')}. Specialist and "
-            "supervisor reasoning is model-driven, so re-running will not reproduce these numbers "
-            "exactly. Single-run results at this sample size should be treated as indicative."
+            f"RUN MODE: live tool-use loops via {runtime.get('llm_provider') or run_mode} on "
+            f"{runtime.get('model')}. Specialist and supervisor reasoning is model-driven, so "
+            "re-running will not reproduce these numbers exactly, and results are specific to this "
+            "provider and model - a different model on the same code would score differently. "
+            "Single-run results at this sample size should be treated as indicative."
         )
 
     # 2. Sample size, stated before anything is read into the numbers.

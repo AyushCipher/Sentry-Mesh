@@ -1,6 +1,6 @@
 # SentryMesh eval harness report
 
-**Run** `dd7076` - 2026-08-08T06:01:44+00:00 - 259ms wall clock
+**Run** `e3378e` - 2026-08-08T12:09:49+00:00 - 232ms wall clock
 
 > All cases are SYNTHETIC. No real financial data is represented anywhere in this system or this report.
 
@@ -159,7 +159,7 @@ Precedent dependence: **3** auto-decision(s) change when the historical-case spe
 
 ### Concerns about these results
 
-- RUN MODE: this run used the offline deterministic reasoner, not an LLM, because no ANTHROPIC_API_KEY was configured. Every accuracy number in this report therefore measures the explicit scoring functions inside each specialist, NOT agent reasoning. The tool calls, the event log, the supervisor's aggregation and the decision thresholds are all exercised exactly as they would be in an LLM run - but nothing here is evidence about model quality, and it must not be presented as such. Re-run with a key set to get numbers that mean what a reader will assume they mean.
+- RUN MODE: this run used the offline deterministic reasoner, not an LLM, because no model provider was configured. Every accuracy number in this report therefore measures the explicit scoring functions inside each specialist, NOT agent reasoning. The tool calls, the event log, the supervisor's aggregation and the decision thresholds are all exercised exactly as they would be in an LLM run - but nothing here is evidence about model quality, and it must not be presented as such. Re-run with a provider configured to get numbers that mean what a reader will assume they mean.
 
 - SAMPLE SIZE: 23 cases, 21 with a decisive ground truth. Every per-category figure below rests on 2-7 cases. Confidence intervals at that size are wide enough to swallow most of the differences between categories, and none of these numbers would survive being quoted as a production benchmark.
 

@@ -23,6 +23,7 @@ export interface Runtime {
   retrieval_backend: string
   llm_backend: string
   run_mode: string
+  llm_provider?: string
   model: string | null
   thresholds: {
     auto_decline_risk: number

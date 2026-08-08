@@ -134,18 +134,99 @@ ANTHROPIC_API_KEY=sk-... docker compose up --build
 # dashboard http://localhost:5173 · API http://localhost:8000/docs
 ```
 
-### Running without an API key
+### Choosing a model provider
 
-Without `ANTHROPIC_API_KEY`, SentryMesh runs the **offline deterministic reasoner**. It still
-executes every specialist's real tools against the real case data and still writes every tool call to
-the event log — but the judgement comes from each agent's explicit scoring function instead of a
-model. This is labelled in every event payload, on the dashboard's top bar, and in the harness report
-as `run_mode: "offline_deterministic"`.
+SentryMesh runs on three interchangeable backends. Agent code is identical across all three — the
+same tool schemas, the same terminal `submit_finding`, the same event-log writes.
 
-**The results below were produced in that mode**, because no key was configured on the build machine.
-They measure the scoring functions and the orchestration, **not** LLM reasoning quality, and the
-report says so before it says anything else. Set a key and re-run to get numbers that mean what a
-reader will assume they mean.
+**1. Any OpenAI-compatible provider (free tiers available).** "OpenAI-compatible" is a *request
+format*, not the company — none of these is OpenAI and none needs an OpenAI key. One adapter serves
+all of them, so switching provider is two lines of `.env`:
+
+```bash
+# Groq — free key at console.groq.com
+SENTRYMESH_LLM_BASE_URL=https://api.groq.com/openai/v1
+SENTRYMESH_LLM_API_KEY=gsk_...
+SENTRYMESH_MODEL=llama-3.3-70b-versatile
+
+# Google Gemini — free key at aistudio.google.com
+# SENTRYMESH_LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai
+# SENTRYMESH_MODEL=gemini-2.0-flash
+
+# Ollama — fully local, no key, no account
+# SENTRYMESH_LLM_BASE_URL=http://localhost:11434/v1
+# SENTRYMESH_MODEL=qwen2.5:14b
+```
+
+Every specialist ends its turn by calling `submit_finding`, so **the model must support tool
+calling.** One that doesn't fails with `error_class="agent_protocol_error"` — which the harness
+reports separately from wrong verdicts, so a bad model choice is visible rather than quietly
+degrading the numbers.
+
+On a free tier metered per minute, four specialists starting at once can exhaust a minute's token
+budget in a single burst. `SENTRYMESH_MAX_CONCURRENT_SPECIALISTS=2` trades wall-clock for staying
+under the limit; every specialist still runs on every case, and no finding changes.
+
+**2. Anthropic.** Set `ANTHROPIC_API_KEY`. Roughly $1 per full 23-case harness run on
+`claude-haiku-4-5`.
+
+**3. Nothing.** With no provider configured, SentryMesh runs the **offline deterministic reasoner**:
+it still executes every specialist's real tools against the real case data and still writes every
+tool call to the event log, but the judgement comes from each agent's explicit scoring function
+instead of a model. Labelled in every event payload, on the dashboard's top bar, and in the harness
+report as `run_mode: "offline_deterministic"` — because numbers produced that way measure the
+scoring functions, not agent reasoning, and must never be presented as the latter.
+
+The tests always pin backend 3 regardless of your `.env` (see `tests/conftest.py`) — a test suite
+that calls a live provider is slow, costs money, and turns assertions about verdicts into assertions
+about what a model felt like saying. The eval harness is where a real provider belongs.
+
+---
+
+## Live-provider validation (Groq) — what worked, and what stopped it
+
+The OpenAI-compatible adapter was verified end to end against **Groq** on real cases. It works: the
+supervisor fans out, all four specialists run genuine tool-use loops, and the verdicts are right.
+
+```
+SM-001  auto_decline  risk 88.5  conf 0.88     (ground truth: fraud)
+   transaction_pattern  risk 85   2 tool calls
+   identity_signal      risk 80   3 tool calls
+   network_analysis     risk 65   2 tool calls
+   historical_case      risk 90   2 tool calls
+```
+
+**A full 23-case run does not fit in Groq's free tier**, and the harness recorded exactly why. Run
+`aad848` (`openai/gpt-oss-20b`, preserved at `eval/results/harness_report_live_groq_partial.json`):
+
+| | |
+|---|---|
+| Cases that completed cleanly | **3 of 23** (SM-001, SM-003, SM-007) |
+| `llm_rate_limit` failures | **78** |
+| `agent_protocol_error` failures | 5 |
+| Genuinely wrong auto-decisions | **1** |
+
+Groq's free tier caps a model at **100,000 tokens/day**. One case costs roughly **14K tokens**
+(5 agents × a multi-turn tool loop, where each turn resends the accumulated tool results), so the
+whole bank needs **~320K tokens** — over three days of free quota for a single model. The run died
+about seven cases in.
+
+**Two things this makes concrete rather than theoretical:**
+
+1. **The error classifier earned its place.** It filed 80 infrastructure failures separately from the
+   1 wrong decision, so the report shows a quota wall as a quota wall. Had those been merged into one
+   "failed" bucket — the thing the harness spec forbids — this run would read as catastrophic
+   reasoning failure instead of an exhausted free tier. The distinction is the difference between
+   "the model is bad" and "buy more tokens."
+2. **Small models really do fumble strict tool schemas.** `llama-3.1-8b-instant` and `qwen3.6-27b`
+   both failed tool-call validation outright on `submit_finding` and could not be used at all.
+   `llama-3.3-70b-versatile` and `openai/gpt-oss-20b` handled it. (`openai/gpt-oss-20b` is an
+   open-weights model on Groq's hardware — not OpenAI's API, and no OpenAI key is involved.)
+
+**Therefore the canonical results below are the offline deterministic run**, which is the only
+*complete* 23-case run available. They measure the scoring functions and the orchestration, not LLM
+reasoning. To produce complete live numbers you need a paid tier, a provider with a larger daily
+budget, or a run spread across several days.
 
 ---
 
@@ -347,9 +428,22 @@ needs SSO, per-reviewer authorisation, and a reviewer identity the log can actua
 precision/recall matrices, because forcing them in would mean inventing a right answer. They are
 judged solely on whether the system declined to commit — a weak test that 2 cases cannot carry.
 
-**Single run, no variance.** Every number here comes from one harness run. With the Anthropic backend
-the specialists are non-deterministic, so a serious evaluation needs n runs with variance reported.
-The harness supports repeated runs but does not aggregate across them.
+**Single run, no variance.** Every number here comes from one harness run. With a live provider the
+specialists are non-deterministic, so a serious evaluation needs n runs with variance reported. The
+harness supports repeated runs but does not aggregate across them.
+
+**A full live-provider eval costs ~320K tokens, which no free tier funds in a day.** Measured at ~14K
+tokens per case: 5 agents, each a multi-turn tool loop that resends its accumulated tool results on
+every turn. The dominant cost is that resending, not the prompts. Real fixes would be trimming what
+tool results return (`get_transaction_history` currently returns up to 50 transactions when the
+velocity/z-score maths is already computed server-side and returned separately), or clearing old
+tool results from the context between turns. Neither is implemented.
+
+**Token usage is not recorded per case.** `LLMRunResult` tracks `input_tokens`/`output_tokens`, but
+nothing aggregates them into the finding, the verdict, or the harness report — so the ~14K/case
+figure above was derived from provider quota errors rather than measured directly. A report that
+scrutinises its own accuracy but cannot tell you what a run cost is missing the number an operator
+would ask for first.
 
 ---
 

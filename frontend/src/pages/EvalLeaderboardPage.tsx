@@ -110,7 +110,7 @@ export default function EvalLeaderboardPage() {
         </p>
       </div>
 
-      {report.runtime.run_mode !== 'anthropic' && (
+      {report.runtime.run_mode === 'offline_deterministic' && (
         <div className="flex gap-3 rounded-lg border border-amber-700/40 bg-amber-950/20 p-4">
           <AlertTriangle size={18} className="mt-0.5 shrink-0 text-amber-400" />
           <p className="text-sm leading-relaxed text-amber-100/80">

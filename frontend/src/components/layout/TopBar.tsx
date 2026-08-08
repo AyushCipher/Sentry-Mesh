@@ -11,7 +11,8 @@ import Badge from '../ui/Badge'
  */
 export default function TopBar({ health }: { health: HealthResponse | null }) {
   const rt = health?.runtime
-  const offline = rt?.run_mode !== 'anthropic'
+  // Live = a real model produced the reasoning, whichever provider served it.
+  const offline = rt?.run_mode === 'offline_deterministic'
 
   return (
     <header className="flex flex-wrap items-center gap-3 border-b border-ink-800 bg-ink-900/60 px-6 py-3">
@@ -21,7 +22,7 @@ export default function TopBar({ health }: { health: HealthResponse | null }) {
         <>
           <Badge tone={offline ? 'escalate' : 'approve'} title="LLM reasoning backend">
             <Cpu size={12} />
-            {offline ? 'offline deterministic reasoner' : `anthropic · ${rt?.model}`}
+            {offline ? 'offline deterministic reasoner' : `${rt?.llm_provider ?? rt?.run_mode} · ${rt?.model}`}
           </Badge>
           <Badge tone={rt?.event_log_backend === 'redis' ? 'accent' : 'muted'} title="Shared event log backend">
             <Database size={12} />
@@ -42,7 +43,7 @@ export default function TopBar({ health }: { health: HealthResponse | null }) {
       {offline && health && (
         <span className="ml-auto flex items-center gap-1.5 text-[11px] text-amber-300/80">
           <AlertOctagon size={12} />
-          No ANTHROPIC_API_KEY: findings come from the labelled deterministic fallback, not a model.
+          No model provider configured: findings come from the labelled deterministic fallback, not a model.
         </span>
       )}
     </header>

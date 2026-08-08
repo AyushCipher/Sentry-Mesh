@@ -104,22 +104,67 @@ class Settings:
     require_pgvector: bool = field(default_factory=lambda: _env_bool("SENTRYMESH_REQUIRE_PGVECTOR"))
 
     anthropic_api_key: str = field(default_factory=lambda: os.getenv("ANTHROPIC_API_KEY", "").strip())
-    model: str = field(default_factory=lambda: os.getenv("SENTRYMESH_MODEL", "claude-sonnet-4-5"))
+    model: str = field(default_factory=lambda: os.getenv("SENTRYMESH_MODEL", "claude-sonnet-5"))
     max_tokens: int = field(default_factory=lambda: _env_int("SENTRYMESH_MAX_TOKENS", 2048))
     llm_backend: str = field(default_factory=lambda: os.getenv("SENTRYMESH_LLM_BACKEND", "auto").strip().lower())
+
+    # OpenAI-compatible providers (Groq, Gemini's compat endpoint, GitHub Models,
+    # Ollama, OpenRouter, Together...). "OpenAI-compatible" is a request format,
+    # not the company: setting these does not involve OpenAI and needs no OpenAI
+    # key. One adapter, and the provider is an environment variable.
+    llm_base_url: str = field(default_factory=lambda: os.getenv("SENTRYMESH_LLM_BASE_URL", "").strip())
+    llm_api_key: str = field(default_factory=lambda: os.getenv("SENTRYMESH_LLM_API_KEY", "").strip())
 
     # Hard cap on tool-use turns per agent, so a confused model cannot loop.
     max_agent_turns: int = 8
 
+    # How many specialists may be in flight at once. 4 = full parallelism, the
+    # default and the point of the fan-out. Free-tier providers meter tokens per
+    # minute, and four concurrent specialists can exceed that budget in a single
+    # burst - setting this to 1 or 2 trades wall-clock for staying under the
+    # limit without changing any agent behaviour.
+    max_concurrent_specialists: int = field(
+        default_factory=lambda: max(1, _env_int("SENTRYMESH_MAX_CONCURRENT_SPECIALISTS", 4))
+    )
+
+    # Extra retries for provider rate limits, on top of the SDK's own. Free
+    # tiers reset per minute, so the backoff below is seconds-scale rather than
+    # the sub-second the SDK defaults to.
+    rate_limit_retries: int = field(default_factory=lambda: _env_int("SENTRYMESH_RATE_LIMIT_RETRIES", 3))
+
     thresholds: DecisionThresholds = field(default_factory=DecisionThresholds.from_env)
 
     def resolved_backend(self) -> str:
-        """Return the LLM backend that will actually be used: 'anthropic' | 'offline'."""
-        if self.llm_backend == "anthropic":
-            return "anthropic"
-        if self.llm_backend == "offline":
-            return "offline"
+        """Which LLM backend will actually run: 'anthropic' | 'openai_compat' | 'offline'.
+
+        On ``auto``, an explicitly configured OpenAI-compatible base URL wins over
+        an Anthropic key: setting one is a deliberate act, whereas an
+        ANTHROPIC_API_KEY often lingers in a shell from unrelated work, and
+        silently billing that key because it happened to be exported would be a
+        genuinely bad surprise.
+        """
+        if self.llm_backend in {"anthropic", "openai_compat", "offline"}:
+            return self.llm_backend
+        if self.llm_base_url:
+            return "openai_compat"
         return "anthropic" if self.anthropic_api_key else "offline"
+
+    def provider_label(self) -> str:
+        """Human-readable provider for reports and /health.
+
+        The host, never the key. Every number in the harness report is a number
+        about a specific provider and model, so the report has to say which.
+        """
+        backend = self.resolved_backend()
+        if backend != "openai_compat":
+            return backend
+        try:
+            from urllib.parse import urlparse
+
+            host = urlparse(self.llm_base_url).hostname or self.llm_base_url
+        except Exception:  # noqa: BLE001
+            host = self.llm_base_url
+        return f"openai_compat:{host}"
 
 
 SETTINGS = Settings()

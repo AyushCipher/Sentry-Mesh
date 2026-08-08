@@ -22,3 +22,7 @@ Thumbs.db
 sentrymesh.zip
 eval/results/*.json
 !eval/results/harness_report.json
+
+# Keep the partial live-provider run as committed evidence alongside the canonical report.
+!eval/results/harness_report_live_groq_partial.json
+!eval/results/harness_report_live_groq_partial.md

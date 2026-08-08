@@ -57,7 +57,8 @@ class SentryMesh:
             "retrieval_backend": getattr(self.precedent_index, "name", "unknown"),
             "llm_backend": self.llm.backend,
             "run_mode": self.llm.run_mode,
-            "model": self.llm.model if self.llm.backend == "anthropic" else None,
+            "llm_provider": SETTINGS.provider_label(),
+            "model": self.llm.model if self.llm.is_live else None,
             "thresholds": {
                 "auto_decline_risk": SETTINGS.thresholds.auto_decline_risk,
                 "auto_approve_risk": SETTINGS.thresholds.auto_approve_risk,

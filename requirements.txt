@@ -1,4 +1,8 @@
 anthropic==0.39.0
+# OpenAI-compatible providers (Groq, Gemini compat endpoint, GitHub Models,
+# Ollama, OpenRouter...). A request format, not the company - no OpenAI
+# account or key is involved on this path.
+openai==2.53.0
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 redis==5.0.1

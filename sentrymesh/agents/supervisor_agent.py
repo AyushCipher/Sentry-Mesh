@@ -408,10 +408,22 @@ class SupervisorAgent:
 
         # Genuinely concurrent: each specialist owns its own LLM tool-use loop
         # and they share nothing but the append-only log, so there is no
-        # ordering constraint between them. With the Anthropic backend this is
+        # ordering constraint between them. At the default concurrency this is
         # four in-flight HTTP requests, not four sequential ones.
+        #
+        # The semaphore exists for free-tier providers that meter tokens per
+        # minute: four specialists starting at once can exhaust a minute's
+        # budget in one burst and take a 429 that has nothing to do with the
+        # case. Throttling changes wall-clock only - every specialist still runs
+        # on every case, and no finding is affected.
+        gate = asyncio.Semaphore(SETTINGS.max_concurrent_specialists)
+
+        async def run_specialist(specialist: Any) -> Finding:
+            async with gate:
+                return await specialist.run(case)
+
         findings: List[Finding] = list(
-            await asyncio.gather(*(s.run(case) for s in self.specialists))
+            await asyncio.gather(*(run_specialist(s) for s in self.specialists))
         )
 
         disagreement = detect_disagreement(findings, self.thresholds)

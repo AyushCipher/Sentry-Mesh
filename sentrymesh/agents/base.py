@@ -65,17 +65,29 @@ class SpecialistAgent(ABC):
 
     # -- shared machinery ---------------------------------------------------
     def user_prompt(self, case: Case) -> str:
-        import json
+        """The opening brief - deliberately WITHOUT the case data.
 
+        An earlier version pasted the whole case JSON in here alongside the
+        tools. Every specialist then answered from the prompt and called zero
+        tools: the tools were decorative, and the "agents investigate" claim was
+        not true of a single run. Handing over only the case identity forces the
+        evidence to come through the tools, which is also what makes each
+        specialist's trace an actual record of what it looked at.
+
+        It cuts the prompt from thousands of tokens to a few dozen as a side
+        effect, which is what keeps four parallel specialists inside a
+        free-tier per-minute token budget.
+        """
         return (
-            f"Investigate flagged case {case.case_id} using only the tools available to you.\n"
+            f"Investigate flagged case {case.case_id} (account {case.account_id}).\n"
+            f"Analyst brief: {case.summary or 'no summary provided'}\n"
             f"Your remit is: {self.focus}\n\n"
-            "Case data (SYNTHETIC evaluation data):\n"
-            f"{json.dumps(case.agent_view(), indent=2, default=str)}\n\n"
-            "Call the investigation tools you need, then call submit_finding exactly once. "
+            "You have NOT been given the case data. Retrieve what you need with your "
+            "investigation tools, then call submit_finding exactly once.\n\n"
             "Score only your own signal category. If your category shows nothing unusual, "
             "say so with a low risk score - a clean finding is as valuable as a dirty one, "
-            "and inflating a weak signal costs a legitimate customer their transaction."
+            "and inflating a weak signal costs a legitimate customer their transaction. "
+            "All data is SYNTHETIC evaluation data."
         )
 
     async def run(self, case: Case) -> Finding:

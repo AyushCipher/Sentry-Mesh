@@ -42,8 +42,13 @@ services:
       # downgrade to the in-memory log would be a bug rather than a convenience.
       SENTRYMESH_REQUIRE_REDIS: "1"
       SENTRYMESH_REQUIRE_PGVECTOR: "1"
+      # Any one provider. Unset all three and the container runs the labelled
+      # offline deterministic reasoner rather than failing to start.
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      SENTRYMESH_MODEL: ${SENTRYMESH_MODEL:-claude-sonnet-5}
+      SENTRYMESH_LLM_BASE_URL: ${SENTRYMESH_LLM_BASE_URL:-}
+      SENTRYMESH_LLM_API_KEY: ${SENTRYMESH_LLM_API_KEY:-}
+      SENTRYMESH_MODEL: ${SENTRYMESH_MODEL:-claude-haiku-4-5}
+      SENTRYMESH_MAX_CONCURRENT_SPECIALISTS: ${SENTRYMESH_MAX_CONCURRENT_SPECIALISTS:-4}
     depends_on:
       redis:
         condition: service_healthy
