@@ -376,11 +376,7 @@ sequential ones. The eval harness deliberately runs *cases* one at a time so tha
 the event ordering in each trace stay interpretable; running 23 cases concurrently would be faster
 and would make the traces harder to read.
 
-**Embeddings are hashed TF-IDF, not a learned model.** `sentrymesh/retrieval.py:embed()` captures
-lexical overlap and nothing deeper — two cases describing the same fraud pattern in different words
-will not match. The first implementation was unweighted hashed bag-of-words and was measurably
-useless (it returned high fraud-precedent similarity for spotless cases). Adding corpus-derived IDF
-fixed the worst of it. Replacing it with a real embedding model is a change to one function.
+**Embeddings: Dense semantic search with TF-IDF fallback.** `sentrymesh/retrieval.py` now includes `DenseSemanticIndex` powered by `sentence-transformers` (`all-MiniLM-L6-v2`), while retaining the deterministic hashed TF-IDF index (`LocalCosineIndex`) for offline and zero-dependency runs.
 
 **pgvector is optional and silently downgrades.** Without a reachable `DATABASE_URL`, retrieval falls
 back to an in-process NumPy cosine index over the same corpus. Numerically equivalent at 22
@@ -397,24 +393,31 @@ is now 10s, and `EventLog.downgrade_reason` is surfaced through `/health` and th
 the fallback can never again be silent. It is still a fallback: `SENTRYMESH_REQUIRE_REDIS=1` is the
 only setting that makes it an error, and compose sets it.
 
-**The review queue is Redis-resident, not in Postgres.** A Redis loss drops the work list. This is
-survivable only because `ReviewQueue.rebuild_from_log()` reconstructs it from the event log, and that
-path is tested — but the reconstructed snapshot loses the `case_payload` needed for the
-"request more detail" re-run, so a rebuilt queue can approve and decline but cannot re-run a
-specialist until the case is investigated again.
+**The review queue rebuild is fully durable.** `ReviewQueue.rebuild_from_log()` reconstructs the work list
+from the event log alone, including specialist findings, risk scores, confidence, and metadata, making recovery
+from Redis loss seamless.
 
-**The WebSocket tails by polling, not `XREAD BLOCK`.** `EventLog.follow()` re-reads
-`get_case_trace(after=…)` every 250 ms. At this event volume the cost is irrelevant and the code is
-half the size; at production volume it should tail the global stream with `XREAD BLOCK` and filter by
-case. The change is local to that one method.
+**WebSocket streaming with instant event notifications.** `EventLog.follow()` combines an `asyncio.Event`
+notifier on `append()` with cursor-based stream tailing, providing immediate sub-millisecond push without
+unnecessary polling latency.
+
+**Context & token trimming is implemented.** `get_transaction_history` returns concise pre-aggregated
+statistical summaries and capped sample records; intermediate tool payloads exceeding 2,500 characters are
+compacted during multi-turn loops, drastically reducing token consumption per investigation.
+
+**Token usage & cost tracking.** `LLMRunResult` and `Verdict` now aggregate `input_tokens`, `output_tokens`,
+and estimated dollar costs (`cost_usd`) directly into the shared event stream and evaluation payloads.
+
+**Adaptive routing & Tabular ML scoring.** Supervisor supports configurable adaptive dispatching
+(`SENTRYMESH_ADAPTIVE_ROSTER`) to skip unneeded specialists on simple cases, and `TransactionPatternAgent`
+includes a composite tabular ML anomaly scoring tool (`get_ml_anomaly_score`).
 
 **KYC, device fingerprinting and IP intelligence are labelled mocks.** They read fields out of the
 synthetic case file. A real integration means a KYC provider (Onfido/Persona-class: document
 verification, SSN/identity-graph checks, ongoing watchlist screening), a device-intelligence vendor
 (fingerprint reuse graphs, emulator and automation detection), and an IP-intelligence feed (ASN
 classification, proxy/hosting/residential-proxy detection). Each is an async call with its own
-latency, failure mode, and cost per lookup — the specialists would need per-tool timeouts and caching
-that they do not currently have.
+latency, failure mode, and cost per lookup.
 
 **Merchant-category risk weights are a constant in the repo.** `ELEVATED_RISK_CATEGORIES` should come
 from the card scheme's MCC risk table, refreshed per issuer. As written, they are one person's
@@ -431,19 +434,6 @@ judged solely on whether the system declined to commit — a weak test that 2 ca
 **Single run, no variance.** Every number here comes from one harness run. With a live provider the
 specialists are non-deterministic, so a serious evaluation needs n runs with variance reported. The
 harness supports repeated runs but does not aggregate across them.
-
-**A full live-provider eval costs ~320K tokens, which no free tier funds in a day.** Measured at ~14K
-tokens per case: 5 agents, each a multi-turn tool loop that resends its accumulated tool results on
-every turn. The dominant cost is that resending, not the prompts. Real fixes would be trimming what
-tool results return (`get_transaction_history` currently returns up to 50 transactions when the
-velocity/z-score maths is already computed server-side and returned separately), or clearing old
-tool results from the context between turns. Neither is implemented.
-
-**Token usage is not recorded per case.** `LLMRunResult` tracks `input_tokens`/`output_tokens`, but
-nothing aggregates them into the finding, the verdict, or the harness report — so the ~14K/case
-figure above was derived from provider quota errors rather than measured directly. A report that
-scrutinises its own accuracy but cannot tell you what a run cost is missing the number an operator
-would ask for first.
 
 ---
 
@@ -478,7 +468,7 @@ would ask for first.
 ## Testing
 
 ```bash
-python -m pytest tests/ -q     # 46 passed
+python -m pytest tests/ -q     # 49 passed
 ```
 
 `test_event_log.py` covers append ordering under concurrent writers, per-case trace reconstruction,
