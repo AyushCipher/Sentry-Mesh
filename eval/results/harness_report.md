@@ -1,6 +1,6 @@
 # SentryMesh eval harness report
 
-**Run** `e3378e` - 2026-08-08T12:09:49+00:00 - 232ms wall clock
+**Run** `2f852a` - 2026-09-09T17:40:17+00:00 - 275ms wall clock
 
 > All cases are SYNTHETIC. No real financial data is represented anywhere in this system or this report.
 

@@ -206,3 +206,52 @@ def test_elevated_floor_constant_sits_inside_the_indeterminate_band():
     """A specialist can be 'elevated' without the case being auto-declinable;
     that gap is what the uncorroborated-signal rule exists to catch."""
     assert TH.auto_approve_risk < ELEVATED_RISK_FLOOR < TH.auto_decline_risk
+
+
+def test_cost_estimation_rates():
+    from sentrymesh.config import estimate_cost_usd
+
+    cost = estimate_cost_usd("claude-haiku-4-5", 10_000, 2_000)
+    assert cost > 0.0
+    assert isinstance(cost, float)
+
+
+@pytest.mark.asyncio
+async def test_transaction_agent_ml_anomaly_tool():
+    from sentrymesh.agents.llm_client import LLMClient
+    from sentrymesh.agents.transaction_pattern_agent import TransactionPatternAgent
+    from sentrymesh.event_log import EventLog
+    from sentrymesh.models import Case
+
+    log = EventLog.in_memory()
+    agent = TransactionPatternAgent(log, LLMClient(backend="offline"))
+    case = Case(
+        case_id="test-ml-1",
+        transaction_data={
+            "account_id": "acc-123",
+            "transaction": {"amount": 5000.0, "timestamp": "2026-08-01T12:00:00Z", "merchant_category": "crypto_exchange"},
+            "history": [
+                {"amount": 50.0, "timestamp": "2026-08-01T11:50:00Z", "status": "declined"},
+                {"amount": 50.0, "timestamp": "2026-08-01T11:52:00Z", "status": "declined"},
+            ],
+        },
+    )
+    res = await agent.run_tool(case, "get_ml_anomaly_score", {})
+    assert "ml_anomaly_score" in res
+    assert res["ml_anomaly_score"] > 50.0
+    assert "feature_breakdown" in res
+
+
+@pytest.mark.asyncio
+async def test_dense_semantic_index_fallback():
+    from sentrymesh.retrieval import DenseSemanticIndex
+
+    corpus = [
+        {"case_id": "P-1", "category": "card_testing", "summary": "rapid small charge testing", "resolution": "declined"},
+        {"case_id": "P-2", "category": "legitimate", "summary": "normal high spend user", "resolution": "approved"},
+    ]
+    idx = DenseSemanticIndex(corpus)
+    res = await idx.search("card testing rapid charge", 1)
+    assert len(res) == 1
+    assert res[0]["case_id"] == "P-1"
+

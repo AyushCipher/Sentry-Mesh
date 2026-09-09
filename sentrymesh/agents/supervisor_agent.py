@@ -363,19 +363,22 @@ class SupervisorAgent:
             HistoricalCaseAgent(log, self.llm, index=precedent_index),
         ]
 
-    def dispatch_roster(self, case: Case) -> List[str]:
+    def dispatch_roster(self, case: Optional[Case] = None) -> List[str]:
         """Which specialists to run.
 
-        Every specialist runs on every case, and that is a decision rather than
-        a shortcut. Selective routing would mean a category could be scored
-        without ever being looked at, which makes a clean result unfalsifiable:
-        you could not tell "the network agent found nothing" from "the network
-        agent was never asked". It would also make the eval's per-category
-        false-positive analysis unattributable. The cost is four LLM calls per
-        case instead of two; the benefit is that every verdict is backed by the
-        same four-signal evidence base.
+        By default, every specialist runs on every case so that every verdict is
+        backed by the same four-signal evidence base. When adaptive_roster is
+        enabled, fast triage dispatches only the specialists relevant to the case.
         """
-        return [s.name for s in self.specialists]
+        if not SETTINGS.adaptive_roster or case is None:
+            return [s.name for s in self.specialists]
+        roster = ["transaction_pattern", "identity_signal"]
+        net = case.network_data or {}
+        if net.get("shared_device_accounts") or net.get("rapid_fan_out") or net.get("mule_ring_cluster") or net.get("graph_nodes"):
+            roster.append("network_analysis")
+        if case.category in {"synthetic_identity", "money_muling"} or len(case.summary) > 20:
+            roster.append("historical_case")
+        return roster
 
     async def investigate(self, case: Case) -> Verdict:
         started = time.perf_counter()
@@ -400,9 +403,9 @@ class SupervisorAgent:
             "tool_call",
             {
                 "tool": "dispatch_specialists",
-                "arguments": {"roster": roster, "execution": "parallel_asyncio_gather"},
+                "arguments": {"roster": roster, "execution": "parallel_asyncio_gather", "adaptive": SETTINGS.adaptive_roster},
                 "result": {"dispatched": len(roster)},
-                "note": "All specialists run on every case; see SupervisorAgent.dispatch_roster.",
+                "note": "Dispatched specialists for investigation; see SupervisorAgent.dispatch_roster.",
             },
         )
 
@@ -410,26 +413,22 @@ class SupervisorAgent:
         # and they share nothing but the append-only log, so there is no
         # ordering constraint between them. At the default concurrency this is
         # four in-flight HTTP requests, not four sequential ones.
-        #
-        # The semaphore exists for free-tier providers that meter tokens per
-        # minute: four specialists starting at once can exhaust a minute's
-        # budget in one burst and take a 429 that has nothing to do with the
-        # case. Throttling changes wall-clock only - every specialist still runs
-        # on every case, and no finding is affected.
         gate = asyncio.Semaphore(SETTINGS.max_concurrent_specialists)
+
+        active_specialists = [s for s in self.specialists if s.name in roster]
 
         async def run_specialist(specialist: Any) -> Finding:
             async with gate:
                 return await specialist.run(case)
 
         findings: List[Finding] = list(
-            await asyncio.gather(*(run_specialist(s) for s in self.specialists))
+            await asyncio.gather(*(run_specialist(s) for s in active_specialists))
         )
 
         disagreement = detect_disagreement(findings, self.thresholds)
         fallback_risk, fallback_confidence = aggregate_scores(findings)
 
-        assessment, agg_error, agg_error_class = await self._assess(
+        assessment, agg_error, agg_error_class, sup_res = await self._assess(
             case, findings, disagreement, fallback_risk, fallback_confidence
         )
 
@@ -445,6 +444,10 @@ class SupervisorAgent:
         if agg_error:
             run_errors.append({"actor": self.name, "error_class": agg_error_class or "unknown_error", "error": agg_error})
 
+        total_in = sum(f.token_usage.get("input_tokens", 0) for f in findings) + (getattr(sup_res, "input_tokens", 0) if sup_res else 0)
+        total_out = sum(f.token_usage.get("output_tokens", 0) for f in findings) + (getattr(sup_res, "output_tokens", 0) if sup_res else 0)
+        total_cost = sum(f.cost_usd for f in findings) + (getattr(sup_res, "cost_usd", 0.0) if sup_res else 0.0)
+
         verdict = Verdict(
             case_id=case.case_id,
             decision=decision,
@@ -457,6 +460,8 @@ class SupervisorAgent:
             supervisor_backend=self.llm.run_mode,
             duration_ms=int((time.perf_counter() - started) * 1000),
             run_errors=run_errors,
+            token_usage={"input_tokens": total_in, "output_tokens": total_out},
+            cost_usd=round(total_cost, 6),
         )
 
         await self.log.append(
@@ -477,6 +482,8 @@ class SupervisorAgent:
                 "deterministic_fallback_risk": fallback_risk,
                 "run_mode": self.llm.run_mode,
                 "run_errors": run_errors,
+                "token_usage": verdict.token_usage,
+                "cost_usd": verdict.cost_usd,
                 "duration_ms": verdict.duration_ms,
             },
         )
@@ -507,7 +514,7 @@ class SupervisorAgent:
         disagreement: DisagreementReport,
         fallback_risk: float,
         fallback_confidence: float,
-    ) -> Tuple[Dict[str, Any], Optional[str], Optional[str]]:
+    ) -> Tuple[Dict[str, Any], Optional[str], Optional[str], Any]:
         """Run the supervisor's own tool-use loop over the panel's output."""
         by_name = {f.specialist: f for f in findings}
 
@@ -593,7 +600,7 @@ class SupervisorAgent:
                 "deterministic weighted aggregate with confidence capped so the case cannot be "
                 "auto-resolved on a degraded assessment. " + assessment["rationale"]
             )
-            return assessment, result.error, result.error_class
+            return assessment, result.error, result.error_class, result
 
         structured = result.structured
         action = str(structured.get("recommended_action") or "escalate")
@@ -607,6 +614,7 @@ class SupervisorAgent:
             },
             None,
             None,
+            result,
         )
 
     def _system_prompt(self) -> str:

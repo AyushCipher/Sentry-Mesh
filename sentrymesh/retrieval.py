@@ -257,8 +257,46 @@ class PgVectorIndex:
         out["retrieval_backend"] = self.name
         return out
 
+class DenseSemanticIndex:
+    """Dense semantic vector search using sentence-transformers when available."""
+
+    name = "dense_semantic"
+
+    def __init__(self, corpus: List[Dict[str, Any]], model_name: str = "all-MiniLM-L6-v2") -> None:
+        self.corpus = corpus
+        self.model_name = model_name
+        self._model = None
+        self._local: Optional[LocalCosineIndex] = None
+        try:
+            from sentence_transformers import SentenceTransformer
+
+            self._model = SentenceTransformer(model_name)
+            texts = [precedent_text(row) for row in corpus]
+            self._vectors = self._model.encode(texts, normalize_embeddings=True).tolist()
+        except Exception:
+            self._local = LocalCosineIndex(corpus)
+
+    async def search(self, query: str, k: int) -> List[Dict[str, Any]]:
+        if self._model is not None:
+            qv = self._model.encode([query], normalize_embeddings=True)[0].tolist()
+            scored = [
+                (cosine(qv, vec), row) for vec, row in zip(self._vectors, self.corpus)
+            ]
+            scored.sort(key=lambda pair: pair[0], reverse=True)
+            return [
+                {**row, "similarity": round(float(score), 4), "retrieval_backend": self.name}
+                for score, row in scored[:k]
+            ]
+        return await self._local.search(query, k) if self._local else []
+
+    async def get(self, case_id: str) -> Optional[Dict[str, Any]]:
+        for row in self.corpus:
+            if row.get("case_id") == case_id:
+                return {**row, "retrieval_backend": self.name}
+        return None
+
     async def close(self) -> None:
-        await self._pool.close()
+        return None
 
 
 def _vector_literal(vec: List[float]) -> str:
@@ -266,7 +304,7 @@ def _vector_literal(vec: List[float]) -> str:
 
 
 async def build_index(corpus: Optional[List[Dict[str, Any]]] = None) -> Any:
-    """Return a pgvector index if one is reachable, else the local index."""
+    """Return a pgvector index if one is reachable, else dense semantic or local index."""
     rows = corpus if corpus is not None else load_corpus()
     dsn = SETTINGS.database_url
     if dsn:
@@ -279,4 +317,11 @@ async def build_index(corpus: Optional[List[Dict[str, Any]]] = None) -> Any:
                 ) from exc
     elif SETTINGS.require_pgvector:
         raise RuntimeError("SENTRYMESH_REQUIRE_PGVECTOR=1 but DATABASE_URL is empty")
+
+    if SETTINGS.dense_embeddings:
+        try:
+            return DenseSemanticIndex(rows)
+        except Exception:
+            pass
     return LocalCosineIndex(rows)
+

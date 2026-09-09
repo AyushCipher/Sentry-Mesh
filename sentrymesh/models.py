@@ -83,6 +83,8 @@ class Finding:
     backend: str = ""
     error: Optional[str] = None
     error_class: Optional[str] = None
+    token_usage: Dict[str, int] = field(default_factory=dict)
+    cost_usd: float = 0.0
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -148,6 +150,8 @@ class Verdict:
     supervisor_backend: str = ""
     duration_ms: int = 0
     run_errors: List[Dict[str, str]] = field(default_factory=list)
+    token_usage: Dict[str, int] = field(default_factory=dict)
+    cost_usd: float = 0.0
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)

@@ -132,6 +132,13 @@ class Settings:
     # the sub-second the SDK defaults to.
     rate_limit_retries: int = field(default_factory=lambda: _env_int("SENTRYMESH_RATE_LIMIT_RETRIES", 3))
 
+    # Adaptive dynamic roster: when True, supervisor runs an initial fast triage
+    # to dispatch only necessary specialists instead of fanning out to all 4 unconditionally.
+    adaptive_roster: bool = field(default_factory=lambda: _env_bool("SENTRYMESH_ADAPTIVE_ROSTER", False))
+
+    # Dense semantic embeddings: when True, uses sentence-transformers / dense embeddings if available.
+    dense_embeddings: bool = field(default_factory=lambda: _env_bool("SENTRYMESH_DENSE_EMBEDDINGS", False))
+
     thresholds: DecisionThresholds = field(default_factory=DecisionThresholds.from_env)
 
     def resolved_backend(self) -> str:
@@ -183,3 +190,22 @@ SPECIALIST_NAMES = (
     "network_analysis",
     "historical_case",
 )
+
+MODEL_COST_PER_MILLION_TOKENS = {
+    "claude-haiku-4-5": {"input": 0.80, "output": 4.00},
+    "claude-sonnet-5": {"input": 3.00, "output": 15.00},
+    "llama-3.3-70b-versatile": {"input": 0.59, "output": 0.79},
+    "gemini-2.0-flash": {"input": 0.10, "output": 0.40},
+    "default": {"input": 1.00, "output": 3.00},
+}
+
+
+def estimate_cost_usd(model: str, input_tokens: int, output_tokens: int) -> float:
+    """Estimate USD cost based on token counts and model pricing."""
+    rates = MODEL_COST_PER_MILLION_TOKENS.get(
+        model,
+        MODEL_COST_PER_MILLION_TOKENS["default"],
+    )
+    cost = (input_tokens * rates["input"] + output_tokens * rates["output"]) / 1_000_000.0
+    return round(cost, 6)
+

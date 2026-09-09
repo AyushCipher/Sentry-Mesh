@@ -168,6 +168,8 @@ class SpecialistAgent(ABC):
             tool_calls=len(result.tool_calls),
             duration_ms=duration_ms,
             backend=result.backend,
+            token_usage={"input_tokens": getattr(result, "input_tokens", 0), "output_tokens": getattr(result, "output_tokens", 0)},
+            cost_usd=getattr(result, "cost_usd", 0.0),
         )
 
     # -- offline helper -----------------------------------------------------

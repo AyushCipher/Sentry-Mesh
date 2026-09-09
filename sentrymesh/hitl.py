@@ -230,6 +230,18 @@ class ReviewQueue:
             verdict_event = next((e for e in reversed(events) if e.event_type == "verdict"), None)
             opened = next((e for e in events if e.event_type == "case_opened"), None)
             payload = verdict_event.payload if verdict_event else {}
+            findings = [
+                {
+                    "specialist": e.actor,
+                    "risk_score": e.payload.get("risk_score", 0.0),
+                    "confidence": e.payload.get("confidence", 0.0),
+                    "reasoning_summary": e.payload.get("reasoning_summary", ""),
+                    "key_evidence": e.payload.get("key_evidence", []),
+                    "status": "ok" if not e.payload.get("error") else f"failed:{e.payload.get('error_class')}",
+                }
+                for e in events
+                if e.event_type == "finding"
+            ]
             snapshot = {
                 "case_id": case_id,
                 "summary": (opened.payload.get("summary") if opened else "") or "",
@@ -240,7 +252,7 @@ class ReviewQueue:
                 "escalation_reason": escalation.payload.get("reason", ""),
                 "rationale": payload.get("rationale", ""),
                 "disagreement": payload.get("disagreement", {}),
-                "findings": [],
+                "findings": findings,
                 "escalated_at": escalation.timestamp,
                 "status": "pending_review",
                 "restored_from_log": True,

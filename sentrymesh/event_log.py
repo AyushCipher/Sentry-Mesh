@@ -251,10 +251,8 @@ class EventLog:
 
     def __init__(self, backend: Any, downgrade_reason: Optional[str] = None) -> None:
         self._backend = backend
-        # Why we are not on Redis, when we are not on Redis. Surfaced through
-        # /health and the harness report so the downgrade is never silent - a
-        # run whose audit trail evaporates at process exit must say so.
         self.downgrade_reason = downgrade_reason
+        self._notifier = asyncio.Event()
 
     @property
     def backend(self) -> str:
@@ -319,7 +317,10 @@ class EventLog:
             },
             default=str,
         )
-        event.event_id = await self._backend.append(case_id, raw)
+        assigned_id = await self._backend.append(case_id, raw)
+        event.event_id = assigned_id
+        self._notifier.set()
+        self._notifier.clear()
         return event
 
     # -- reads -------------------------------------------------------------
@@ -363,14 +364,7 @@ class EventLog:
         poll_interval: float = 0.25,
         idle_timeout: float = 300.0,
     ) -> AsyncIterator[Event]:
-        """Yield new events for a case as they are appended.
-
-        Implemented as a poll over ``get_case_trace(after=...)`` rather than
-        ``XREAD BLOCK``.  The per-case index is a list, so a blocking read would
-        have to tail the *global* stream and filter, which costs more code than
-        it saves at this event volume.  Named as a known limitation in the
-        README; swapping in ``XREAD BLOCK`` is a change local to this method.
-        """
+        """Yield new events for a case as they are appended with immediate event notification."""
         cursor = after
         idle = 0.0
         while idle < idle_timeout:
@@ -381,7 +375,10 @@ class EventLog:
                     cursor = event.event_id
                     yield event
             else:
-                await asyncio.sleep(poll_interval)
+                try:
+                    await asyncio.wait_for(self._notifier.wait(), timeout=poll_interval)
+                except asyncio.TimeoutError:
+                    pass
                 idle += poll_interval
 
 

@@ -1,0 +1,30 @@
+2. Commands to start it
+
+cd "c:/Users/ayush/OneDrive/Desktop/TagPractice/Web-Development-Learnings/3. Main Projects/17. Agent Orchestration Fraud/sentrymesh"
+
+# --- one-time, already done on this machine ---
+python -m pip install -r requirements.txt
+cd frontend && npm install && cd ..
+Run it (two terminals):
+
+
+# Terminal 1 — API on :8000
+uvicorn backend.main:app --reload
+
+# Terminal 2 — dashboard on :5173
+cd frontend && npm run dev
+Then open http://localhost:5173
+
+Other useful commands:
+
+
+python -m pytest tests/ -q          # 46 tests, ~2s, never touches your API key
+python eval/run_harness.py          # full eval (uses Groq — see quota note below)
+SENTRYMESH_LLM_BACKEND=offline python eval/run_harness.py   # free, instant, no quota
+python eval/case_bank/build_cases.py                        # regenerate case bank
+docker compose up --build           # whole stack incl. Redis + pgvector
+Redis is already running on your machine, so the event log is live. Nothing else needed.
+
+Q. You said "leaving that testing with API key everything is over now." That's not right, and it's worth being clear about: the project isn't blocked or broken. The live run is an upgrade, not a missing piece. 
+ANS - If you showed this to someone tomorrow, the honest framing is:
+"It runs end-to-end. The published eval numbers are from the deterministic mode, which the report states up front — the LLM path is wired and verified on individual cases, I just haven't run the full eval on it yet."

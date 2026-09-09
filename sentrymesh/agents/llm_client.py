@@ -48,7 +48,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Sequence, Tuple
 
-from sentrymesh.config import SETTINGS
+from sentrymesh.config import SETTINGS, estimate_cost_usd
 
 ToolExecutor = Callable[[str, Dict[str, Any]], Awaitable[Dict[str, Any]]]
 OfflineSolver = Callable[[List["ToolCallRecord"]], Dict[str, Any]]
@@ -151,6 +151,7 @@ class LLMRunResult:
     narration: str = ""
     input_tokens: int = 0
     output_tokens: int = 0
+    cost_usd: float = 0.0
     error: Optional[str] = None
     error_class: Optional[str] = None
 
@@ -317,6 +318,7 @@ class LLMClient:
                 if block.name == final_tool:
                     result.structured = dict(block.input or {})
                     result.narration = "\n".join(narration)
+                    result.cost_usd = estimate_cost_usd(self.model, result.input_tokens, result.output_tokens)
                     return result
 
             messages.append({"role": "assistant", "content": response.content})
@@ -326,11 +328,15 @@ class LLMClient:
                 result.tool_calls.append(record)
                 if on_tool_call:
                     await on_tool_call(record)
+                payload = record.result if record.error is None else {"error": record.error}
+                content_str = json.dumps(payload, default=str)
+                if len(content_str) > 2500:
+                    content_str = content_str[:2500] + "... (truncated for context efficiency)"
                 tool_results.append(
                     {
                         "type": "tool_result",
                         "tool_use_id": block.id,
-                        "content": json.dumps(record.result if record.error is None else {"error": record.error}, default=str),
+                        "content": content_str,
                         "is_error": record.error is not None,
                     }
                 )
@@ -339,6 +345,7 @@ class LLMClient:
         result.error = f"exceeded {self.max_turns} turns without calling {final_tool}"
         result.error_class = ERR_PROTOCOL
         result.narration = "\n".join(narration)
+        result.cost_usd = estimate_cost_usd(self.model, result.input_tokens, result.output_tokens)
         return result
 
     # -------------------------------------------------- openai-compatible
@@ -447,6 +454,7 @@ class LLMClient:
                         result.error = f"{final_tool} arguments were not valid JSON: {exc}"
                         result.error_class = ERR_PROTOCOL
                     result.narration = "\n".join(narration)
+                    result.cost_usd = estimate_cost_usd(self.model, result.input_tokens, result.output_tokens)
                     return result
 
             messages.append(
@@ -473,20 +481,22 @@ class LLMClient:
                 result.tool_calls.append(record)
                 if on_tool_call:
                     await on_tool_call(record)
+                payload = record.result if record.error is None else {"error": record.error}
+                content_str = json.dumps(payload, default=str)
+                if len(content_str) > 2500:
+                    content_str = content_str[:2500] + "... (truncated for context efficiency)"
                 messages.append(
                     {
                         "role": "tool",
                         "tool_call_id": call.id,
-                        "content": json.dumps(
-                            record.result if record.error is None else {"error": record.error},
-                            default=str,
-                        ),
+                        "content": content_str,
                     }
                 )
 
         result.error = f"exceeded {self.max_turns} turns without calling {final_tool}"
         result.error_class = ERR_PROTOCOL
         result.narration = "\n".join(narration)
+        result.cost_usd = estimate_cost_usd(self.model, result.input_tokens, result.output_tokens)
         return result
 
     # --------------------------------------------------------------- offline
