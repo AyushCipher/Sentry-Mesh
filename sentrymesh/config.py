@@ -46,6 +46,18 @@ def _env_bool(name: str, default: bool = False) -> bool:
     return raw in {"1", "true", "yes", "on"}
 
 
+def default_require_redis() -> bool:
+    """Fail closed: Redis is required unless explicitly relaxed.
+
+    ``SENTRYMESH_REQUIRE_REDIS`` wins when set. Otherwise the default is
+    required, and only the dev flag ``SENTRYMESH_DEV=1`` allows the silent
+    in-memory fallback (a downgrade that loses the audit log on restart).
+    """
+    if os.getenv("SENTRYMESH_REQUIRE_REDIS", "").strip():
+        return _env_bool("SENTRYMESH_REQUIRE_REDIS")
+    return not _env_bool("SENTRYMESH_DEV")
+
+
 @dataclass(frozen=True)
 class DecisionThresholds:
     """Supervisor decision boundaries.
@@ -64,10 +76,11 @@ class DecisionThresholds:
     min_confidence: float = 0.70
 
     # --- disagreement detection -------------------------------------------
-    # Largest pairwise gap between any two *contributing* specialist scores.
-    max_pairwise_spread: float = 40.0
-    # Population standard deviation across the contributing risk scores.
-    max_risk_stdev: float = 22.0
+    # NOTE: raw pairwise spread / risk stdev are computed and reported as trace
+    # diagnostics but deliberately have NO threshold: the specialists score
+    # orthogonal categories, and a spread rule escalated 21 of 23 seeded cases
+    # (see `detect_disagreement`). The former `max_pairwise_spread` and
+    # `max_risk_stdev` settings were dead config and have been removed.
     # A specialist reporting confidence below this has ABSTAINED: it is telling
     # the supervisor its category carries no information on this case, which is
     # a different thing from contradicting the panel. Abstentions are excluded
@@ -81,12 +94,24 @@ class DecisionThresholds:
     split_midpoint: float = 50.0
     split_margin: float = 15.0
 
+    # --- bounding of the supervisor LLM's numbers ---------------------------
+    # The model's combined_risk is never allowed below
+    # max(deterministic fallback risk, k * loudest confident specialist risk).
+    risk_floor_factor: float = 0.9
+    # A specialist counts as "confident" for the floor above at this confidence.
+    floor_confidence: float = 0.70
+    # If the model's risk differs from the deterministic fallback by more than
+    # this many points, the model is not trusted and the case is escalated.
+    max_model_risk_divergence: float = 30.0
+
     @classmethod
     def from_env(cls) -> "DecisionThresholds":
         return cls(
             auto_decline_risk=_env_float("SENTRYMESH_AUTO_DECLINE_RISK", 70.0),
             auto_approve_risk=_env_float("SENTRYMESH_AUTO_APPROVE_RISK", 35.0),
             min_confidence=_env_float("SENTRYMESH_MIN_CONFIDENCE", 0.70),
+            risk_floor_factor=_env_float("SENTRYMESH_RISK_FLOOR_FACTOR", 0.9),
+            max_model_risk_divergence=_env_float("SENTRYMESH_MAX_MODEL_RISK_DIVERGENCE", 30.0),
         )
 
 
@@ -98,7 +123,10 @@ class Settings:
     # timeout on the IPv6 attempt before falling back. That reads as "Redis is
     # down" and silently downgrades the event log to in-memory.
     redis_url: str = field(default_factory=lambda: os.getenv("REDIS_URL", "redis://127.0.0.1:6379/0"))
-    require_redis: bool = field(default_factory=lambda: _env_bool("SENTRYMESH_REQUIRE_REDIS"))
+    require_redis: bool = field(default_factory=default_require_redis)
+
+    # Optional cap on the shared stream length (XADD MAXLEN ~ n). 0 = unbounded.
+    stream_maxlen: int = field(default_factory=lambda: max(0, _env_int("SENTRYMESH_STREAM_MAXLEN", 0)))
 
     database_url: str = field(default_factory=lambda: os.getenv("DATABASE_URL", ""))
     require_pgvector: bool = field(default_factory=lambda: _env_bool("SENTRYMESH_REQUIRE_PGVECTOR"))

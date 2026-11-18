@@ -1,0 +1,1654 @@
+{
+  "generated_at": "2026-10-31T04:19:26+00:00",
+  "note": "All numbers are computed from the saved raw files in eval/heldout/results/. SYNTHETIC data authored by Claude.",
+  "heldout_live": {
+    "repeats_on_disk": {
+      "1": 36
+    },
+    "unique_cases": 36,
+    "rows_with_any_run_error": 0,
+    "error_classes": {},
+    "pooled": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.7143,
+        "ci95": [
+          0.5217,
+          0.8947
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.8333,
+        "ci95": [
+          0.6857,
+          0.9444
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.4,
+        "ci95": [
+          0.1538,
+          0.6667
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate": {
+        "point": 0.3611,
+        "ci95": [
+          0.1944,
+          0.5
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1994
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.2333,
+        "ci95": [
+          0.0938,
+          0.3889
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.6389,
+        "ci95": [
+          0.5,
+          0.8056
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 36,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "per_repeat_point": {
+      "1": {
+        "precision_auto_only": 1.0,
+        "recall_auto_only": 1.0,
+        "f1_auto_only": 1.0,
+        "fpr_auto_only": 0.0,
+        "precision_escalation_as_flag": 0.7143,
+        "recall_escalation_as_flag": 1.0,
+        "f1_escalation_as_flag": 0.8333,
+        "fpr_escalation_as_flag": 0.4,
+        "escalation_rate": 0.3611,
+        "escalation_rate_on_ambiguous": 1.0,
+        "escalation_rate_on_decisive": 0.2333,
+        "auto_resolve_rate": 0.6389,
+        "auto_resolve_accuracy_all": 1.0,
+        "auto_resolve_accuracy_decisive_only": 1.0,
+        "fraud_auto_approved_rate": 0.0,
+        "n_rows": 36
+      }
+    },
+    "clean_rows_only": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.7143,
+        "ci95": [
+          0.5217,
+          0.8947
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.8333,
+        "ci95": [
+          0.6857,
+          0.9444
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.4,
+        "ci95": [
+          0.1538,
+          0.6667
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate": {
+        "point": 0.3611,
+        "ci95": [
+          0.1944,
+          0.5
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1994
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.2333,
+        "ci95": [
+          0.0938,
+          0.3889
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.6389,
+        "ci95": [
+          0.5,
+          0.8056
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 36,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "adversarial": {
+      "rows": 6,
+      "injection_succeeded_rows": 0,
+      "decisions": {
+        "auto_approve": 2,
+        "auto_decline": 1,
+        "escalate": 3
+      }
+    },
+    "decision_stability_across_repeats": null,
+    "decision_counts_by_truth": {
+      "fraud": {
+        "auto_decline": 14,
+        "escalate": 1
+      },
+      "legitimate": {
+        "auto_approve": 9,
+        "escalate": 6
+      },
+      "ambiguous": {
+        "escalate": 6
+      }
+    },
+    "split_dev": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1996
+      },
+      "recall_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1996
+      },
+      "f1_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1996
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 1937
+      },
+      "precision_escalation_as_flag": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1996
+      },
+      "recall_escalation_as_flag": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1996
+      },
+      "f1_escalation_as_flag": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1996
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 1937
+      },
+      "escalation_rate": {
+        "point": 0.3333,
+        "ci95": [
+          0.0833,
+          0.5833
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1986
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.6667,
+        "ci95": [
+          0.4167,
+          0.9167
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 1996
+      },
+      "n_rows": {
+        "point": 12,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "split_test": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 1998
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.625,
+        "ci95": [
+          0.3846,
+          0.8571
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.7692,
+        "ci95": [
+          0.5555,
+          0.9231
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.5,
+        "ci95": [
+          0.2,
+          0.8
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate": {
+        "point": 0.375,
+        "ci95": [
+          0.2083,
+          0.5833
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1756
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.3182,
+        "ci95": [
+          0.1364,
+          0.5217
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.625,
+        "ci95": [
+          0.4167,
+          0.7917
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 24,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "run_manifest": {
+      "model": "models/gemini-flash-lite-latest",
+      "provider_host": "openai_compat:generativelanguage.googleapis.com",
+      "started_at": "2026-10-31T03:54:46+00:00",
+      "finished_at": "2026-10-31T04:17:12+00:00",
+      "repeats_requested": 3,
+      "runs": [
+        {
+          "repeat": 1,
+          "file": "heldout_live_rep1.jsonl",
+          "cases_in_set": 121,
+          "completed_this_invocation": 33,
+          "on_disk_total": 36,
+          "not_run_or_aborted_due_to_budget": 85,
+          "stop_reason": []
+        }
+      ],
+      "budget": {
+        "live_calls": 747,
+        "cache_hits": 0,
+        "retries": 279,
+        "failed_calls": 297,
+        "input_tokens": 728222,
+        "output_tokens_incl_reasoning": 43462,
+        "estimated_cost_usd": 0.0902,
+        "assumed_price_per_million": {
+          "input": 0.1,
+          "output": 0.4
+        },
+        "caps": {
+          "max_calls": 6000,
+          "max_cost_usd": 2.0
+        }
+      }
+    }
+  },
+  "heldout_offline": {
+    "repeats_on_disk": {
+      "1": 121
+    },
+    "unique_cases": 121,
+    "rows_with_any_run_error": 0,
+    "error_classes": {},
+    "pooled": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_auto_only": {
+        "point": 0.4706,
+        "ci95": [
+          0.2308,
+          0.7143
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_auto_only": {
+        "point": 0.64,
+        "ci95": [
+          0.375,
+          0.8333
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.8298,
+        "ci95": [
+          0.7091,
+          0.9333
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 0.8125,
+        "ci95": [
+          0.6939,
+          0.9231
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.8211,
+        "ci95": [
+          0.725,
+          0.8991
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.1569,
+        "ci95": [
+          0.0612,
+          0.2667
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate": {
+        "point": 0.4298,
+        "ci95": [
+          0.3388,
+          0.5207
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 0.5909,
+        "ci95": [
+          0.3636,
+          0.8
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.3939,
+        "ci95": [
+          0.2991,
+          0.4946
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.5702,
+        "ci95": [
+          0.4793,
+          0.6612
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 0.7391,
+        "ci95": [
+          0.6364,
+          0.8406
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 0.85,
+        "ci95": [
+          0.7576,
+          0.9385
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.1875,
+        "ci95": [
+          0.0769,
+          0.3061
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 121,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "per_repeat_point": {
+      "1": {
+        "precision_auto_only": 1.0,
+        "recall_auto_only": 0.4706,
+        "f1_auto_only": 0.64,
+        "fpr_auto_only": 0.0,
+        "precision_escalation_as_flag": 0.8298,
+        "recall_escalation_as_flag": 0.8125,
+        "f1_escalation_as_flag": 0.8211,
+        "fpr_escalation_as_flag": 0.1569,
+        "escalation_rate": 0.4298,
+        "escalation_rate_on_ambiguous": 0.5909,
+        "escalation_rate_on_decisive": 0.3939,
+        "auto_resolve_rate": 0.5702,
+        "auto_resolve_accuracy_all": 0.7391,
+        "auto_resolve_accuracy_decisive_only": 0.85,
+        "fraud_auto_approved_rate": 0.1875,
+        "n_rows": 121
+      }
+    },
+    "clean_rows_only": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_auto_only": {
+        "point": 0.4706,
+        "ci95": [
+          0.2308,
+          0.7143
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_auto_only": {
+        "point": 0.64,
+        "ci95": [
+          0.375,
+          0.8333
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.8298,
+        "ci95": [
+          0.7091,
+          0.9333
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 0.8125,
+        "ci95": [
+          0.6939,
+          0.9231
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.8211,
+        "ci95": [
+          0.725,
+          0.8991
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.1569,
+        "ci95": [
+          0.0612,
+          0.2667
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate": {
+        "point": 0.4298,
+        "ci95": [
+          0.3388,
+          0.5207
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 0.5909,
+        "ci95": [
+          0.3636,
+          0.8
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.3939,
+        "ci95": [
+          0.2991,
+          0.4946
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.5702,
+        "ci95": [
+          0.4793,
+          0.6612
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 0.7391,
+        "ci95": [
+          0.6364,
+          0.8406
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 0.85,
+        "ci95": [
+          0.7576,
+          0.9385
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.1875,
+        "ci95": [
+          0.0769,
+          0.3061
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 121,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "adversarial": {
+      "rows": 18,
+      "injection_succeeded_rows": 2,
+      "decisions": {
+        "auto_approve": 10,
+        "auto_decline": 0,
+        "escalate": 8
+      }
+    },
+    "decision_stability_across_repeats": null,
+    "decision_counts_by_truth": {
+      "fraud": {
+        "auto_approve": 9,
+        "auto_decline": 8,
+        "escalate": 31
+      },
+      "legitimate": {
+        "auto_approve": 43,
+        "escalate": 8
+      },
+      "ambiguous": {
+        "auto_approve": 9,
+        "escalate": 13
+      }
+    },
+    "matched_to_live_cases": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1927
+      },
+      "recall_auto_only": {
+        "point": 0.75,
+        "ci95": [
+          0.0,
+          1.0
+        ],
+        "valid_boot_samples": 1978
+      },
+      "f1_auto_only": {
+        "point": 0.8571,
+        "ci95": [
+          0.5,
+          1.0
+        ],
+        "valid_boot_samples": 1927
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.9333,
+        "ci95": [
+          0.7692,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 0.9333,
+        "ci95": [
+          0.7857,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.9333,
+        "ci95": [
+          0.8182,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.0667,
+        "ci95": [
+          0.0,
+          0.2143
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate": {
+        "point": 0.4444,
+        "ci95": [
+          0.2778,
+          0.6111
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 0.6667,
+        "ci95": [
+          0.2,
+          1.0
+        ],
+        "valid_boot_samples": 1994
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.4,
+        "ci95": [
+          0.2258,
+          0.5769
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.5556,
+        "ci95": [
+          0.3889,
+          0.7222
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 0.85,
+        "ci95": [
+          0.6818,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 0.9444,
+        "ci95": [
+          0.8235,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.0667,
+        "ci95": [
+          0.0,
+          0.2143
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 36,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "matched_to_live_case_count": 36,
+    "split_dev": {
+      "precision_auto_only": {
+        "point": null,
+        "ci95": null,
+        "valid_boot_samples": 0
+      },
+      "recall_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 1739
+      },
+      "f1_auto_only": {
+        "point": null,
+        "ci95": null,
+        "valid_boot_samples": 0
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.9231,
+        "ci95": [
+          0.75,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 0.8571,
+        "ci95": [
+          0.6667,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.8889,
+        "ci95": [
+          0.75,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.0667,
+        "ci95": [
+          0.0,
+          0.2222
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate": {
+        "point": 0.4444,
+        "ci95": [
+          0.2778,
+          0.6111
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 0.4286,
+        "ci95": [
+          0.0,
+          0.8
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.4483,
+        "ci95": [
+          0.2692,
+          0.6296
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.5556,
+        "ci95": [
+          0.3889,
+          0.7222
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 0.7,
+        "ci95": [
+          0.5,
+          0.8889
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 0.875,
+        "ci95": [
+          0.6923,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.1429,
+        "ci95": [
+          0.0,
+          0.3333
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 36,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "split_test": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1999
+      },
+      "recall_auto_only": {
+        "point": 0.5333,
+        "ci95": [
+          0.2727,
+          0.8
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_auto_only": {
+        "point": 0.6956,
+        "ci95": [
+          0.4285,
+          0.8889
+        ],
+        "valid_boot_samples": 1999
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.7941,
+        "ci95": [
+          0.6486,
+          0.9211
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 0.7941,
+        "ci95": [
+          0.6486,
+          0.9211
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.7941,
+        "ci95": [
+          0.6769,
+          0.8889
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.1944,
+        "ci95": [
+          0.0714,
+          0.3333
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate": {
+        "point": 0.4235,
+        "ci95": [
+          0.3176,
+          0.5294
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 0.6667,
+        "ci95": [
+          0.4118,
+          0.9
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.3714,
+        "ci95": [
+          0.2576,
+          0.4848
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.5765,
+        "ci95": [
+          0.4706,
+          0.6824
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 0.7551,
+        "ci95": [
+          0.6304,
+          0.8654
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 0.8409,
+        "ci95": [
+          0.7317,
+          0.9423
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.2059,
+        "ci95": [
+          0.0789,
+          0.3514
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 85,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "run_manifest": {
+      "model": "offline_deterministic",
+      "provider_host": "none",
+      "started_at": "2026-10-31T03:30:34+00:00",
+      "finished_at": "2026-10-31T03:30:38+00:00",
+      "repeats_requested": 1,
+      "runs": [
+        {
+          "repeat": 1,
+          "file": "heldout_offline_rep1.jsonl",
+          "cases_in_set": 121,
+          "completed_this_invocation": 121,
+          "on_disk_total": 121,
+          "not_run_or_aborted_due_to_budget": 0
+        }
+      ],
+      "budget": {
+        "live_calls": 0,
+        "cache_hits": 0,
+        "retries": 0,
+        "failed_calls": 0,
+        "input_tokens": 0,
+        "output_tokens_incl_reasoning": 0,
+        "estimated_cost_usd": 0.0,
+        "assumed_price_per_million": {
+          "input": 1.0,
+          "output": 4.0
+        },
+        "caps": {
+          "max_calls": 6000,
+          "max_cost_usd": 2.5
+        }
+      }
+    }
+  },
+  "bank_offline": {
+    "repeats_on_disk": {
+      "1": 23
+    },
+    "unique_cases": 23,
+    "rows_with_any_run_error": 0,
+    "error_classes": {},
+    "pooled": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1991
+      },
+      "recall_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1991
+      },
+      "f1_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1991
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 1976
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.8235,
+        "ci95": [
+          0.625,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.9032,
+        "ci95": [
+          0.7692,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.4286,
+        "ci95": [
+          0.0,
+          0.8
+        ],
+        "valid_boot_samples": 1999
+      },
+      "escalation_rate": {
+        "point": 0.6087,
+        "ci95": [
+          0.3913,
+          0.7826
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1750
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.5714,
+        "ci95": [
+          0.35,
+          0.7826
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.3913,
+        "ci95": [
+          0.2174,
+          0.6087
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 23,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "per_repeat_point": {
+      "1": {
+        "precision_auto_only": 1.0,
+        "recall_auto_only": 1.0,
+        "f1_auto_only": 1.0,
+        "fpr_auto_only": 0.0,
+        "precision_escalation_as_flag": 0.8235,
+        "recall_escalation_as_flag": 1.0,
+        "f1_escalation_as_flag": 0.9032,
+        "fpr_escalation_as_flag": 0.4286,
+        "escalation_rate": 0.6087,
+        "escalation_rate_on_ambiguous": 1.0,
+        "escalation_rate_on_decisive": 0.5714,
+        "auto_resolve_rate": 0.3913,
+        "auto_resolve_accuracy_all": 1.0,
+        "auto_resolve_accuracy_decisive_only": 1.0,
+        "fraud_auto_approved_rate": 0.0,
+        "n_rows": 23
+      }
+    },
+    "clean_rows_only": {
+      "precision_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1991
+      },
+      "recall_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1991
+      },
+      "f1_auto_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1991
+      },
+      "fpr_auto_only": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 1976
+      },
+      "precision_escalation_as_flag": {
+        "point": 0.8235,
+        "ci95": [
+          0.625,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "recall_escalation_as_flag": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "f1_escalation_as_flag": {
+        "point": 0.9032,
+        "ci95": [
+          0.7692,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fpr_escalation_as_flag": {
+        "point": 0.4286,
+        "ci95": [
+          0.0,
+          0.8
+        ],
+        "valid_boot_samples": 1999
+      },
+      "escalation_rate": {
+        "point": 0.6087,
+        "ci95": [
+          0.3913,
+          0.7826
+        ],
+        "valid_boot_samples": 2000
+      },
+      "escalation_rate_on_ambiguous": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 1750
+      },
+      "escalation_rate_on_decisive": {
+        "point": 0.5714,
+        "ci95": [
+          0.35,
+          0.7826
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_rate": {
+        "point": 0.3913,
+        "ci95": [
+          0.2174,
+          0.6087
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_all": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "auto_resolve_accuracy_decisive_only": {
+        "point": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "fraud_auto_approved_rate": {
+        "point": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "valid_boot_samples": 2000
+      },
+      "n_rows": {
+        "point": 23,
+        "ci95": null,
+        "valid_boot_samples": 2000
+      }
+    },
+    "adversarial": {
+      "rows": 0,
+      "injection_succeeded_rows": 0,
+      "decisions": {
+        "auto_approve": 0,
+        "auto_decline": 0,
+        "escalate": 0
+      }
+    },
+    "decision_stability_across_repeats": null,
+    "decision_counts_by_truth": {
+      "fraud": {
+        "auto_decline": 5,
+        "escalate": 9
+      },
+      "legitimate": {
+        "auto_approve": 4,
+        "escalate": 3
+      },
+      "ambiguous": {
+        "escalate": 2
+      }
+    },
+    "run_manifest": {
+      "model": "offline_deterministic",
+      "provider_host": "none",
+      "started_at": "2026-10-31T03:30:48+00:00",
+      "finished_at": "2026-10-31T03:30:49+00:00",
+      "repeats_requested": 1,
+      "runs": [
+        {
+          "repeat": 1,
+          "file": "bank_offline_rep1.jsonl",
+          "cases_in_set": 23,
+          "completed_this_invocation": 23,
+          "on_disk_total": 23,
+          "not_run_or_aborted_due_to_budget": 0
+        }
+      ],
+      "budget": {
+        "live_calls": 0,
+        "cache_hits": 0,
+        "retries": 0,
+        "failed_calls": 0,
+        "input_tokens": 0,
+        "output_tokens_incl_reasoning": 0,
+        "estimated_cost_usd": 0.0,
+        "assumed_price_per_million": {
+          "input": 1.0,
+          "output": 4.0
+        },
+        "caps": {
+          "max_calls": 6000,
+          "max_cost_usd": 2.5
+        }
+      }
+    }
+  }
+}

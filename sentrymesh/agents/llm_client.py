@@ -49,6 +49,7 @@ from dataclasses import dataclass, field
 from typing import Any, Awaitable, Callable, Dict, List, Optional, Sequence, Tuple
 
 from sentrymesh.config import SETTINGS, estimate_cost_usd
+from sentrymesh.safety import fence_untrusted
 
 ToolExecutor = Callable[[str, Dict[str, Any]], Awaitable[Dict[str, Any]]]
 OfflineSolver = Callable[[List["ToolCallRecord"]], Dict[str, Any]]
@@ -332,6 +333,7 @@ class LLMClient:
                 content_str = json.dumps(payload, default=str)
                 if len(content_str) > 2500:
                     content_str = content_str[:2500] + "... (truncated for context efficiency)"
+                content_str = fence_untrusted(content_str)
                 tool_results.append(
                     {
                         "type": "tool_result",
@@ -485,6 +487,7 @@ class LLMClient:
                 content_str = json.dumps(payload, default=str)
                 if len(content_str) > 2500:
                     content_str = content_str[:2500] + "... (truncated for context efficiency)"
+                content_str = fence_untrusted(content_str)
                 messages.append(
                     {
                         "role": "tool",

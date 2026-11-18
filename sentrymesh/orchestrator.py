@@ -18,7 +18,7 @@ from sentrymesh.agents.supervisor_agent import SupervisorAgent
 from sentrymesh.config import SETTINGS
 from sentrymesh.event_log import Event, EventLog
 from sentrymesh.hitl import ReviewQueue
-from sentrymesh.models import Case, HumanDecision, Verdict
+from sentrymesh.models import Case, Finding, HumanDecision, Verdict
 from sentrymesh.retrieval import build_index
 
 
@@ -54,6 +54,7 @@ class SentryMesh:
             "event_log_backend": self.log.backend,
             "event_log_downgrade_reason": self.log.downgrade_reason,
             "review_queue_backend": self.queue.backend,
+            "review_queue_downgrade_reason": self.queue.downgrade_reason,
             "retrieval_backend": getattr(self.precedent_index, "name", "unknown"),
             "llm_backend": self.llm.backend,
             "run_mode": self.llm.run_mode,
@@ -142,7 +143,84 @@ class SentryMesh:
             else:
                 finding = await specialist.run(case)
                 result["detail_finding"] = finding.to_dict()
+                result["reaggregated"] = await self._reaggregate(decision.case_id, snapshot, finding)
         return result
+
+    async def _reaggregate(self, case_id: str, snapshot: Dict[str, Any], new_finding: Finding) -> Dict[str, Any]:
+        """Swap the re-run specialist's finding into the panel and re-derive the verdict.
+
+        Deterministic (no LLM call). Writes a ``verdict`` event flagged
+        ``reaggregated`` so the trace shows the refreshed numbers, and updates
+        the queued snapshot - but never closes the case: only a human does.
+        """
+        panel: List[Finding] = []
+        replaced = False
+        for row in snapshot.get("findings", []):
+            if row.get("specialist") == new_finding.specialist:
+                panel.append(new_finding)
+                replaced = True
+            elif str(row.get("status", "ok")).startswith("failed:"):
+                panel.append(Finding.failed(row["specialist"], "failed in original run", row["status"][7:]))
+            else:
+                panel.append(
+                    Finding(
+                        specialist=row["specialist"],
+                        risk_score=float(row.get("risk_score", 0.0)),
+                        confidence=float(row.get("confidence", 0.0)),
+                        reasoning_summary=row.get("reasoning_summary", ""),
+                        key_evidence=list(row.get("key_evidence", [])),
+                    )
+                )
+        if not replaced:
+            panel.append(new_finding)
+
+        agg = self.supervisor.reaggregate(panel)
+        await self.log.append(
+            case_id,
+            "supervisor",
+            "verdict",
+            {
+                "decision": agg["decision"],
+                "combined_risk": agg["combined_risk"],
+                "confidence": agg["confidence"],
+                "rationale": agg["rationale"],
+                "disagreement": agg["disagreement"].to_dict(),
+                "specialist_scores": {f.specialist: f.risk_score for f in panel},
+                "specialist_confidence": {f.specialist: f.confidence for f in panel},
+                "escalation_reason": agg["escalation_reason"],
+                "reaggregated": True,
+                "reaggregated_after": new_finding.specialist,
+                "run_mode": "offline_deterministic",
+            },
+        )
+        updated = {
+            **snapshot,
+            "decision": agg["decision"],
+            "combined_risk": agg["combined_risk"],
+            "confidence": agg["confidence"],
+            "rationale": agg["rationale"],
+            "escalation_reason": agg["escalation_reason"],
+            "disagreement": agg["disagreement"].to_dict(),
+            "findings": [
+                {
+                    "specialist": f.specialist,
+                    "risk_score": f.risk_score,
+                    "confidence": f.confidence,
+                    "reasoning_summary": f.reasoning_summary,
+                    "key_evidence": f.key_evidence,
+                    "status": "ok" if f.ok else f"failed:{f.error_class}",
+                }
+                for f in panel
+            ],
+            "reaggregated": True,
+        }
+        await self.queue.update_snapshot(case_id, updated)
+        return {
+            "decision": agg["decision"],
+            "combined_risk": agg["combined_risk"],
+            "confidence": agg["confidence"],
+            "escalation_reason": agg["escalation_reason"],
+        }
 
     @staticmethod
     def _case_from_snapshot(case_id: str, snapshot: Optional[Dict[str, Any]]) -> Optional[Case]:

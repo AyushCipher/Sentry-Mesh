@@ -40,7 +40,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from typing import Any, AsyncIterator, Dict, List, Optional, Tuple
 
-from sentrymesh.config import CASE_INDEX_KEY, SETTINGS, STREAM_KEY
+from sentrymesh.config import CASE_INDEX_KEY, SETTINGS, SPECIALIST_NAMES, STREAM_KEY
 
 # The five event types the architecture is specified around, plus two
 # operational types that keep the log honest: a case-open marker so a trace has
@@ -58,7 +58,12 @@ ALLOWED_EVENT_TYPES = frozenset(
     }
 )
 
-ALLOWED_ACTOR_PREFIXES = ("supervisor", "human_reviewer", "harness")
+# Every event has an accountable author, and the author must be a known kind of
+# actor: the supervisor, a human reviewer, the eval harness, or a specialist
+# agent. An unrecognised actor string is rejected rather than logged.
+ALLOWED_ACTOR_PREFIXES = ("supervisor", "human_reviewer", "harness", "specialist", *SPECIALIST_NAMES)
+
+IDEMPOTENCY_KEY = "sentrymesh:idem:{key}"
 
 
 def _utcnow() -> str:
@@ -99,7 +104,9 @@ class _InMemoryStreamBackend:
 
     name = "in_memory"
 
-    def __init__(self) -> None:
+    def __init__(self, maxlen: int = 0) -> None:
+        self._maxlen = maxlen
+        self._idem: Dict[str, str] = {}
         self._stream: List[Tuple[str, str]] = []
         self._index: Dict[str, List[str]] = {}
         self._last_ms = 0
@@ -114,12 +121,24 @@ class _InMemoryStreamBackend:
             self._last_ms, self._last_seq = ms, 0
         return f"{self._last_ms}-{self._last_seq}"
 
-    async def append(self, case_id: str, raw: str) -> str:
+    async def append(self, case_id: str, raw: str, idem_key: Optional[str] = None) -> Tuple[str, bool]:
+        """Returns ``(event_id, created)``; ``created`` is False for a replayed idem_key."""
         async with self._lock:
+            if idem_key is not None and idem_key in self._idem:
+                return self._idem[idem_key], False
             event_id = self._next_id()
             self._stream.append((event_id, raw))
             self._index.setdefault(case_id, []).append(event_id)
-            return event_id
+            if idem_key is not None:
+                self._idem[idem_key] = event_id
+            if self._maxlen and len(self._stream) > self._maxlen:
+                dropped = {eid for eid, _ in self._stream[: -self._maxlen]}
+                self._stream = self._stream[-self._maxlen :]
+                for cid in list(self._index):
+                    self._index[cid] = [e for e in self._index[cid] if e not in dropped]
+                    if not self._index[cid]:
+                        del self._index[cid]
+            return event_id, True
 
     async def read_case(self, case_id: str, after: Optional[str]) -> List[Tuple[str, str]]:
         ids = set(self._index.get(case_id, []))
@@ -158,21 +177,40 @@ class _RedisStreamBackend:
     # Append and index-update in one atomic server-side call.  Doing this in a
     # MULTI/EXEC is not possible because the RPUSH needs the ID that XADD only
     # returns at EXEC time; a Lua script sees it immediately.
+    #
+    # KEYS[3] is an optional idempotency key (empty ARGV[2] = none): when it is
+    # already set the existing event ID is returned and nothing is written, all
+    # inside the same atomic call. ARGV[3] > 0 trims the stream (MAXLEN ~).
+    # Returns {id, created}.
     _APPEND_LUA = """
-    local id = redis.call('XADD', KEYS[1], '*', 'event', ARGV[1])
+    if ARGV[2] ~= '' then
+        local existing = redis.call('GET', KEYS[3])
+        if existing then return {existing, 0} end
+    end
+    local id
+    if tonumber(ARGV[3]) > 0 then
+        id = redis.call('XADD', KEYS[1], 'MAXLEN', '~', ARGV[3], '*', 'event', ARGV[1])
+    else
+        id = redis.call('XADD', KEYS[1], '*', 'event', ARGV[1])
+    end
     redis.call('RPUSH', KEYS[2], id)
-    return id
+    if ARGV[2] ~= '' then redis.call('SET', KEYS[3], id) end
+    return {id, 1}
     """
 
-    def __init__(self, client: Any) -> None:
+    def __init__(self, client: Any, maxlen: int = 0) -> None:
         self._r = client
+        self._maxlen = maxlen
         self._append = client.register_script(self._APPEND_LUA)
 
-    async def append(self, case_id: str, raw: str) -> str:
-        event_id = await self._append(
-            keys=[STREAM_KEY, CASE_INDEX_KEY.format(case_id=case_id)], args=[raw]
+    async def append(self, case_id: str, raw: str, idem_key: Optional[str] = None) -> Tuple[str, bool]:
+        res = await self._append(
+            keys=[STREAM_KEY, CASE_INDEX_KEY.format(case_id=case_id), IDEMPOTENCY_KEY.format(key=idem_key or "-")],
+            args=[raw, idem_key or "", self._maxlen],
         )
-        return event_id.decode() if isinstance(event_id, bytes) else str(event_id)
+        event_id, created = res[0], res[1]
+        event_id = event_id.decode() if isinstance(event_id, bytes) else str(event_id)
+        return event_id, bool(int(created))
 
     async def read_case(self, case_id: str, after: Optional[str]) -> List[Tuple[str, str]]:
         ids = await self._r.lrange(CASE_INDEX_KEY.format(case_id=case_id), 0, -1)
@@ -236,6 +274,11 @@ def _decode_entry(entry: Any) -> Tuple[str, str]:
     return eid, raw
 
 
+def id_gt(a: str, b: str) -> bool:
+    """Public numeric stream-ID comparison (``"9-0" < "10-0"``, unlike strings)."""
+    return _id_gt(a, b)
+
+
 def _id_gt(a: str, b: str) -> bool:
     """Compare two ``<ms>-<seq>`` stream IDs numerically."""
 
@@ -260,7 +303,13 @@ class EventLog:
 
     # -- construction ------------------------------------------------------
     @classmethod
-    async def connect(cls, redis_url: Optional[str] = None, *, require_redis: Optional[bool] = None) -> "EventLog":
+    async def connect(
+        cls,
+        redis_url: Optional[str] = None,
+        *,
+        require_redis: Optional[bool] = None,
+        maxlen: Optional[int] = None,
+    ) -> "EventLog":
         """Connect to Redis, or fall back to the in-memory backend.
 
         With ``SENTRYMESH_REQUIRE_REDIS=1`` a missing server is a hard error
@@ -269,6 +318,7 @@ class EventLog:
         """
         url = redis_url or SETTINGS.redis_url
         strict = SETTINGS.require_redis if require_redis is None else require_redis
+        cap = SETTINGS.stream_maxlen if maxlen is None else maxlen
         try:
             import redis.asyncio as aioredis
 
@@ -277,19 +327,19 @@ class EventLog:
             # timeout turns "resolution is slow" into "Redis is down".
             client = aioredis.from_url(url, socket_connect_timeout=10, socket_timeout=10)
             await client.ping()
-            return cls(_RedisStreamBackend(client))
+            return cls(_RedisStreamBackend(client, maxlen=cap))
         except Exception as exc:  # noqa: BLE001 - any connection failure downgrades
             if strict:
                 raise RuntimeError(f"SENTRYMESH_REQUIRE_REDIS=1 but Redis at {url} is unreachable: {exc}") from exc
             return cls(
-                _InMemoryStreamBackend(),
+                _InMemoryStreamBackend(maxlen=cap),
                 downgrade_reason=f"Redis at {url} unreachable ({type(exc).__name__}: {exc}); "
                 "the event log is in-memory and will not survive this process",
             )
 
     @classmethod
-    def in_memory(cls) -> "EventLog":
-        return cls(_InMemoryStreamBackend())
+    def in_memory(cls, maxlen: int = 0) -> "EventLog":
+        return cls(_InMemoryStreamBackend(maxlen=maxlen))
 
     # -- writes ------------------------------------------------------------
     async def append(
@@ -298,13 +348,23 @@ class EventLog:
         actor: str,
         event_type: str,
         payload: Optional[Dict[str, Any]] = None,
+        *,
+        idempotency_key: Optional[str] = None,
     ) -> Event:
+        """Append one event.
+
+        ``idempotency_key`` (conventionally ``case_id:run_id:event_type``) makes
+        the write exactly-once: replaying the same key returns the originally
+        stored event ID and writes nothing.
+        """
         if event_type not in ALLOWED_EVENT_TYPES:
             raise ValueError(f"unknown event_type {event_type!r}; allowed: {sorted(ALLOWED_EVENT_TYPES)}")
         if not case_id:
             raise ValueError("case_id is required - every event belongs to a case")
         if not actor:
             raise ValueError("actor is required - every event has an accountable author")
+        if not actor.startswith(ALLOWED_ACTOR_PREFIXES):
+            raise ValueError(f"unknown actor {actor!r}; allowed prefixes: {list(ALLOWED_ACTOR_PREFIXES)}")
 
         event = Event(case_id=case_id, actor=actor, event_type=event_type, payload=payload or {})
         raw = json.dumps(
@@ -317,10 +377,11 @@ class EventLog:
             },
             default=str,
         )
-        assigned_id = await self._backend.append(case_id, raw)
+        assigned_id, created = await self._backend.append(case_id, raw, idempotency_key)
         event.event_id = assigned_id
-        self._notifier.set()
-        self._notifier.clear()
+        if created:
+            self._notifier.set()
+            self._notifier.clear()
         return event
 
     # -- reads -------------------------------------------------------------

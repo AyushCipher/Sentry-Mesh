@@ -1,0 +1,50 @@
+{
+  "set": "bank",
+  "mode": "offline",
+  "model": "offline_deterministic",
+  "provider_host": "none",
+  "started_at": "2026-10-31T03:30:48+00:00",
+  "finished_at": "2026-10-31T03:30:49+00:00",
+  "repeats_requested": 1,
+  "case_concurrency": 3,
+  "llm_concurrency": 6,
+  "specialist_concurrency": 2,
+  "thresholds": {
+    "auto_decline_risk": 70.0,
+    "auto_approve_risk": 35.0,
+    "min_confidence": 0.7,
+    "abstention_confidence": 0.4,
+    "split_midpoint": 50.0,
+    "split_margin": 15.0,
+    "risk_floor_factor": 0.9,
+    "floor_confidence": 0.7,
+    "max_model_risk_divergence": 30.0
+  },
+  "runs": [
+    {
+      "repeat": 1,
+      "file": "bank_offline_rep1.jsonl",
+      "cases_in_set": 23,
+      "completed_this_invocation": 23,
+      "on_disk_total": 23,
+      "not_run_or_aborted_due_to_budget": 0
+    }
+  ],
+  "budget": {
+    "live_calls": 0,
+    "cache_hits": 0,
+    "retries": 0,
+    "failed_calls": 0,
+    "input_tokens": 0,
+    "output_tokens_incl_reasoning": 0,
+    "estimated_cost_usd": 0.0,
+    "assumed_price_per_million": {
+      "input": 1.0,
+      "output": 4.0
+    },
+    "caps": {
+      "max_calls": 6000,
+      "max_cost_usd": 2.5
+    }
+  }
+}

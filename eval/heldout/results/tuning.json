@@ -1,0 +1,389 @@
+{
+  "bounding_activity_at_default": {
+    "rows_with_any_policy_override": 34,
+    "rows_floor_raised": 32,
+    "rows_divergence_forced_escalation": 0,
+    "rows_total": 36
+  },
+  "protocol": "grid search over (risk_floor_factor, max_model_risk_divergence) using ONLY dev-split rows of eval/heldout/cases.json; evaluation on the test split; supervisor model outputs replayed from saved raw rows (no new LLM calls).",
+  "cost_function": {
+    "fraud_auto_approved": 10.0,
+    "legit_auto_declined": 5.0,
+    "decisive_escalated": 1.0,
+    "ambiguous_auto_resolved": 3.0,
+    "fraud_auto_declined": 0.0,
+    "legit_auto_approved": 0.0,
+    "ambiguous_escalated": 0.0
+  },
+  "replay_sanity_default_thresholds_decision_mismatches": 0,
+  "rows_checked": 36,
+  "dev_rows": 12,
+  "test_rows": 24,
+  "dev_cases": 12,
+  "test_cases": 24,
+  "default": {
+    "risk_floor_factor": 0.9,
+    "max_model_risk_divergence": 30.0
+  },
+  "default_dev_cost": 0.0,
+  "selected": {
+    "risk_floor_factor": 0.9,
+    "max_model_risk_divergence": 30.0,
+    "dev_cost": 0.0,
+    "changed_from_default": false
+  },
+  "dev_before": {
+    "cost": 0.0,
+    "cost_per_row": 0.0,
+    "metrics": {
+      "precision_auto_only": 1.0,
+      "recall_auto_only": 1.0,
+      "f1_auto_only": 1.0,
+      "fpr_auto_only": 0.0,
+      "precision_escalation_as_flag": 1.0,
+      "recall_escalation_as_flag": 1.0,
+      "f1_escalation_as_flag": 1.0,
+      "fpr_escalation_as_flag": 0.0,
+      "escalation_rate": 0.3333,
+      "escalation_rate_on_ambiguous": 1.0,
+      "escalation_rate_on_decisive": 0.0,
+      "auto_resolve_rate": 0.6667,
+      "auto_resolve_accuracy_all": 1.0,
+      "auto_resolve_accuracy_decisive_only": 1.0,
+      "fraud_auto_approved_rate": 0.0,
+      "n_rows": 12
+    },
+    "n_rows": 12
+  },
+  "dev_after": {
+    "cost": 0.0,
+    "cost_per_row": 0.0,
+    "metrics": {
+      "precision_auto_only": 1.0,
+      "recall_auto_only": 1.0,
+      "f1_auto_only": 1.0,
+      "fpr_auto_only": 0.0,
+      "precision_escalation_as_flag": 1.0,
+      "recall_escalation_as_flag": 1.0,
+      "f1_escalation_as_flag": 1.0,
+      "fpr_escalation_as_flag": 0.0,
+      "escalation_rate": 0.3333,
+      "escalation_rate_on_ambiguous": 1.0,
+      "escalation_rate_on_decisive": 0.0,
+      "auto_resolve_rate": 0.6667,
+      "auto_resolve_accuracy_all": 1.0,
+      "auto_resolve_accuracy_decisive_only": 1.0,
+      "fraud_auto_approved_rate": 0.0,
+      "n_rows": 12
+    },
+    "n_rows": 12
+  },
+  "test_before": {
+    "cost": 7.0,
+    "cost_per_row": 0.2917,
+    "metrics": {
+      "precision_auto_only": 1.0,
+      "recall_auto_only": 1.0,
+      "f1_auto_only": 1.0,
+      "fpr_auto_only": 0.0,
+      "precision_escalation_as_flag": 0.625,
+      "recall_escalation_as_flag": 1.0,
+      "f1_escalation_as_flag": 0.7692,
+      "fpr_escalation_as_flag": 0.5,
+      "escalation_rate": 0.375,
+      "escalation_rate_on_ambiguous": 1.0,
+      "escalation_rate_on_decisive": 0.3182,
+      "auto_resolve_rate": 0.625,
+      "auto_resolve_accuracy_all": 1.0,
+      "auto_resolve_accuracy_decisive_only": 1.0,
+      "fraud_auto_approved_rate": 0.0,
+      "n_rows": 24
+    },
+    "n_rows": 24
+  },
+  "test_after": {
+    "cost": 7.0,
+    "cost_per_row": 0.2917,
+    "metrics": {
+      "precision_auto_only": 1.0,
+      "recall_auto_only": 1.0,
+      "f1_auto_only": 1.0,
+      "fpr_auto_only": 0.0,
+      "precision_escalation_as_flag": 0.625,
+      "recall_escalation_as_flag": 1.0,
+      "f1_escalation_as_flag": 0.7692,
+      "fpr_escalation_as_flag": 0.5,
+      "escalation_rate": 0.375,
+      "escalation_rate_on_ambiguous": 1.0,
+      "escalation_rate_on_decisive": 0.3182,
+      "auto_resolve_rate": 0.625,
+      "auto_resolve_accuracy_all": 1.0,
+      "auto_resolve_accuracy_decisive_only": 1.0,
+      "fraud_auto_approved_rate": 0.0,
+      "n_rows": 24
+    },
+    "n_rows": 24
+  },
+  "test_cost_per_row_diff_tuned_minus_default": {
+    "mean": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  "grid": [
+    {
+      "risk_floor_factor": 0.5,
+      "max_model_risk_divergence": 10.0,
+      "dev_cost": 2.0,
+      "dev_escalation_rate": 0.5
+    },
+    {
+      "risk_floor_factor": 0.5,
+      "max_model_risk_divergence": 15.0,
+      "dev_cost": 1.0,
+      "dev_escalation_rate": 0.4167
+    },
+    {
+      "risk_floor_factor": 0.5,
+      "max_model_risk_divergence": 20.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.5,
+      "max_model_risk_divergence": 30.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.5,
+      "max_model_risk_divergence": 45.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.5,
+      "max_model_risk_divergence": 60.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.5,
+      "max_model_risk_divergence": 100.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.6,
+      "max_model_risk_divergence": 10.0,
+      "dev_cost": 2.0,
+      "dev_escalation_rate": 0.5
+    },
+    {
+      "risk_floor_factor": 0.6,
+      "max_model_risk_divergence": 15.0,
+      "dev_cost": 1.0,
+      "dev_escalation_rate": 0.4167
+    },
+    {
+      "risk_floor_factor": 0.6,
+      "max_model_risk_divergence": 20.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.6,
+      "max_model_risk_divergence": 30.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.6,
+      "max_model_risk_divergence": 45.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.6,
+      "max_model_risk_divergence": 60.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.6,
+      "max_model_risk_divergence": 100.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.7,
+      "max_model_risk_divergence": 10.0,
+      "dev_cost": 2.0,
+      "dev_escalation_rate": 0.5
+    },
+    {
+      "risk_floor_factor": 0.7,
+      "max_model_risk_divergence": 15.0,
+      "dev_cost": 1.0,
+      "dev_escalation_rate": 0.4167
+    },
+    {
+      "risk_floor_factor": 0.7,
+      "max_model_risk_divergence": 20.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.7,
+      "max_model_risk_divergence": 30.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.7,
+      "max_model_risk_divergence": 45.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.7,
+      "max_model_risk_divergence": 60.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.7,
+      "max_model_risk_divergence": 100.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.8,
+      "max_model_risk_divergence": 10.0,
+      "dev_cost": 2.0,
+      "dev_escalation_rate": 0.5
+    },
+    {
+      "risk_floor_factor": 0.8,
+      "max_model_risk_divergence": 15.0,
+      "dev_cost": 1.0,
+      "dev_escalation_rate": 0.4167
+    },
+    {
+      "risk_floor_factor": 0.8,
+      "max_model_risk_divergence": 20.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.8,
+      "max_model_risk_divergence": 30.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.8,
+      "max_model_risk_divergence": 45.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.8,
+      "max_model_risk_divergence": 60.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.8,
+      "max_model_risk_divergence": 100.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.9,
+      "max_model_risk_divergence": 10.0,
+      "dev_cost": 2.0,
+      "dev_escalation_rate": 0.5
+    },
+    {
+      "risk_floor_factor": 0.9,
+      "max_model_risk_divergence": 15.0,
+      "dev_cost": 1.0,
+      "dev_escalation_rate": 0.4167
+    },
+    {
+      "risk_floor_factor": 0.9,
+      "max_model_risk_divergence": 20.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.9,
+      "max_model_risk_divergence": 30.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.9,
+      "max_model_risk_divergence": 45.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.9,
+      "max_model_risk_divergence": 60.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 0.9,
+      "max_model_risk_divergence": 100.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 1.0,
+      "max_model_risk_divergence": 10.0,
+      "dev_cost": 2.0,
+      "dev_escalation_rate": 0.5
+    },
+    {
+      "risk_floor_factor": 1.0,
+      "max_model_risk_divergence": 15.0,
+      "dev_cost": 1.0,
+      "dev_escalation_rate": 0.4167
+    },
+    {
+      "risk_floor_factor": 1.0,
+      "max_model_risk_divergence": 20.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 1.0,
+      "max_model_risk_divergence": 30.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 1.0,
+      "max_model_risk_divergence": 45.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 1.0,
+      "max_model_risk_divergence": 60.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    },
+    {
+      "risk_floor_factor": 1.0,
+      "max_model_risk_divergence": 100.0,
+      "dev_cost": 0.0,
+      "dev_escalation_rate": 0.3333
+    }
+  ],
+  "caveat": "Dev split is small; the selected point can be dev-set noise. A CI on the test diff that spans 0 means no demonstrated benefit."
+}

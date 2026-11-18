@@ -61,6 +61,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        VITE_API_KEY: ${SENTRYMESH_API_KEY:-}
     depends_on:
       backend:
         condition: service_healthy

@@ -14,12 +14,14 @@ canned animation.
 from __future__ import annotations
 
 import asyncio
+import hmac
 import json
+import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from fastapi import BackgroundTasks, FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -54,9 +56,37 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+DEFAULT_CORS_ORIGINS = ("http://localhost:5173", "http://127.0.0.1:5173")
+
+
+def cors_origins() -> List[str]:
+    """Allowed browser origins from ``SENTRYMESH_CORS_ORIGINS`` (comma-separated).
+
+    Defaults to the local Vite dev server only; ``*`` must be asked for explicitly.
+    """
+    raw = os.getenv("SENTRYMESH_CORS_ORIGINS", "").strip()
+    if not raw:
+        return list(DEFAULT_CORS_ORIGINS)
+    return [o.strip() for o in raw.split(",") if o.strip()]
+
+
+def require_api_key(x_api_key: Optional[str] = Header(default=None)) -> None:
+    """Optional shared-secret guard for state-changing review endpoints.
+
+    Off when ``SENTRYMESH_API_KEY`` is unset (local demo); when set, the
+    ``X-API-Key`` header must match (constant-time compare). Read per request
+    so rotating the key needs no code change.
+    """
+    expected = os.getenv("SENTRYMESH_API_KEY", "").strip()
+    if not expected:
+        return
+    if not x_api_key or not hmac.compare_digest(x_api_key.encode(), expected.encode()):
+        raise HTTPException(status_code=401, detail="missing or invalid X-API-Key")
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # v1 has no auth; the dashboard is a local demo surface.
+    allow_origins=cors_origins(),
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -256,7 +286,7 @@ async def review_case(case_id: str) -> Dict[str, Any]:
     return row
 
 
-@app.post("/api/review-queue/_rebuild")
+@app.post("/api/review-queue/_rebuild", dependencies=[Depends(require_api_key)])
 async def rebuild_queue() -> Dict[str, Any]:
     """Rebuild the queue from the event log. Proves the queue is derived state.
 
@@ -268,7 +298,7 @@ async def rebuild_queue() -> Dict[str, Any]:
     return {"restored": restored, "depth": await mesh().queue.depth()}
 
 
-@app.post("/api/review-queue/{case_id}")
+@app.post("/api/review-queue/{case_id}", dependencies=[Depends(require_api_key)])
 async def submit_review(case_id: str, submission: ReviewSubmission) -> Dict[str, Any]:
     decision = HumanDecision(
         case_id=case_id,

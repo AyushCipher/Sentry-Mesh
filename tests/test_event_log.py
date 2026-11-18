@@ -25,7 +25,7 @@ def test_case_trace_preserves_append_order(run_async):
         log = EventLog.in_memory()
         case = new_case_id()
         for i in range(10):
-            await log.append(case, f"actor_{i % 3}", "finding", {"seq": i})
+            await log.append(case, f"specialist_{i % 3}", "finding", {"seq": i})
         return await log.get_case_trace(case)
 
     trace = run_async(scenario())

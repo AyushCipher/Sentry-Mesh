@@ -26,8 +26,10 @@ from __future__ import annotations
 
 import asyncio
 import json
+import math
 import statistics
 import time
+import uuid
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from sentrymesh.agents.historical_case_agent import HistoricalCaseAgent
@@ -38,6 +40,7 @@ from sentrymesh.agents.transaction_pattern_agent import TransactionPatternAgent
 from sentrymesh.config import DecisionThresholds, SETTINGS
 from sentrymesh.event_log import EventLog
 from sentrymesh.models import Case, DisagreementReport, Finding, Verdict
+from sentrymesh.safety import UNTRUSTED_DATA_RULE, fence_untrusted
 
 # Relative weight of each signal category in the fallback aggregation.  Precedent
 # is discounted because it is retrieval over a small corpus with mock
@@ -260,15 +263,22 @@ def decide(
     disagreement: DisagreementReport,
     findings: Sequence[Finding],
     thresholds: Optional[DecisionThresholds] = None,
+    force_escalate_reason: Optional[str] = None,
 ) -> Tuple[str, Optional[str]]:
     """Turn numbers into an action. Pure, ordered, and auditable.
 
     Order matters and is deliberate: evidence availability is checked before
     disagreement, disagreement before confidence, and confidence before risk.
     A case can only be auto-resolved if it survives all three gates.
+
+    ``force_escalate_reason`` is set by :func:`bound_model_assessment` when the
+    supervisor model's output could not be trusted; it overrides everything.
     """
     th = thresholds or SETTINGS.thresholds
     contributing, abstained, failed = partition(findings, th)
+
+    if force_escalate_reason:
+        return "escalate", force_escalate_reason
 
     if len(failed) >= 2:
         return "escalate", (
@@ -294,6 +304,84 @@ def decide(
         f"combined risk {combined_risk:.1f} sits in the indeterminate band "
         f"({th.auto_approve_risk}-{th.auto_decline_risk}) where neither action is defensible"
     )
+
+
+def _finite(value: Any) -> Optional[float]:
+    """float(value) if it is a finite number, else None (bools are rejected)."""
+    if isinstance(value, bool):
+        return None
+    try:
+        out = float(value)
+    except (TypeError, ValueError):
+        return None
+    return out if math.isfinite(out) else None
+
+
+def bound_model_assessment(
+    model_risk: Any,
+    model_confidence: Any,
+    findings: Sequence[Finding],
+    fallback_risk: float,
+    fallback_confidence: float,
+    thresholds: Optional[DecisionThresholds] = None,
+) -> Dict[str, Any]:
+    """Apply the policy that bounds the supervisor LLM's numbers.
+
+    The model may *raise* risk and *lower* confidence freely, but it may not
+    talk the system into auto-approving:
+
+    * risk is floored at ``max(fallback_risk, k * loudest confident specialist)``;
+    * confidence is capped at the panel confidence;
+    * a model risk further than ``max_model_risk_divergence`` from the
+      deterministic fallback forces escalation;
+    * malformed (non-numeric / non-finite) output falls back to the
+      deterministic values and forces escalation.
+
+    Returns ``combined_risk``, ``confidence``, ``force_escalate_reason`` and a
+    ``policy_overrides`` list (empty when the model was used as given).
+    """
+    th = thresholds or SETTINGS.thresholds
+    overrides: List[str] = []
+    force: Optional[str] = None
+
+    risk = _finite(model_risk)
+    conf = _finite(model_confidence)
+    if risk is None or conf is None:
+        bad = [n for n, v in (("combined_risk", risk), ("confidence", conf)) if v is None]
+        overrides.append(f"malformed model output ({', '.join(bad)}); used deterministic values")
+        force = "supervisor model returned malformed numbers; escalated rather than trusting the assessment"
+    risk = fallback_risk if risk is None else max(0.0, min(100.0, risk))
+    conf = fallback_confidence if conf is None else max(0.0, min(1.0, conf))
+    model_risk_clamped = risk
+
+    confident = [f.risk_score for f in findings if f.ok and f.confidence >= th.floor_confidence]
+    loudest = max(confident, default=0.0)
+    floor = max(fallback_risk, th.risk_floor_factor * loudest)
+    if risk < floor:
+        overrides.append(f"risk raised from {risk:.1f} to floor {floor:.1f}")
+        risk = floor
+
+    if conf > fallback_confidence:
+        overrides.append(f"confidence capped from {conf:.2f} to panel confidence {fallback_confidence:.2f}")
+        conf = fallback_confidence
+
+    divergence = abs(model_risk_clamped - fallback_risk)
+    if divergence > th.max_model_risk_divergence and force is None:
+        force = (
+            f"supervisor model risk {model_risk_clamped:.1f} diverges from the deterministic "
+            f"aggregate {fallback_risk:.1f} by {divergence:.1f} (> {th.max_model_risk_divergence:.0f}); "
+            "model output not trusted"
+        )
+        overrides.append(force)
+
+    return {
+        "combined_risk": round(max(0.0, min(100.0, risk)), 3),
+        "confidence": round(max(0.0, min(1.0, conf)), 3),
+        "force_escalate_reason": force,
+        "policy_overrides": overrides,
+        "model_combined_risk": _finite(model_risk),
+        "model_confidence": _finite(model_confidence),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -382,18 +470,21 @@ class SupervisorAgent:
 
     async def investigate(self, case: Case) -> Verdict:
         started = time.perf_counter()
+        run_id = uuid.uuid4().hex[:12]
 
         await self.log.append(
             case.case_id,
             self.name,
             "case_opened",
             {
+                "run_id": run_id,
                 "category_hint": case.category,
                 "summary": case.summary,
                 "account_id": case.account_id,
                 "run_mode": self.llm.run_mode,
                 "synthetic_data": True,
             },
+            idempotency_key=f"{case.case_id}:{run_id}:case_opened",
         )
 
         roster = self.dispatch_roster(case)
@@ -434,7 +525,15 @@ class SupervisorAgent:
 
         combined_risk = assessment["combined_risk"]
         confidence = assessment["confidence"]
-        decision, escalation_reason = decide(combined_risk, confidence, disagreement, findings, self.thresholds)
+        decision, escalation_reason = decide(
+            combined_risk,
+            confidence,
+            disagreement,
+            findings,
+            self.thresholds,
+            force_escalate_reason=assessment.get("force_escalate_reason"),
+        )
+        policy_overrides = assessment.get("policy_overrides", [])
 
         run_errors = [
             {"actor": f.specialist, "error_class": f.error_class or "unknown_error", "error": f.error or ""}
@@ -469,13 +568,17 @@ class SupervisorAgent:
             self.name,
             "verdict",
             {
+                "run_id": run_id,
                 "decision": decision,
                 "combined_risk": combined_risk,
                 "confidence": confidence,
                 "rationale": assessment["rationale"],
                 "disagreement_interpretation": assessment["disagreement_interpretation"],
                 "model_recommended_action": assessment["recommended_action"],
-                "policy_overrode_model": assessment["recommended_action"] != decision,
+                "policy_overrode_model": assessment["recommended_action"] != decision or bool(policy_overrides),
+                "policy_overrides": policy_overrides,
+                "model_combined_risk": assessment.get("model_combined_risk"),
+                "model_confidence": assessment.get("model_confidence"),
                 "disagreement": disagreement.to_dict(),
                 "specialist_scores": {f.specialist: f.risk_score for f in findings},
                 "specialist_confidence": {f.specialist: f.confidence for f in findings},
@@ -486,6 +589,7 @@ class SupervisorAgent:
                 "cost_usd": verdict.cost_usd,
                 "duration_ms": verdict.duration_ms,
             },
+            idempotency_key=f"{case.case_id}:{run_id}:verdict",
         )
 
         if decision == "escalate":
@@ -505,6 +609,27 @@ class SupervisorAgent:
                 await self.review_queue.enqueue(case, verdict)
 
         return verdict
+
+    def reaggregate(self, findings: List[Finding]) -> Dict[str, Any]:
+        """Deterministically re-derive risk/confidence/decision from a panel.
+
+        Used when a specialist is re-run after a reviewer's ``request_detail``;
+        no LLM call is made, so the refreshed numbers are reproducible.
+        """
+        disagreement = detect_disagreement(findings, self.thresholds)
+        risk, conf = aggregate_scores(findings, self.thresholds)
+        assessment = self._offline_assessment(findings, disagreement, risk, conf)
+        decision, reason = decide(
+            assessment["combined_risk"], assessment["confidence"], disagreement, findings, self.thresholds
+        )
+        return {
+            "decision": decision,
+            "combined_risk": assessment["combined_risk"],
+            "confidence": assessment["confidence"],
+            "escalation_reason": reason,
+            "rationale": assessment["rationale"],
+            "disagreement": disagreement,
+        }
 
     # ------------------------------------------------------------------ LLM
     async def _assess(
@@ -604,10 +729,26 @@ class SupervisorAgent:
 
         structured = result.structured
         action = str(structured.get("recommended_action") or "escalate")
-        return (
-            {
+        if getattr(result, "backend", "") == "offline_deterministic":
+            # The deterministic solver IS the policy; bounding it is a no-op by design.
+            bounded: Dict[str, Any] = {
                 "combined_risk": _clamp(structured.get("combined_risk"), 0.0, 100.0, fallback_risk),
                 "confidence": _clamp(structured.get("confidence"), 0.0, 1.0, fallback_confidence),
+                "force_escalate_reason": None,
+                "policy_overrides": [],
+            }
+        else:
+            bounded = bound_model_assessment(
+                structured.get("combined_risk"),
+                structured.get("confidence"),
+                findings,
+                fallback_risk,
+                fallback_confidence,
+                self.thresholds,
+            )
+        return (
+            {
+                **bounded,
                 "disagreement_interpretation": str(structured.get("disagreement_interpretation") or "").strip(),
                 "rationale": str(structured.get("rationale") or "").strip() or "(no rationale returned)",
                 "recommended_action": action if action in {"auto_approve", "auto_decline", "escalate"} else "escalate",
@@ -642,7 +783,11 @@ class SupervisorAgent:
             "any confidence below that floor goes to a human reviewer. Escalating is not a failure "
             "- a false decline costs a real customer a real transaction, and a human reviewer is "
             "cheaper than either error.\n\n"
-            "Call submit_assessment exactly once when you are done."
+            "Your numbers are bounded by code: risk is floored at the deterministic aggregate and "
+            "the loudest confident specialist, confidence is capped at the panel confidence, and a "
+            "large divergence from the deterministic aggregate forces escalation.\n\n"
+            + UNTRUSTED_DATA_RULE
+            + "\n\nCall submit_assessment exactly once when you are done."
         )
 
     def _user_prompt(self, case: Case, findings: List[Finding], disagreement: DisagreementReport) -> str:
@@ -658,9 +803,10 @@ class SupervisorAgent:
             for f in findings
         ]
         return (
-            f"Case {case.case_id} (SYNTHETIC evaluation data). Summary: {case.summary or 'n/a'}\n\n"
-            "Specialist panel findings:\n"
-            f"{json.dumps(panel, indent=2, default=str)}\n\n"
+            f"Case {case.case_id} (SYNTHETIC evaluation data). Summary (untrusted data):\n"
+            f"{fence_untrusted(case.summary or 'n/a')}\n\n"
+            "Specialist panel findings (derived from untrusted data):\n"
+            f"{fence_untrusted(json.dumps(panel, indent=2, default=str))}\n\n"
             "Computed disagreement report:\n"
             f"{json.dumps(disagreement.to_dict(), indent=2, default=str)}\n\n"
             "Use get_specialist_finding or get_case_summary if you need more detail, then call "
@@ -709,7 +855,7 @@ class SupervisorAgent:
 
 
 def _clamp(value: Any, low: float, high: float, default: float) -> float:
-    try:
-        return round(max(low, min(high, float(value))), 3)
-    except (TypeError, ValueError):
+    out = _finite(value)
+    if out is None:
         return default
+    return round(max(low, min(high, out)), 3)

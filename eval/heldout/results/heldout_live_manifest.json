@@ -1,0 +1,51 @@
+{
+  "set": "heldout",
+  "mode": "live",
+  "model": "models/gemini-flash-lite-latest",
+  "provider_host": "openai_compat:generativelanguage.googleapis.com",
+  "started_at": "2026-10-31T03:54:46+00:00",
+  "finished_at": "2026-10-31T04:17:12+00:00",
+  "repeats_requested": 3,
+  "case_concurrency": 8,
+  "llm_concurrency": 12,
+  "specialist_concurrency": 2,
+  "thresholds": {
+    "auto_decline_risk": 70.0,
+    "auto_approve_risk": 35.0,
+    "min_confidence": 0.7,
+    "abstention_confidence": 0.4,
+    "split_midpoint": 50.0,
+    "split_margin": 15.0,
+    "risk_floor_factor": 0.9,
+    "floor_confidence": 0.7,
+    "max_model_risk_divergence": 30.0
+  },
+  "runs": [
+    {
+      "repeat": 1,
+      "file": "heldout_live_rep1.jsonl",
+      "cases_in_set": 121,
+      "completed_this_invocation": 33,
+      "on_disk_total": 36,
+      "not_run_or_aborted_due_to_budget": 85,
+      "stop_reason": []
+    }
+  ],
+  "budget": {
+    "live_calls": 747,
+    "cache_hits": 0,
+    "retries": 279,
+    "failed_calls": 297,
+    "input_tokens": 728222,
+    "output_tokens_incl_reasoning": 43462,
+    "estimated_cost_usd": 0.0902,
+    "assumed_price_per_million": {
+      "input": 0.1,
+      "output": 0.4
+    },
+    "caps": {
+      "max_calls": 6000,
+      "max_cost_usd": 2.0
+    }
+  }
+}

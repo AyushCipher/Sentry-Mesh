@@ -6,6 +6,9 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
+# Same value as the backend's SENTRYMESH_API_KEY; embedded in the JS bundle (demo shared secret).
+ARG VITE_API_KEY=
+ENV VITE_API_KEY=$VITE_API_KEY
 RUN npm run build
 
 FROM nginx:1.25-alpine

@@ -1,0 +1,6 @@
+{
+  "note": "Written by hand from provider 429 bodies observed during the runs (no secrets). Evidence for why the live run is partial.",
+  "configured_model": {"name": "gemini-3.6-flash", "provider_error_metric": "generate_content_free_tier_requests", "limit_per_day": 20, "observed": "exhausted after about 20 successful requests (first smoke run); suggested retry in ~3h"},
+  "fallback_model_used": {"name": "models/gemini-flash-lite-latest", "resolved_by_provider_error_to": "gemini-3.5-flash-lite", "quota_id": "GenerateRequestsPerDayPerProjectPerModel-FreeTier", "limit_per_day": 500, "observed": "exhausted mid-run; probe afterwards returned 429 with retry in ~2h42m"},
+  "per_minute_throttling": "roughly 40% of calls in the full run needed a backoff retry (see manifest retries/failed_calls)."
+}

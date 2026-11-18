@@ -1,0 +1,558 @@
+{
+ "corpus": "heldout_resolved_case_precedents",
+ "data_disclaimer": "SYNTHETIC precedents authored by an LLM for the held-out evaluation. Disjoint from eval/precedent_cases.json.",
+ "precedents": [
+  {
+   "case_id": "PRC-001",
+   "category": "card_testing",
+   "summary": "A flurry of micro-donations to charity checkouts, each under four dollars, with most returned as declines from a freshly opened profile.",
+   "signals": [
+    "micro-charges",
+    "charity merchant",
+    "declines",
+    "new profile"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Charity checkouts are used to probe stolen card numbers because receipts look innocuous. Card list blocked.",
+   "resolved_at": "2025-06-02",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-002",
+   "category": "card_testing",
+   "summary": "Automated browser hammering a prepaid top-up page with sequential small loads from a datacentre address.",
+   "signals": [
+    "automation",
+    "prepaid top-up",
+    "datacentre"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Headless client, rotating card numbers. Merchant notified.",
+   "resolved_at": "2025-06-19",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-003",
+   "category": "card_testing",
+   "summary": "Dozens of one-dollar app-store style charges across three storefronts within an hour; account opened the previous evening.",
+   "signals": [
+    "one-dollar",
+    "storefronts",
+    "account opened yesterday"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Enumeration of a leaked BIN block.",
+   "resolved_at": "2025-07-08",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-004",
+   "category": "account_takeover",
+   "summary": "Credential reset followed minutes later by a very large order for resellable electronics shipped to a newly saved address abroad.",
+   "signals": [
+    "credential reset",
+    "new shipping address",
+    "resellable goods"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Customer confirmed they did not reset. Account recovered, address blacklisted.",
+   "resolved_at": "2025-05-12",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-005",
+   "category": "account_takeover",
+   "summary": "Long-standing customer; sudden jewellery spend from unfamiliar handset in another continent, impossible given a card-present swipe earlier the same day.",
+   "signals": [
+    "impossible travel",
+    "unfamiliar handset",
+    "jewellery"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Cloned device profile used from overseas. Funds returned.",
+   "resolved_at": "2025-08-21",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-006",
+   "category": "account_takeover",
+   "summary": "Support-chat social engineering preceded a device swap and a cash-equivalent purchase at four times the normal ticket, from a domestic residential address.",
+   "signals": [
+    "support contact",
+    "device swap",
+    "elevated ticket"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Attacker had the customer's partial identifiers from a data dump; passed callback verification as the genuine holder.",
+   "resolved_at": "2025-09-30",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-007",
+   "category": "account_takeover",
+   "summary": "Gift voucher purchases through a newly enrolled phone after a password change; location plausible, amounts moderate.",
+   "signals": [
+    "password change",
+    "new phone",
+    "voucher"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Quiet takeover pattern; losses small per event but recurring across customers.",
+   "resolved_at": "2025-10-14",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-008",
+   "category": "synthetic_identity",
+   "summary": "Applicant with mismatched social number profile used the card lightly for two months, then cashed out several thousand through an exchange.",
+   "signals": [
+    "social number mismatch",
+    "seasoning",
+    "cash-out"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Fabricated identity; linked applications used same phone prefix.",
+   "resolved_at": "2025-04-03",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-009",
+   "category": "synthetic_identity",
+   "summary": "Cluster of fresh sign-ups with near-identical email stems and phone numbers; each maxed credit within weeks of opening.",
+   "signals": [
+    "email stems",
+    "phone prefix",
+    "maxed credit"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Single operator farming identities. Cluster closed.",
+   "resolved_at": "2025-05-27",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-010",
+   "category": "synthetic_identity",
+   "summary": "Thin-file borrower with pending verification suddenly purchased high-value jewellery; sibling accounts share payment instruments.",
+   "signals": [
+    "thin file",
+    "pending verification",
+    "shared payment"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Bust-out ring; recovery partial.",
+   "resolved_at": "2025-11-09",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-011",
+   "category": "money_muling",
+   "summary": "Incoming transfers forwarded to remittance services within the hour from an account sharing a handset with six other profiles.",
+   "signals": [
+    "pass-through",
+    "remittance",
+    "shared handset"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Mule network recruited via social media job adverts.",
+   "resolved_at": "2025-03-18",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-012",
+   "category": "money_muling",
+   "summary": "Student account with clean verification receives and immediately forwards funds; its payment instrument also appears on a dozen unrelated accounts.",
+   "signals": [
+    "clean verification",
+    "shared instrument",
+    "fast forwarding"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Genuine student unwittingly recruited; account restricted, customer educated.",
+   "resolved_at": "2025-07-30",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-013",
+   "category": "promo_abuse",
+   "summary": "Disposable email domains and a single residential proxy pool across many accounts that redeemed welcome credit and bought resellable digital items.",
+   "signals": [
+    "disposable email",
+    "proxy pool",
+    "welcome credit"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Bonus farming ring; credits clawed back.",
+   "resolved_at": "2025-08-11",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-014",
+   "category": "legitimate",
+   "summary": "Tenured customer abroad with plane and hotel charges on the card in the days before, buying meals and taxis in the destination city.",
+   "signals": [
+    "foreign location",
+    "travel evidence",
+    "long tenure"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Customer confirmed holiday via app message. No action.",
+   "resolved_at": "2025-06-24",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-015",
+   "category": "legitimate",
+   "summary": "Alert on a new phone: device fingerprint changed twice after an OS update; same city, same billing, usual merchants.",
+   "signals": [
+    "new phone",
+    "fingerprint churn",
+    "same city"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Handset upgrade confirmed. Rule threshold for device churn loosened for tenured accounts.",
+   "resolved_at": "2025-07-15",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-016",
+   "category": "legitimate",
+   "summary": "Customer using a corporate VPN gateway for years; the tripped proxy rule was the only oddity on an otherwise unremarkable profile.",
+   "signals": [
+    "corporate vpn",
+    "tenured",
+    "proxy rule"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Habitual VPN use. Allow-listed.",
+   "resolved_at": "2025-05-05",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-017",
+   "category": "legitimate",
+   "summary": "Large furniture purchase on an enhanced-verified account with a prior purchase of similar size from the same retailer last year.",
+   "signals": [
+    "large ticket",
+    "prior similar purchase",
+    "enhanced verification"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Customer had pre-notified the bank of a home renovation.",
+   "resolved_at": "2025-09-02",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-018",
+   "category": "legitimate",
+   "summary": "Family tablet shared among spouse and children, each aged account verified; linked in the graph since 2023.",
+   "signals": [
+    "household device",
+    "aged accounts",
+    "verified"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Household link, no fraud. Added to family-device allow list.",
+   "resolved_at": "2025-10-01",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-019",
+   "category": "legitimate",
+   "summary": "Shopping-mall afternoon: eight card-present swipes in nearby stores, no declines, customer's own phone present.",
+   "signals": [
+    "in-person burst",
+    "no declines",
+    "own device"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Normal weekend shopping.",
+   "resolved_at": "2025-12-06",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-020",
+   "category": "legitimate",
+   "summary": "Two-week-old account with coffee, bus fare and groceries swiped in person; verification still in progress.",
+   "signals": [
+    "new customer",
+    "everyday spend",
+    "in-person"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Newly onboarded customer behaving normally.",
+   "resolved_at": "2025-04-22",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-021",
+   "category": "legitimate",
+   "summary": "Reseller with scripted order placement from a cloud server, but a three-year verified business history of steady wholesale-sized buys.",
+   "signals": [
+    "scripted orders",
+    "cloud hosting",
+    "verified business"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Customer's order-management software. Documented and allow-listed.",
+   "resolved_at": "2025-08-28",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-022",
+   "category": "legitimate",
+   "summary": "Customer's annual insurance premium and utility bills paid by card on the usual day each month, flagged by an amount rule.",
+   "signals": [
+    "recurring",
+    "bills",
+    "usual day"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Recurring payments.",
+   "resolved_at": "2025-03-03",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-023",
+   "category": "ambiguous",
+   "summary": "Tenured holder abroad bought crypto for the first time from a new phone; no travel booking on file. Call-back went unanswered.",
+   "signals": [
+    "first crypto purchase",
+    "new phone",
+    "abroad"
+   ],
+   "resolution": "declined",
+   "resolution_notes": "Customer later reported the login as unauthorised.",
+   "resolved_at": "2025-06-10",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-024",
+   "category": "ambiguous",
+   "summary": "Tenured holder abroad bought crypto from a new phone; no booking on file; customer phoned back and confirmed an overseas business trip.",
+   "signals": [
+    "first crypto purchase",
+    "new phone",
+    "abroad"
+   ],
+   "resolution": "approved_after_review",
+   "resolution_notes": "Reached on second attempt; trip confirmed with employer letter.",
+   "resolved_at": "2025-09-18",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-025",
+   "category": "ambiguous",
+   "summary": "Three fresh accounts on one laptop, each unremarkable; reviewer asked branch staff to check ID documents.",
+   "signals": [
+    "shared laptop",
+    "clean individually"
+   ],
+   "resolution": "approved_after_review",
+   "resolution_notes": "Flatmates; IDs checked in person.",
+   "resolved_at": "2025-04-30",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-026",
+   "category": "ambiguous",
+   "summary": "Three fresh accounts on one laptop, each unremarkable; later found opened within an hour of each other from one address.",
+   "signals": [
+    "shared laptop",
+    "clean individually"
+   ],
+   "resolution": "declined",
+   "resolution_notes": "Mule starter set; second review found same-session onboarding.",
+   "resolved_at": "2025-05-19",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-027",
+   "category": "ambiguous",
+   "summary": "Elderly customer sends an unusually large amount to a first-time payee from their usual computer; relative later confirmed the transfer was genuine.",
+   "signals": [
+    "large first payee",
+    "usual device",
+    "older customer"
+   ],
+   "resolution": "approved_after_review",
+   "resolution_notes": "Funeral expenses abroad.",
+   "resolved_at": "2025-07-22",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-028",
+   "category": "ambiguous",
+   "summary": "Elderly customer sends an unusually large amount to a first-time payee from their usual computer; call revealed coaching by an unknown caller.",
+   "signals": [
+    "large first payee",
+    "usual device",
+    "older customer"
+   ],
+   "resolution": "declined",
+   "resolution_notes": "Romance scam; transfer stopped before settlement.",
+   "resolved_at": "2025-10-27",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-029",
+   "category": "ambiguous",
+   "summary": "Month-old account buys several hundred dollars of vouchers; little history to compare against.",
+   "signals": [
+    "thin history",
+    "vouchers"
+   ],
+   "resolution": "approved_after_review",
+   "resolution_notes": "Birthday gifts, confirmed by customer.",
+   "resolved_at": "2025-11-18",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-030",
+   "category": "ambiguous",
+   "summary": "Month-old account buys several hundred dollars of vouchers; little history to compare against.",
+   "signals": [
+    "thin history",
+    "vouchers"
+   ],
+   "resolution": "declined",
+   "resolution_notes": "Account later linked to a mule cluster.",
+   "resolved_at": "2025-12-12",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-031",
+   "category": "card_testing",
+   "summary": "Pattern of tiny streaming-trial sign-ups using a different card number each minute from one browser profile.",
+   "signals": [
+    "trial sign-ups",
+    "rotating cards",
+    "single profile"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Trial endpoints probed for live PANs.",
+   "resolved_at": "2025-09-11",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-032",
+   "category": "account_takeover",
+   "summary": "SIM-swap suspected: one-time passcodes delivered to a new number followed by a large crypto purchase.",
+   "signals": [
+    "sim swap",
+    "otp",
+    "crypto"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Carrier confirmed port-out fraud.",
+   "resolved_at": "2025-11-25",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-033",
+   "category": "account_takeover",
+   "summary": "Remote-access trojan evidence: purchase placed from the customer's own device while a screen-sharing app was active.",
+   "signals": [
+    "remote access",
+    "own device"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Customer duped by fake technical support; refunded under policy.",
+   "resolved_at": "2025-12-20",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-034",
+   "category": "money_muling",
+   "summary": "Marketplace seller account receives many small buyer payments then sweeps to a single payee abroad daily.",
+   "signals": [
+    "many small inbound",
+    "daily sweep",
+    "foreign payee"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Fake storefront collecting payments.",
+   "resolved_at": "2025-08-05",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-035",
+   "category": "legitimate",
+   "summary": "Gig worker receives many small inbound payments and withdraws weekly to their own bank account.",
+   "signals": [
+    "many small inbound",
+    "own account",
+    "weekly"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Payout pattern of a delivery courier.",
+   "resolved_at": "2025-10-19",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-036",
+   "category": "legitimate",
+   "summary": "Teenager with parent-managed account makes a first large gaming purchase after birthday money was deposited.",
+   "signals": [
+    "young user",
+    "deposit then spend"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Gift from grandparents, confirmed.",
+   "resolved_at": "2025-12-26",
+   "reviewer": "analyst_d"
+  },
+  {
+   "case_id": "PRC-037",
+   "category": "legitimate",
+   "summary": "Foreign billing address but long relationship; customer is an expatriate with home-country shopping each month.",
+   "signals": [
+    "billing abroad",
+    "monthly pattern"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Expat customer; profile updated.",
+   "resolved_at": "2025-02-14",
+   "reviewer": "analyst_b"
+  },
+  {
+   "case_id": "PRC-038",
+   "category": "legitimate",
+   "summary": "Night-shift nurse purchases groceries and fuel at 3 a.m. weekly.",
+   "signals": [
+    "off-hours",
+    "weekly routine"
+   ],
+   "resolution": "cleared_legitimate",
+   "resolution_notes": "Shift schedule explained.",
+   "resolved_at": "2025-03-27",
+   "reviewer": "analyst_c"
+  },
+  {
+   "case_id": "PRC-039",
+   "category": "synthetic_identity",
+   "summary": "Authorised-user piggybacking: dozens of cards added as authorised users on one aged account to inherit its credit history.",
+   "signals": [
+    "authorised users",
+    "aged account",
+    "credit piggyback"
+   ],
+   "resolution": "confirmed_fraud",
+   "resolution_notes": "Credit-renting scheme.",
+   "resolved_at": "2025-06-30",
+   "reviewer": "analyst_a"
+  },
+  {
+   "case_id": "PRC-040",
+   "category": "ambiguous",
+   "summary": "Cloud-hosted ordering at a small online shop with unverified owner details; no declines, no complaints.",
+   "signals": [
+    "cloud hosting",
+    "unverified owner"
+   ],
+   "resolution": "approved_after_review",
+   "resolution_notes": "Merchant onboarding paperwork produced; fine.",
+   "resolved_at": "2025-12-30",
+   "reviewer": "analyst_d"
+  }
+ ]
+}

@@ -1,7 +1,17 @@
 import axios from 'axios'
 import type { CaseStatus, HarnessReport, ReviewCase, Runtime, SeededCase, TraceEvent } from '../types'
 
-const api = axios.create({ baseURL: '/', timeout: 30000 })
+// When the backend runs with SENTRYMESH_API_KEY set, its review endpoints require an
+// X-API-Key header. Set VITE_API_KEY at build/dev time to the same value. Note that a
+// VITE_* value is embedded in the shipped JS bundle: that is acceptable for a demo
+// shared secret, not for a real credential (put an auth proxy in front for that).
+const API_KEY = (import.meta.env.VITE_API_KEY as string | undefined)?.trim()
+
+const api = axios.create({
+  baseURL: '/',
+  timeout: 30000,
+  headers: API_KEY ? { 'X-API-Key': API_KEY } : undefined,
+})
 
 export interface HealthResponse {
   status: string

@@ -26,7 +26,7 @@ import json
 from typing import Any, Dict, List, Optional
 
 from sentrymesh.config import REVIEW_META_KEY, REVIEW_QUEUE_KEY, SETTINGS
-from sentrymesh.event_log import EventLog
+from sentrymesh.event_log import EventLog, id_gt
 from sentrymesh.models import Case, HumanDecision, Verdict
 
 REVIEW_ACTIONS = ("approve", "decline", "request_detail")
@@ -51,6 +51,17 @@ class _MemoryQueueBackend:
     async def get(self, case_id: str) -> Optional[str]:
         return self._meta.get(case_id)
 
+    async def claim(self, case_id: str) -> Optional[str]:
+        """Atomically take a case off the queue; only one caller can win.
+
+        No ``await`` between the check and the removal, so on a single event
+        loop two concurrent decisions cannot both observe the case as present.
+        """
+        meta = self._meta.pop(case_id, None)
+        if meta is not None:
+            self._order = [c for c in self._order if c != case_id]
+        return meta
+
     async def update(self, case_id: str, meta: str) -> None:
         if case_id in self._meta:
             self._meta[case_id] = meta
@@ -68,6 +79,7 @@ class _RedisQueueBackend:
 
     def __init__(self, client: Any) -> None:
         self._r = client
+        self._claim_script: Any = None
 
     async def push(self, case_id: str, meta: str) -> None:
         # HSETNX-style guard: only append to the ordered list the first time a
@@ -88,6 +100,24 @@ class _RedisQueueBackend:
             return None
         return raw.decode() if isinstance(raw, bytes) else raw
 
+    # Atomic read-and-remove: HGET + HDEL + LREM in one server-side call, so two
+    # concurrent decisions cannot both claim the same case.
+    _CLAIM_LUA = """
+    local m = redis.call('HGET', KEYS[1], ARGV[1])
+    if not m then return false end
+    redis.call('HDEL', KEYS[1], ARGV[1])
+    redis.call('LREM', KEYS[2], 0, ARGV[1])
+    return m
+    """
+
+    async def claim(self, case_id: str) -> Optional[str]:
+        if self._claim_script is None:
+            self._claim_script = self._r.register_script(self._CLAIM_LUA)
+        raw = await self._claim_script(keys=[REVIEW_META_KEY, REVIEW_QUEUE_KEY], args=[case_id])
+        if not raw:
+            return None
+        return raw.decode() if isinstance(raw, bytes) else raw
+
     async def update(self, case_id: str, meta: str) -> None:
         if await self._r.hexists(REVIEW_META_KEY, case_id):
             await self._r.hset(REVIEW_META_KEY, case_id, meta)
@@ -103,9 +133,11 @@ class _RedisQueueBackend:
 class ReviewQueue:
     """Escalated cases waiting on a human decision."""
 
-    def __init__(self, log: EventLog, backend: Any) -> None:
+    def __init__(self, log: EventLog, backend: Any, downgrade_reason: Optional[str] = None) -> None:
         self.log = log
         self._backend = backend
+        # Non-None iff Redis was wanted but the queue fell back to in-memory.
+        self.downgrade_reason = downgrade_reason
 
     @property
     def backend(self) -> str:
@@ -124,7 +156,12 @@ class ReviewQueue:
         except Exception as exc:  # noqa: BLE001
             if SETTINGS.require_redis:
                 raise RuntimeError(f"SENTRYMESH_REQUIRE_REDIS=1 but Redis at {url} is unreachable: {exc}") from exc
-            return cls(log, _MemoryQueueBackend())
+            return cls(
+                log,
+                _MemoryQueueBackend(),
+                downgrade_reason=f"Redis at {url} unreachable ({type(exc).__name__}: {exc}); "
+                "the review queue is in-memory and will not survive this process",
+            )
 
     @classmethod
     def in_memory(cls, log: EventLog) -> "ReviewQueue":
@@ -153,23 +190,32 @@ class ReviewQueue:
         if decision.action not in REVIEW_ACTIONS:
             raise ValueError(f"unknown review action {decision.action!r}; allowed: {REVIEW_ACTIONS}")
 
-        raw = await self._backend.get(decision.case_id)
+        closing = decision.action != "request_detail"
+        # A closing decision first CLAIMS the case atomically; the loser of a
+        # race gets KeyError and writes nothing, so a case can never carry two
+        # contradictory closing decisions.
+        raw = await (self._backend.claim(decision.case_id) if closing else self._backend.get(decision.case_id))
         if raw is None:
             raise KeyError(f"case {decision.case_id} is not in the review queue")
         snapshot = json.loads(raw)
 
-        await self.log.append(
-            decision.case_id,
-            "human_reviewer",
-            "human_decision",
-            {
-                **decision.to_dict(),
-                "supervisor_decision": snapshot.get("decision"),
-                "supervisor_combined_risk": snapshot.get("combined_risk"),
-                "agreed_with_supervisor": _agrees(decision.action, snapshot.get("decision")),
-                "queue_backend": self.backend,
-            },
-        )
+        try:
+            await self.log.append(
+                decision.case_id,
+                "human_reviewer",
+                "human_decision",
+                {
+                    **decision.to_dict(),
+                    "supervisor_decision": snapshot.get("decision"),
+                    "supervisor_combined_risk": snapshot.get("combined_risk"),
+                    "agreed_with_supervisor": _agrees(decision.action, snapshot.get("decision")),
+                    "queue_backend": self.backend,
+                },
+            )
+        except BaseException:
+            if closing:  # the decision was not recorded: put the case back
+                await self._backend.push(decision.case_id, raw)
+            raise
 
         if decision.action == "request_detail":
             snapshot.setdefault("detail_requests", []).append(
@@ -179,12 +225,15 @@ class ReviewQueue:
             await self._backend.update(decision.case_id, json.dumps(snapshot, default=str))
             return {"case_id": decision.case_id, "status": "awaiting_detail", "removed_from_queue": False}
 
-        await self._backend.remove(decision.case_id)
         return {
             "case_id": decision.case_id,
             "status": f"closed_{decision.action}",
             "removed_from_queue": True,
         }
+
+    async def update_snapshot(self, case_id: str, snapshot: Dict[str, Any]) -> None:
+        """Replace the queued snapshot for a case (no-op if it already left)."""
+        await self._backend.update(case_id, json.dumps(snapshot, default=str))
 
     async def clear(self) -> None:
         await self._backend.clear()
@@ -222,7 +271,7 @@ class ReviewQueue:
             closed = any(
                 e.event_type == "human_decision"
                 and e.payload.get("action") in {"approve", "decline"}
-                and e.event_id > escalation.event_id
+                and id_gt(e.event_id, escalation.event_id)
                 for e in events
             )
             if closed:

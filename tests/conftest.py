@@ -21,6 +21,10 @@ from pathlib import Path
 
 # Must precede the sentrymesh import below - order is load-bearing.
 os.environ["SENTRYMESH_LLM_BACKEND"] = "offline"
+# Redis is fail-closed by default; the unit suite runs in-memory, so it is a dev run.
+os.environ["SENTRYMESH_DEV"] = "1"
+os.environ.pop("SENTRYMESH_REQUIRE_REDIS", None)
+os.environ.pop("SENTRYMESH_API_KEY", None)
 os.environ.pop("ANTHROPIC_API_KEY", None)
 os.environ.pop("SENTRYMESH_LLM_BASE_URL", None)
 os.environ.pop("SENTRYMESH_LLM_API_KEY", None)
